@@ -1,0 +1,6 @@
+node_modules/
+bin/
+obj/
+.vs/
+/wwwroot/ej2.min.js
+/wwwroot/ejs.interop.js

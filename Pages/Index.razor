@@ -1,0 +1,27 @@
+﻿@page "/"
+@using System.IO
+
+<div>
+    @foreach (var item in @SampleList)
+    {
+        <div>
+            <a href="@item.ToLower()">@item</a>
+        </div>
+    }
+</div>
+
+@code {
+    List<string> SampleList = new List<string>();
+
+    protected override void OnInit()
+    {
+        string[] files = Directory.GetFiles(System.Environment.CurrentDirectory + "\\Pages\\Samples", "*.razor", SearchOption.AllDirectories);
+        foreach (var file in files)
+        {
+            string filename = file.Split(new string[] { "\\Samples" }, StringSplitOptions.None)[1]
+                .Replace("\\\\", "/").Replace("\\", "/").Replace(".razor", "");
+            SampleList.Add(filename);
+        }
+        base.OnInit();
+    }
+}

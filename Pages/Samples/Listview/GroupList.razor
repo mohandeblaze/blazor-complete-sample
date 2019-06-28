@@ -1,0 +1,32 @@
+@page "/listview/grouplist"
+
+<EjsListView HtmlAttributes="@htmlattr" DataSource="@dataSource" ShowHeader="true" HeaderTitle="@HeaderTitle">
+    <ListViewFieldSettings Id="Id" Text="Text" GroupBy="Type"></ListViewFieldSettings>
+</EjsListView>
+
+@code {
+    [Inject]
+    protected IJSRuntime JsRuntime { get; set; }
+
+    string HeaderTitle = "Listview header";
+
+    Dictionary<string, object> htmlattr = new Dictionary<string, object>() {
+        {"style" , "border: 1px dashed blue"}
+    };
+
+    List<DataModel> dataSource = new List<DataModel>()
+{
+        new DataModel{ Id = "1", Text = "1", Type = "Odd"},
+        new DataModel{ Id = "2", Text = "2", Type = "Even"},
+        new DataModel{ Id = "3", Text = "3", Type = "Odd"},
+        new DataModel{ Id = "4", Text = "4", Type = "Even"},
+    };
+
+    class DataModel
+    {
+        public string Id { get; set; }
+        public string Text { get; set; }
+        public string Type { get; set; }
+    }
+
+}

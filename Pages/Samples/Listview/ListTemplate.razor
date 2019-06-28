@@ -1,0 +1,35 @@
+@page "/listview/ListTemplate"
+
+<EjsListView DataSource="@dataSource" ModelType="@model" ShowHeader="true">
+    <ListViewFieldSettings Id="Id" Text="Text" GroupBy="Type"></ListViewFieldSettings>
+    <ListViewTemplates>
+        <Template>
+            <div>Template item @context.Text</div>
+        </Template>
+        <GroupTemplate>
+            <div>Group Template @context.Text</div>
+        </GroupTemplate>
+        <HeaderTemplate>
+            <h3>H3 Template</h3>
+        </HeaderTemplate>
+    </ListViewTemplates>
+</EjsListView>
+
+@code {
+    List<MyModel> dataSource = new List<MyModel>()
+{
+        new MyModel{ Id = "1", Text = "1", Type="Odd"},
+        new MyModel{ Id = "2", Text = "2", Type="Even"},
+        new MyModel{ Id = "3", Text = "3", Type="Odd"},
+        new MyModel{ Id = "4", Text = "4", Type="Even"},
+    };
+
+    MyModel model = new MyModel();
+
+    class MyModel
+    {
+        public string Id { get; set; }
+        public string Text { get; set; }
+        public string Type { get; set; }
+    }
+}

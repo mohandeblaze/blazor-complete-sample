@@ -1,0 +1,39 @@
+@page "/listview/remotelist"
+
+<EjsListView ShowHeader="true"
+             HeaderTitle="@HeaderTitle"
+             Query="new ej.data.Query().from('Products').select('ProductID,ProductName').take(10)"
+             OnActionBegin="@((e) => { actionBegin = true; this.StateHasChanged(); })"
+             OnActionComplete="@((e) => { actionComplete = true; this.StateHasChanged(); })"
+             OnActionFailure="@((e) => { actionFailure = true; this.StateHasChanged(); })">
+    <EjsDataManager Adaptor="Syncfusion.EJ2.Blazor.Adaptors.ODataAdaptor" CrossDomain="true" Url="//js.syncfusion.com/demos/ejServices/Wcf/Northwind.svc/"></EjsDataManager>
+    <ListViewFieldSettings Id="ProductID" Text="ProductName"></ListViewFieldSettings>
+</EjsListView>
+
+<br />
+
+<h4>Action begin tiggered: @actionBegin</h4>
+
+<br />
+
+<h4>Action Completed tiggered: @actionComplete</h4>
+
+<br />
+
+<h4>Action Failure tiggered: @actionFailure</h4>
+
+@code {
+
+    string HeaderTitle = "Listview header";
+
+    bool actionBegin = false;
+
+    bool actionComplete = false;
+
+    bool actionFailure = false;
+
+    protected override void OnInit()
+    {
+        base.OnInit();
+    }
+}

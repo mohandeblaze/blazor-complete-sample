@@ -1,0 +1,68 @@
+@page "/listview/ListEvents"
+
+<EjsListView DataSource="@dataSource"
+             Selected="@((e) => OnSelect(e))"
+             OnActionBegin="@((e) => { actionBegin = true; this.StateHasChanged(); })"
+             OnActionComplete="@((e) => { actionComplete = true; this.StateHasChanged(); })"
+             OnActionFailure="@((e) => { actionFailure = true; this.StateHasChanged(); })"
+             ShowHeader="true"
+             HeaderTitle="@HeaderTitle"
+             HtmlAttributes="@htmlattr">
+    <ListViewFieldSettings Id="Id" Text="Text"></ListViewFieldSettings>
+</EjsListView>
+
+<br />
+
+<h4>Action begin tiggered: @actionBegin</h4>
+
+<br />
+
+<h4>Action Completed tiggered: @actionComplete</h4>
+
+<br />
+
+<h4>Action Failure tiggered: @actionFailure</h4>
+
+<br />
+
+<h4>Current Selected item: @selecteditem</h4>
+
+@code {
+    [Inject]
+    protected IJSRuntime JsRuntime { get; set; }
+
+    string HeaderTitle = "Listview header";
+
+    string selecteditem = "null";
+
+    bool actionBegin = false;
+
+    bool actionComplete = false;
+
+    bool actionFailure = false;
+
+    Dictionary<string, object> htmlattr = new Dictionary<string, object>() {
+        {"style" , "border: 1px dashed blue"}
+    };
+
+    List<DataModel> dataSource = new List<DataModel>()
+{
+        new DataModel{ Id = "1", Text = "1"},
+        new DataModel{ Id = "2", Text = "2"},
+        new DataModel{ Id = "3", Text = "3"},
+        new DataModel{ Id = "4", Text = "4"},
+    };
+
+    void OnSelect(Syncfusion.EJ2.Blazor.Lists.SelectEventArgs selectEventArgs)
+    {
+        selecteditem = selectEventArgs.Text;
+        this.StateHasChanged();
+    }
+
+    class DataModel
+    {
+        public string Id { get; set; }
+        public string Text { get; set; }
+    }
+
+}
