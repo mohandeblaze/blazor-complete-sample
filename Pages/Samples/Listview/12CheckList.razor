@@ -1,0 +1,33 @@
+@page "/listview/12CheckList"
+
+<EjsListView HtmlAttributes="@htmlattr" ShowCheckBox="true" DataSource="@dataSource" ShowHeader="true" HeaderTitle="@HeaderTitle">
+    <ListViewFieldSettings Id="Id" Text="Text"></ListViewFieldSettings>
+</EjsListView>
+
+@code {
+    [Inject]
+    protected IJSRuntime JsRuntime { get; set; }
+
+    string HeaderTitle = "Listview header";
+
+    Dictionary<string, object> htmlattr = new Dictionary<string, object>() {
+        {"style" , "border: 1px dashed blue"}
+    };
+
+    List<DataModel> dataSource = new List<DataModel>()
+    {
+        new DataModel{ Id = "1", Text = "Artwork"},
+        new DataModel{ Id = "2", Text = "Abstract"},
+        new DataModel{ Id = "3", Text = "Modern Painting"},
+        new DataModel{ Id = "4", Text = "Ceramics"},
+        new DataModel{ Id = "5", Text = "Animation Art"},
+        new DataModel{ Id = "6", Text = "Oil Painting"},
+    };
+
+    class DataModel
+    {
+        public string Id { get; set; }
+        public string Text { get; set; }
+    }
+
+}

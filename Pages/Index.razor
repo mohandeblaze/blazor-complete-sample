@@ -1,17 +1,29 @@
 ﻿@page "/"
 @using System.IO
 
-<div>
-    @foreach (var item in @SampleList)
+<div class="component-container">
+    @foreach (var compName in SampleData.Keys)
     {
-        <div>
-            <a href="@item.ToLower()">@item</a>
+        <div class="component-item">
+            <h3>@compName</h3>
+
+            @if (SampleData.TryGetValue(compName, out List<string> fileNames))
+            {
+                <div>
+                    @foreach (var item in fileNames)
+                    {
+                        <div>
+                            <a href="@item.ToLower()">@item</a>
+                        </div>
+                    }
+                </div>
+            }
         </div>
     }
 </div>
 
 @code {
-    List<string> SampleList = new List<string>();
+    Dictionary<string, List<string>> SampleData = new Dictionary<string, List<string>>();
 
     protected override void OnInit()
     {
@@ -20,8 +32,29 @@
         {
             string filename = file.Split(new string[] { "\\Samples" }, StringSplitOptions.None)[1]
                 .Replace("\\\\", "/").Replace("\\", "/").Replace(".razor", "");
-            SampleList.Add(filename);
+            int position = filename.LastIndexOf('/');
+            string componentName = filename.Substring(1, position - 1);
+            if (!SampleData.ContainsKey(componentName))
+            {
+                SampleData.Add(componentName, new List<string>() { filename });
+            }
+            else
+            {
+                SampleData.TryGetValue(componentName, out List<string> value);
+                value.Add(filename);
+            }
         }
         base.OnInit();
     }
 }
+
+<style>
+    .component-container {
+        display: flex;
+        align-items: flex-start;
+    }
+
+    .component-item {
+        margin: 0 20px;
+    }
+</style>

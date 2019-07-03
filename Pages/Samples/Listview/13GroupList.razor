@@ -1,7 +1,7 @@
-@page "/listview/simplelist"
+@page "/listview/13grouplist"
 
 <EjsListView HtmlAttributes="@htmlattr" DataSource="@dataSource" ShowHeader="true" HeaderTitle="@HeaderTitle">
-    <ListViewFieldSettings Id="Id" Text="Text"></ListViewFieldSettings>
+    <ListViewFieldSettings Id="Id" Text="Text" GroupBy="Type"></ListViewFieldSettings>
 </EjsListView>
 
 @code {
@@ -14,20 +14,19 @@
         {"style" , "border: 1px dashed blue"}
     };
 
-    DataModel[] data = { new DataModel { Id = "1", Text = "1" }, new DataModel { Id = "2", Text = "2" } };
-
     List<DataModel> dataSource = new List<DataModel>()
-    {
-        new DataModel{ Id = "1", Text = "1"},
-        new DataModel{ Id = "2", Text = "2"},
-        new DataModel{ Id = "3", Text = "3"},
-        new DataModel{ Id = "4", Text = "4"},
+{
+        new DataModel{ Id = "1", Text = "1", Type = "Odd"},
+        new DataModel{ Id = "2", Text = "2", Type = "Even"},
+        new DataModel{ Id = "3", Text = "3", Type = "Odd"},
+        new DataModel{ Id = "4", Text = "4", Type = "Even"},
     };
 
     class DataModel
     {
         public string Id { get; set; }
         public string Text { get; set; }
+        public string Type { get; set; }
     }
 
 }
