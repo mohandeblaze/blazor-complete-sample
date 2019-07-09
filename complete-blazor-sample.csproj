@@ -6,8 +6,8 @@
     <RootNamespace>complete_blazor_sample</RootNamespace>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Syncfusion.EJ2.Blazor" Version="17.2.0.29-beta" />
+  <ItemGroup>    
+    <PackageReference Include="Syncfusion.EJ2.Blazor" Version="17.2.0.30-beta" />
   </ItemGroup>
 
 </Project>
