@@ -2,8 +2,13 @@
 @using Newtonsoft.Json
 @using Syncfusion.EJ2.Blazor
 
-<EjsListView @ref="EjsListView" HtmlAttributes="@htmlattr" DataSource="@dataSource" ShowHeader="true" HeaderTitle="@HeaderTitle">
+<EjsListView @ref="EjsListView" ModelType="@_DataModel" HtmlAttributes="@htmlattr" DataSource="@dataSource" ShowHeader="true" HeaderTitle="@HeaderTitle">
     <ListViewFieldSettings Id="Id" Text="Text"></ListViewFieldSettings>
+    <ListViewTemplates>
+        <Template>
+            <div>@context.Text</div>
+        </Template>
+    </ListViewTemplates>
 </EjsListView>
 
 <div class="padding">
@@ -19,14 +24,14 @@
 @code {
     [Inject]
     protected IJSRuntime JsRuntime { get; set; }
-
+    DataModel _DataModel = new DataModel();
     EjsListView EjsListView;
 
     string HeaderTitle = "Listview header";
 
     SelectedItem SelectedItemValue;
 
-    SelectedItem FindItemValue;
+    DataModel FindItemValue;
 
     Dictionary<string, object> htmlattr = new Dictionary<string, object>() {
         {"style" , "border: 1px dashed blue"}
@@ -52,11 +57,11 @@
 
     async void findItem()
     {
-        DataModel[] data = { new DataModel { Id = "1", Text = "1" } };
+        DataModel data = new DataModel { Id = "1", Text = "1" };
         var item = await EjsListView.FindItem(data);
         if (item != null)
         {
-            FindItemValue = JsonConvert.DeserializeObject<SelectedItem>(item.ToString());
+            FindItemValue = JsonConvert.DeserializeObject<DataModel>(item.ToString());
             this.StateHasChanged();
         }
     }

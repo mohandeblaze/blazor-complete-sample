@@ -1,0 +1,132 @@
+@page "/listview/23Virtualization"
+
+<Ejslistview id="ui-list" dataSource="@Data" Template="@Template" EnableVirtualization="true" CssClass="e-list-template" HeaderTitle="Contacts"
+             Height=500 ShowHeader="true">
+    <listViewFieldSettings Text="name"></listViewFieldSettings>
+</Ejslistview>
+
+
+@code{
+
+    string Template =  "<div class='e-list-wrapper e-list-avatar'>" +
+                 "<span id=\"${$imgUrl ? \'hideUI\' : \'showUI\' }\" class='e-avatar e-avatar-circle' icon='${icon}'> " +
+            "${icon}</span> <img id=\"${$imgUrl ? \'showUI\' : \'hideUI\' }\" class='e-avatar e-avatar-circle' src=\"${$imgUrl ?  $imgUrl : \' \' }\" />" +
+            "<span class='e-list-content'>${name}</span></div>";
+
+    List<object> CommonData = new List<object>();
+    List<object> Data = new List<object>();
+
+
+    protected override void OnInit()
+    {
+        base.OnInit();
+
+        this.CommonData.Add(new { name = "Nancy", imgUrl = "", icon = "N", id = "0" });
+        this.CommonData.Add(new { name = "Andrew", imgUrl = "", icon = "A", id = "1" });
+        this.CommonData.Add(new { name = "Janet", imgUrl = "", icon = "J", id = "2" });
+        this.CommonData.Add(new { name = "Margaret", icon = "", imgUrl = "https://ej2.syncfusion.com/demos/src/listview/images/margaret.png", id = "3" });
+        this.CommonData.Add(new { name = "Steven", imgUrl = "", icon = "S", id = "4" });
+        this.CommonData.Add(new { name = "Laura", icon = "", imgUrl = "https://ej2.syncfusion.com/demos/src/listview/images/laura.png", id = "5" });
+        this.CommonData.Add(new { name = "Robert", imgUrl = "", icon = "R", id = "6" });
+        this.CommonData.Add(new { name = "Michael", imgUrl = "", icon = "M", id = "7" });
+        this.CommonData.Add(new { name = "Albert", icon = "", imgUrl = "https://ej2.syncfusion.com/demos/src/listview/images/albert.png", id = "8" });
+        this.CommonData.Add(new { name = "Nolan", imgUrl = "", icon = "N", id = "9" });
+
+        List<Object> generateData(int no)
+        {
+            int index = 0;
+            int spyIndex = 0;
+            List<object> data = new List<object>();
+            for (int i = 0; i < no; i++)
+            {
+                while (index == spyIndex)
+                {
+                    index = new Random().Next(0, 10);
+                }
+                data.Add(new
+                {
+                    name = this.CommonData[index].GetType().GetProperty("name").GetValue(this.CommonData[index], null).ToString(),
+                    icon = this.CommonData[index].GetType().GetProperty("icon").GetValue(this.CommonData[index], null).ToString(),
+                    imgUrl = this.CommonData[index].GetType().GetProperty("imgUrl").GetValue(this.CommonData[index], null).ToString(),
+                    id = i.ToString()
+                });
+                spyIndex = index;
+            }
+
+            return data;
+        }
+
+        Data = generateData(1000);
+    }
+}
+
+<style>
+
+    /* ListView position alignment */
+
+    #ui-list.e-listview {
+        max-width: 325px;
+        line-height: initial;
+        border: 1px solid lightgray;
+    }
+
+        /* ListView header alignment */
+
+        #ui-list.e-listview .e-list-header {
+            height: 50px
+        }
+
+            #ui-list.e-listview .e-list-header .e-text {
+                line-height: 18px
+            }
+
+        /* ListView template customization */
+
+        #ui-list.e-listview #showUI {
+            display: flex;
+        }
+
+        #ui-list.e-listview #hideUI {
+            display: none;
+        }
+
+        #ui-list.e-listview .e-list-item {
+            padding: 3px 0;
+        }
+
+        #ui-list.e-listview [icon="R"] {
+            background: lightgrey;
+        }
+
+        #ui-list.e-listview [icon="M"] {
+            background: pink;
+        }
+
+        #ui-list.e-listview [icon="A"] {
+            background: lightgreen;
+        }
+
+        #ui-list.e-listview [icon="S"] {
+            background: lightskyblue;
+        }
+
+        #ui-list.e-listview [icon="J"] {
+            background: orange;
+        }
+
+        #ui-list.e-listview [icon="N"] {
+            background: lightblue;
+        }
+
+    /* ListView theme customization */
+
+    .highcontrast #ui-list.e-listview .e-list-item,
+    .highcontrast #ui-list.e-listview .e-list-header {
+        background: rgb(0, 0, 0);
+    }
+
+        .highcontrast #ui-list.e-listview .e-list-item.e-active {
+            background: #ffd939;
+            color: #000000;
+        }
+</style>
