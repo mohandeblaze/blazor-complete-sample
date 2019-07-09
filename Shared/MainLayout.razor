@@ -1,4 +1,8 @@
 ﻿@inherits LayoutComponentBase
+@using Data
+
+@inject Microsoft.AspNetCore.Components.IUriHelper UriHelper
+@inject SampleService SampleService
 
 <div class="sidebar">
     <NavMenu />
@@ -6,12 +10,12 @@
 
 <div class="main">
     <div class="top-row px-4">
-        <button class="e-btn e-info button">Prev</button>
-        <button class="e-btn e-info button">Next</button>
+        <button class="e-btn e-success button" @onclick="@OnStartClick">Start</button>
+        <button class="e-btn e-info button" @onclick="@OnPrevClick">Prev</button>
+        <button class="e-btn e-info button" @onclick="@OnNextClick">Next</button>
     </div>
 
     <div class="content px-4">
-        
         @Body
     </div>
 </div>
@@ -21,3 +25,33 @@
         margin: 0 30px;
     }
 </style>
+
+@code {
+    void OnStartClick()
+    {
+        UriHelper.NavigateTo(UriHelper.GetBaseUri() + SampleService.Samples[0].Substring(1));
+    }
+
+    void OnNextClick()
+    {
+        UriHelper.NavigateTo(UriHelper.GetBaseUri() + GetPath(false));
+    }
+
+    void OnPrevClick()
+    {
+        UriHelper.NavigateTo(UriHelper.GetBaseUri() + GetPath(true));
+    }
+
+    string GetPath(bool isPrev)
+    {
+        string currentPath = UriHelper.ToBaseRelativePath(UriHelper.GetBaseUri(), UriHelper.GetAbsoluteUri());
+        if (isPrev)
+        {
+            return SampleService.GetPrevSamplePath("/" + currentPath).Substring(1);
+        }
+        else
+        {
+            return SampleService.GetNextSamplePath("/" + currentPath).Substring(1);
+        }
+    }
+}
