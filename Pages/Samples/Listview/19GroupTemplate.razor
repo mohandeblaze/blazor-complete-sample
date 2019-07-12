@@ -1,6 +1,6 @@
-@page "/listview/19GroupTemplateSample"
+@page "/listview/19GroupTemplate"
 
-<EjsListView ID="groupedList" DataSource="@dataSource" ModelType="@model" ShowHeader="true" CssClass="e-list-template" HeaderTitle="Settings">
+@*<EjsListView ID="groupedList" DataSource="@DataSource" ModelType="@model" ShowHeader="true" CssClass="e-list-template" HeaderTitle="Settings">
     <ListViewFieldSettings Id="Id" Text="Name" GroupBy="Category"></ListViewFieldSettings>
     <ListViewTemplates>
         <Template>
@@ -16,10 +16,10 @@
             </div>
         </GroupTemplate>
     </ListViewTemplates>
-</EjsListView>
+</EjsListView>*@
 
 @code {
-    List<DataModel> dataSource = new List<DataModel>()
+    List<DataModel> DataSource = new List<DataModel>()
     {
         new DataModel { Name= "WI-FI", Content = "Disabled", Id = "1", Class = "wifi", Category = "Wireless & networks", Order = 0 },
         new DataModel { Name= "Bluetooth", Content = "Disabled", Id = "2", Class = "bluetooth", Category = "Wireless & networks", Order = 0 },

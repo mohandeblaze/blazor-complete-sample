@@ -9,7 +9,7 @@ namespace complete_blazor_sample.Pages.Samples.Heatmap
     {
         public static int[,] GetDefaultData()
         {
-            int[,] dataSource = new int[,]
+            int[,] DataSource = new int[,]
             {
                 {52, 65, 67, 45, 37, 52},
                 {68, 52, 63, 51, 30, 51},
@@ -24,12 +24,12 @@ namespace complete_blazor_sample.Pages.Samples.Heatmap
                 {61, 40, 62, 26, 34, 54},
                 {41, 69, 61, 84, 84, 87}
             };
-            return dataSource;
+            return DataSource;
         }
 
         public static int?[,] GetEmptyPointData()
         {
-            int?[,] dataSource = new int?[11, 12]
+            int?[,] DataSource = new int?[11, 12]
             {
                 {8, 5, 2, 6, 8, 2, 9, 3, 7, 8, 7, 6},
                 {5, null, 4, 9, 10, null, 11, 7, 3, 7, 8, null},
@@ -43,12 +43,12 @@ namespace complete_blazor_sample.Pages.Samples.Heatmap
                 {1, null, 4, null, null, 2, null, 5, 1, 5, 2, 1},
                 {1, null, 2, 1, 5, null, null, null, 5, 2, 1, null}
             };
-            return dataSource;
+            return DataSource;
         }
 
         public static double[,] GetInverseData()
         {
-            double[,] dataSource = new double[,]
+            double[,] DataSource = new double[,]
             {
                 {2.65, 2.21, 1.52, 1.49, 1.81, 1.12, 0.69, 0.59, 0.57, 0.54},
                 {2.13, 2.31, 2.29, 2.30, 2.14, 1.98, 1.84, 1.66, 1.46, 1.23},
@@ -61,12 +61,12 @@ namespace complete_blazor_sample.Pages.Samples.Heatmap
                 {0.57, 0.56, 0.63, 0.70, 0.63, 0.10, -0.26, -0.38, -0.07, 0.10},
                 {3.07, 3.14, 2.61, 2.18, 1.97, 1.94, 1.57, 1.29, 1.57, 1.41}
             };
-            return dataSource;
+            return DataSource;
         }
 
         public static int[,] GetOpposedData()
         {
-            int[,] dataSource = new int[,]
+            int[,] DataSource = new int[,]
             {
                 {36371, 25675, 28292, 33399, 35980, 38585, 39351, 39964, 36543, 30529, 33298, 36985},
                 {34702, 27618, 31063, 34525, 36772, 35410, 38750, 39467, 35390, 34196, 35302, 35703},
@@ -80,12 +80,12 @@ namespace complete_blazor_sample.Pages.Samples.Heatmap
                 {34378, 29576, 30547, 35664, 36622, 38145, 40347, 41868, 38252, 36505, 29576, 36450},
                 {35219, 31670, 32589, 34927, 36998, 39825, 41126, 42002, 37021, 36583, 32408, 37108}
             };
-            return dataSource;
+            return DataSource;
         }
 
         public static int[,] GetLegendData()
         {
-            int[,] dataSource = new int[,]
+            int[,] DataSource = new int[,]
             {
                 {10, 8, 7, 7, 10, 14, 17, 18, 18, 17, 16, 15},
                 {10, 8, 7, 6, 8, 13, 15, 17, 17, 17, 15, 12},
@@ -95,12 +95,12 @@ namespace complete_blazor_sample.Pages.Samples.Heatmap
                 {13, 13, 12, 12, 12, 15, 18, 21, 22, 21, 19, 16},
                 {11, 10, 9, 9, 10, 12, 14, 16, 17, 17, 16, 14}
             };
-            return dataSource;
+            return DataSource;
         }
 
         public static Double[,] tableBubbleData()
         {
-            Double[,] dataSource = new Double[,]
+            Double[,] DataSource = new Double[,]
             {
                 { 40, 41, 52, 57, 61 },
                 { 37, 40, 46, 52, 53 },
@@ -111,12 +111,12 @@ namespace complete_blazor_sample.Pages.Samples.Heatmap
                 { 48, 49, 50, 51, 52 },
                 { 52, 54, 56, 56, 57 }
             };
-            return dataSource;
+            return DataSource;
         }
 
         public static int[,] GetLargeData()
         {
-            int[,] dataSource = new int[,]
+            int[,] DataSource = new int[,]
             {
                 { 104, 104, 175, 208, 258, 280, 290, 312, 332, 320, 312, 300, 300, 300, 300, 250, 250, 156, 156, 156, 156, 130, 130, 104},
                 {52, 52, 52, 52, 100, 170, 234, 234, 234, 234, 234, 200, 180, 130, 120, 130, 120, 130, 120, 80, 70, 60, 52, 52},
@@ -720,7 +720,7 @@ namespace complete_blazor_sample.Pages.Samples.Heatmap
     {100, 150, 160, 180, 190, 220, 250, 280, 315, 300, 300, 290, 280, 260, 230,
         200, 180, 160, 150, 140, 130, 120, 102, 92},
 
-    //Dec  
+    //Dec
     {104, 104, 175, 220, 250, 270, 290, 300, 312, 300, 290, 270, 250, 220, 200,
         190, 180, 170, 140, 120, 110, 100, 90, 80},
     {104, 104, 175, 220, 250, 270, 290, 300, 312, 300, 290, 270, 250, 220, 200,
@@ -784,11 +784,11 @@ namespace complete_blazor_sample.Pages.Samples.Heatmap
     {187, 195, 220, 235, 268, 285, 300, 321, 349, 351, 334, 320, 319, 296, 275,
         262, 249, 239, 225, 206, 189, 169, 139, 121}
             };
-            return dataSource;
+            return DataSource;
         }
         public static double[,] GetPaletteData()
         {
-            double[,] dataSource = new double[,]
+            double[,] DataSource = new double[,]
            {
                 {17.2, 24.6, 18.4, 9.6, 8.6, 18.8, 10.3, 5.0},
                 {15.8, 29.9, 15.2, 31.3, 18.1, 5.5, 10.2, 14.6},
@@ -802,7 +802,7 @@ namespace complete_blazor_sample.Pages.Samples.Heatmap
                 {16.3, 27.4, 27.0, 5.5, 16.2, 12.6, 8.3, 15.2},
                 {7.2, 20.1, 16.9, 9.0, 7.6, 16.2, 8.4, 29.0}
            };
-            return dataSource;
+            return DataSource;
         }
 
         public static double[,] GetRendermodeData()
@@ -826,7 +826,7 @@ namespace complete_blazor_sample.Pages.Samples.Heatmap
 
         public static int?[,] GetCalendarData()
         {
-            int?[,] dataSource = new int?[,]
+            int?[,] DataSource = new int?[,]
             {
                 { null, null, null, null, 16, 48, 0 },
                 {0, 15, 0, 24, 0, 39, 0},
@@ -883,11 +883,11 @@ namespace complete_blazor_sample.Pages.Samples.Heatmap
                 {0, 8, 47, 27, 0, 35, 40},
                 {0, 10, 2, 0, 44, 5, null},
             };
-            return dataSource;
+            return DataSource;
         }
         public static double[,] GetTooltipData()
         {
-            double[,] dataSource = new double[,]
+            double[,] DataSource = new double[,]
             {
                 {0.72, 0.71, 0.71, 0.67, 0.72, 0.53, 0.53, 0.56, 0.58, 0.56},
                 {2.28, 2.29, 2.09, 1.84, 1.64, 1.49, 1.49, 1.39, 1.32, 1.23},
@@ -898,11 +898,11 @@ namespace complete_blazor_sample.Pages.Samples.Heatmap
                 {5.80, 5.74, 5.64, 5.44, 5.18, 5.08, 5.07, 5.00, 5.35, 5.47},
                 {6.91, 7.40, 8.13, 8.80, 9.04, 9.24, 9.43, 9.35, 9.49, 9.69}
             };
-            return dataSource;
+            return DataSource;
         }
         public static int[,] GetMultiLevelData()
         {
-            int[,] dataSource = new int[,]
+            int[,] DataSource = new int[,]
             {
                 {52, 65, 67, 45, 37, 52, 32, 76, 60, 64, 82, 91},
                 {68, 52, 63, 51, 30, 51, 51, 81, 70, 60, 88, 80},
@@ -917,7 +917,7 @@ namespace complete_blazor_sample.Pages.Samples.Heatmap
                 {61, 40, 62, 26, 34, 54, 56, 74, 83, 78, 95, 98}
 
             };
-            return dataSource;
+            return DataSource;
         }
 
     }

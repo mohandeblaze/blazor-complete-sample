@@ -1,0 +1,255 @@
+@page "/Treeview/18PublicMethods"
+@using Newtonsoft.Json
+
+<div style="display: flex;">
+    <div style="margin: 10px;">
+        <EjsTreeView @ref="@NormalTreeview" AllowEditing="true">
+            <TreeViewFieldsSettings DataSource="@parentitem" Id="nodeId" ParentID="pid" Text="nodeText" HasChildren="hasChild" Expanded="expanded" Child="@child"></TreeViewFieldsSettings>
+        </EjsTreeView>
+    </div>
+
+    <div style="margin: 10px;">
+        <EjsTreeView @ref="@CheckTreeview" AllowEditing="true" ShowCheckBox="true">
+            <TreeViewFieldsSettings DataSource="@parentitem" Id="nodeId" ParentID="pid" Text="nodeText" HasChildren="hasChild" Expanded="expanded" Child="@child"></TreeViewFieldsSettings>
+        </EjsTreeView>
+    </div>
+</div>
+
+<div style="display: flex;flex-wrap: wrap;justify-content: space-between;">
+    <div class="padding">
+        <div class="bold">Add Nodes</div>
+        <div class="italic">Void</div>
+        <button class="e-btn e-info" @onclick="@AddNodes">Add Nodes</button>
+    </div>
+
+    <div class="padding">
+        <div class="bold">RemoveNodes</div>
+        <div class="italic">Void</div>
+        <button class="e-btn e-info" @onclick="@RemoveNodes">RemoveNodes</button>
+    </div>
+
+    <div class="padding">
+        <div class="bold">UpdateNode</div>
+        <div class="italic">Void</div>
+        <button class="e-btn e-info" @onclick="@UpdateNode">UpdateNode</button>
+    </div>
+
+    <div class="padding">
+        <div class="bold">CheckAll</div>
+        <div class="italic">Void</div>
+        <button class="e-btn e-info" @onclick="@CheckAll">CheckAll</button>
+    </div>
+
+    <div class="padding">
+        <div class="bold">UncheckAll</div>
+        <div class="italic">Void</div>
+        <button class="e-btn e-info" @onclick="@UncheckAll">UncheckAll</button>
+    </div>
+
+    <div class="padding">
+        <div class="bold">ExpandAll</div>
+        <div class="italic">Void</div>
+        <button class="e-btn e-info" @onclick="@ExpandAll">ExpandAll</button>
+    </div>
+
+    <div class="padding">
+        <div class="bold">CollapseAll</div>
+        <div class="italic">Void</div>
+        <button class="e-btn e-info" @onclick="@CollapseAll">CollapseAll</button>
+    </div>
+
+    <div class="padding">
+        <div class="bold">EnableNodes</div>
+        <div class="italic">Void</div>
+        <button class="e-btn e-info" @onclick="@EnableNodes">EnableNodes</button>
+    </div>
+
+    <div class="padding">
+        <div class="bold">DisableNodes</div>
+        <div class="italic">Void</div>
+        <button class="e-btn e-info" @onclick="@DisableNodes">DisableNodes</button>
+    </div>
+
+    <div class="padding">
+        <div class="bold">Begin edit</div>
+        <div class="italic">Void</div>
+        <button class="e-btn e-info" @onclick="@BeginEdit">Begin edit</button>
+    </div>
+
+    <div class="padding">
+        <div class="bold">GetTreeData</div>
+        <div class="italic">
+            @foreach (var item in GetParentitem)
+            {
+                <div>@item.nodeText</div>
+            }
+        </div>
+        <button class="e-btn e-info" @onclick="@GetTreeData">GetTreeData</button>
+    </div>
+</div>
+
+@code{
+    object child;
+
+    EjsTreeView NormalTreeview;
+
+    EjsTreeView CheckTreeview;
+
+    List<Parentitem> parentitem = new List<Parentitem>();
+
+    List<string> EventTriggeredList = new List<string>();
+
+    List<Parentitem> GetParentitem = new List<Parentitem>();
+
+    void AddNodes()
+    {
+        Parentitem[] parentitem = new Parentitem[] { new Parentitem { nodeId = "04-01", nodeText = "New node" } };
+        NormalTreeview.AddNodes(parentitem, null, null, null);
+        CheckTreeview.AddNodes(parentitem, null, null, null);
+    }
+
+    void RemoveNodes()
+    {
+        string[] NodeId = { parentitem[2].nodeId };
+        NormalTreeview.RemoveNodes(NodeId);
+        CheckTreeview.RemoveNodes(NodeId);
+    }
+
+    void UpdateNode()
+    {
+        NormalTreeview.UpdateNode(parentitem[1].nodeId, "Node Updated");
+        CheckTreeview.UpdateNode(parentitem[1].nodeId, "Node Updated");
+    }
+
+    void BeginEdit()
+    {
+        NormalTreeview.BeginEdit(parentitem[0].nodeId);
+        CheckTreeview.BeginEdit(parentitem[0].nodeId);
+    }
+
+    void CheckAll()
+    {
+        CheckTreeview.CheckAll();
+    }
+
+    void UncheckAll()
+    {
+        CheckTreeview.UncheckAll();
+    }
+
+    void ExpandAll()
+    {
+        NormalTreeview.ExpandAll();
+        CheckTreeview.ExpandAll();
+    }
+
+    void CollapseAll()
+    {
+        NormalTreeview.CollapseAll();
+        CheckTreeview.CollapseAll();
+    }
+
+    void DisableNodes()
+    {
+        string[] NodeId = { parentitem[0].nodeId, parentitem[1].nodeId };
+        NormalTreeview.DisableNodes(NodeId);
+        CheckTreeview.DisableNodes(NodeId);
+    }
+
+    void EnableNodes()
+    {
+        string[] NodeId = { parentitem[0].nodeId, parentitem[1].nodeId };
+        NormalTreeview.EnableNodes(NodeId);
+        CheckTreeview.EnableNodes(NodeId);
+    }
+
+    async void GetTreeData()
+    {
+        List<object> treeData = await NormalTreeview.GetTreeData();
+        string sData = JsonConvert.SerializeObject(treeData);
+        GetParentitem = JsonConvert.DeserializeObject<List<Parentitem>>(sData);
+        this.StateHasChanged();
+    }
+
+    protected override void OnInit()
+    {
+        base.OnInit();
+        this.parentitem.Add(new Parentitem
+        {
+            nodeId = "01",
+            nodeText = "Local Disk (C:)",
+            child = new List<Childitem>()
+{
+                new Childitem { nodeId = "01-01", nodeText = "Program Files" },
+                new Childitem { nodeId = "01-02", nodeText = "Users"},
+                new Childitem { nodeId = "01-03", nodeText = "Windows" }
+            },
+        });
+
+        this.parentitem.Add(new Parentitem
+        {
+            nodeId = "02",
+            nodeText = "Local Disk (D:)",
+            child = new List<Childitem>()
+{
+                new Childitem { nodeId = "02-01", nodeText = "Personals" },
+                new Childitem { nodeId = "02-02", nodeText = "Projects" },
+                new Childitem { nodeId = "02-02", nodeText = "Office" }
+            },
+        });
+
+        this.parentitem.Add(new Parentitem
+        {
+            nodeId = "03",
+            nodeText = "Local Disk (E:)",
+            child = new List<Childitem>()
+{
+                new Childitem { nodeId = "03-01", nodeText = "Pictures" },
+                new Childitem { nodeId = "03-02", nodeText = "Documents", icon = "docx" },
+                new Childitem { nodeId = "03-03", nodeText = "Study Materials" }
+            },
+        });
+        this.child = "child";
+    }
+
+
+    public class Parentitem
+    {
+        public string nodeId { get; set; }
+        public string nodeText { get; set; }
+        public string icon { get; set; }
+        public bool selected { get; set; }
+        public List<Childitem> child;
+
+    }
+
+    public class Childitem
+    {
+        public string nodeId { get; set; }
+        public string nodeText { get; set; }
+        public string icon { get; set; }
+        public bool selected { get; set; }
+    }
+}
+
+<style>
+    .padding {
+        margin: 10px;
+    }
+
+        .padding * {
+            margin: 5px 10px;
+        }
+
+    .e-listview {
+        margin: 10px;
+    }
+
+    .bold {
+        font-weight: bold;
+    }
+
+    .italic {
+        font-style: italic;
+    }
+</style>

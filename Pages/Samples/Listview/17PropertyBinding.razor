@@ -1,6 +1,6 @@
-@page "/listview/17ListPropertyBinding"
+@page "/listview/17PropertyBinding"
 
-<EjsListView DataSource="@dataSource" ShowHeader="true" HeaderTitle="@HeaderTitle">
+<EjsListView DataSource="@DataSource" ShowHeader="true" HeaderTitle="@HeaderTitle">
     <ListViewFieldSettings Id="Id" Text="Text"></ListViewFieldSettings>
 </EjsListView>
 
@@ -16,11 +16,11 @@
 
     string HeaderTitle = "Listview header";
 
-    Dictionary<string, object> htmlattr = new Dictionary<string, object>() {
+    Dictionary<string, object> HTMLProps = new Dictionary<string, object>() {
         {"style" , "border: 1px dashed blue"}
     };
 
-    List<DataModel> dataSource = new List<DataModel>()
+    List<DataModel> DataSource = new List<DataModel>()
     {
         new DataModel{ Id = "1", Text = "1"},
         new DataModel{ Id = "2", Text = "2"},
@@ -30,7 +30,7 @@
 
     void onClick()
     {
-        dataSource = new List<DataModel>()
+        DataSource = new List<DataModel>()
         {
             new DataModel{ Id = "1", Text = "Changed 1"},
             new DataModel{ Id = "2", Text = "Changed 2"},

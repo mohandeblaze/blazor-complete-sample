@@ -1,7 +1,7 @@
 @import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
 
 html, body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: 'Fira Code',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
 }
 
 a {
@@ -12,6 +12,11 @@ app {
     position: relative;
     display: flex;
     flex-direction: column;
+}
+
+.sample-title {
+    margin: 15px 0;
+    text-align:center;
 }
 
 .top-row {
@@ -26,8 +31,11 @@ app {
 
     .main .top-row {
         background-color: #e6e6e6;
+        z-index: 100;
         border-bottom: 1px solid #d6d5d5;
-        justify-content: flex-end;
+        justify-content: center;
+        background: rgb(2,0,36);
+        background: linear-gradient(90deg, rgba(2,0,36,0.7488037451308649) 0%, rgba(9,9,121,0.7544059860272234) 35%, rgba(3,190,228,0.7460026246826856) 100%);
     }
 
         .main .top-row > a {
@@ -35,7 +43,8 @@ app {
         }
 
 .sidebar {
-    background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);
+    background: rgb(2,0,36);
+    background: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(26,109,125,1) 100%);
 }
 
     .sidebar .top-row {

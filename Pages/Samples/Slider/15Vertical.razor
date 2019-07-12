@@ -1,0 +1,109 @@
+@page "/Slider/15Vertical"
+
+<div class="content-wrapper">
+    <table class="slider_table">
+        <tbody>
+            <tr>
+                <td>
+                    <div class="sliderwrap">
+                        <EJSSlider ID="default" Value="30" Orientation="@SliderOrientation.Vertical">
+                            <SliderTicksData Placement="@placement"></SliderTicksData>
+                            <SliderTooltipData IsVisible="@enableTooltip"></SliderTooltipData>
+                        </EJSSlider>
+                    </div>
+                </td>
+                <td>
+                    <div class="sliderwrap">
+                        <EJSSlider ID="minrange" Type=SliderType.MinRange Orientation="@SliderOrientation.Vertical" Value="30">
+                            <SliderTicksData Placement="@placement"></SliderTicksData>
+                            <SliderTooltipData IsVisible="@enableTooltip"></SliderTooltipData>
+                        </EJSSlider>
+                    </div>
+                </td>
+                <td>
+                    <div class="sliderwrap">
+                        <EJSSlider ID="range" Orientation="@SliderOrientation.Vertical" Type=SliderType.Range Value="@val">
+                            <SliderTicksData Placement="@placement"></SliderTicksData>
+                            <SliderTooltipData IsVisible="@enableTooltip"></SliderTooltipData>
+                        </EJSSlider>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+@code{
+    int[] val = { 30, 70 };
+    Placement placement = Placement.None;
+    bool enableTooltip = false;
+
+    //void onChange(Syncfusion.EJ2.Blazor.Buttons.ChangeEventArgs args)
+    //{
+    //    placement = args.Checked ? Placement.Before : Placement.None;
+
+    //}
+
+    //void onTooltipChange(Syncfusion.EJ2.Blazor.Buttons.ChangeEventArgs args)
+    //{
+    //    enableTooltip = args.Checked ? true : false;
+
+    //}
+
+}
+
+<style>
+
+
+    .content-wrapper {
+        width: 80%;
+        margin: 0 auto;
+        min-width: 185px;
+    }
+
+    .sliderwrap {
+        height: 375px;
+        margin-top: 10px;
+        width: 60%;
+        margin: auto;
+    }
+
+    .e-bigger .content-wrapper {
+        width: 80%;
+    }
+
+    .sliderwrap .e-lbl {
+        display: block;
+        font-size: 11px;
+        font-weight: 500;
+        margin-top: 15px;
+        margin-left: -10px;
+    }
+
+    .sliderwrap:last-child .e-lbl {
+        margin-left: -2px;
+    }
+
+    .slider_table td {
+        text-align: center;
+    }
+
+    .slider_table {
+        border: 0;
+        width: 100%
+    }
+
+    .e-content-placeholder.e-slider.e-placeholder-slider {
+        height: 375px;
+        margin-top: 10px;
+        width: 60%;
+        margin: auto;
+        background-image: none;
+    }
+
+        .e-content-placeholder.e-slider.e-placeholder-slider::after {
+            animation: none;
+            display: none;
+        }
+</style>

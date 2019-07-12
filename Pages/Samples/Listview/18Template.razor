@@ -1,6 +1,6 @@
-@page "/listview/18ListTemplate"
+@page "/listview/18Template"
 
-<EjsListView DataSource="@dataSource" ModelType="@model" ShowHeader="true">
+@*<EjsListView DataSource="@DataSource" ModelType="@model" ShowHeader="true">
     <ListViewFieldSettings Id="Id" Text="Text" GroupBy="Type"></ListViewFieldSettings>
     <ListViewTemplates>
         <Template>
@@ -13,10 +13,10 @@
             <h3>H3 Template</h3>
         </HeaderTemplate>
     </ListViewTemplates>
-</EjsListView>
+</EjsListView>*@
 
 @code {
-    List<MyModel> dataSource = new List<MyModel>()
+    List<MyModel> DataSource = new List<MyModel>()
 {
         new MyModel{ Id = "1", Text = "1", Type="Odd"},
         new MyModel{ Id = "2", Text = "2", Type="Even"},

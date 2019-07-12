@@ -46,7 +46,7 @@
                 value.Add(filename);
             }
             SampleService.Samples.Add(filename);
-            Console.WriteLine(filename + " >>>>> " + filename.LastIndexOf('/') + " >>>> " + filename.Substring(filename.LastIndexOf('/') + 3));
+            Console.WriteLine(filename + " >>>>> " + filename.LastIndexOf('/') + " >> into >> " + filename.Substring(filename.LastIndexOf('/') + 3));
         }
 
         base.OnInit();
@@ -61,7 +61,7 @@
     }
 
     .component-item {
-        padding: 15px 20px;
+        padding: 10px 30px;
         margin: 15px 20px;
     }
 

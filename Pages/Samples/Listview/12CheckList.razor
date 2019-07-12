@@ -1,6 +1,8 @@
 @page "/listview/12CheckList"
 
-<EjsListView HtmlAttributes="@htmlattr" ShowCheckBox="true" DataSource="@dataSource" ShowHeader="true" HeaderTitle="@HeaderTitle">
+<h4 class="sample-title">CheckList</h4>
+
+<EjsListView HtmlAttributes="@HTMLProps" ShowCheckBox="true" DataSource="@DataSource" ShowHeader="true" HeaderTitle="@HeaderTitle">
     <ListViewFieldSettings Id="Id" Text="Text"></ListViewFieldSettings>
 </EjsListView>
 
@@ -10,12 +12,12 @@
 
     string HeaderTitle = "Listview header";
 
-    Dictionary<string, object> htmlattr = new Dictionary<string, object>() {
+    Dictionary<string, object> HTMLProps = new Dictionary<string, object>() {
         {"style" , "border: 1px dashed blue"}
     };
 
-    List<DataModel> dataSource = new List<DataModel>()
-    {
+    List<DataModel> DataSource = new List<DataModel>()
+{
         new DataModel{ Id = "1", Text = "Artwork"},
         new DataModel{ Id = "2", Text = "Abstract"},
         new DataModel{ Id = "3", Text = "Modern Painting"},

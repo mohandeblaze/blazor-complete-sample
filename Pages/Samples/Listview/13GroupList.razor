@@ -1,6 +1,8 @@
 @page "/listview/13grouplist"
 
-<EjsListView HtmlAttributes="@htmlattr" DataSource="@dataSource" ShowHeader="true" HeaderTitle="@HeaderTitle">
+<h4 class="sample-title">Group List</h4>
+
+<EjsListView HtmlAttributes="@HTMLProps" DataSource="@DataSource" ShowHeader="true" HeaderTitle="@HeaderTitle">
     <ListViewFieldSettings Id="Id" Text="Text" GroupBy="Type"></ListViewFieldSettings>
 </EjsListView>
 
@@ -10,11 +12,11 @@
 
     string HeaderTitle = "Listview header";
 
-    Dictionary<string, object> htmlattr = new Dictionary<string, object>() {
+    Dictionary<string, object> HTMLProps = new Dictionary<string, object>() {
         {"style" , "border: 1px dashed blue"}
     };
 
-    List<DataModel> dataSource = new List<DataModel>()
+    List<DataModel> DataSource = new List<DataModel>()
 {
         new DataModel{ Id = "1", Text = "1", Type = "Odd"},
         new DataModel{ Id = "2", Text = "2", Type = "Even"},

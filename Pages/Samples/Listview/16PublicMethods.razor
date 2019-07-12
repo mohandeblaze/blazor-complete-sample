@@ -1,0 +1,286 @@
+@page "/listview/16PublicMethods"
+@using Newtonsoft.Json
+@using Syncfusion.EJ2.Blazor
+
+<div style="display: flex;">
+    <div style="margin: 10px;">
+        <EjsListView @ref="NormalList"
+                     HtmlAttributes="@HTMLProps"
+                     DataSource="@DataSource"
+                     ShowHeader="true"
+                     HeaderTitle="Normal List">
+            <ListViewFieldSettings Id="Id" Text="Text"></ListViewFieldSettings>
+        </EjsListView>
+    </div>
+
+    <div style="margin: 10px;">
+        <EjsListView @ref="CheckList"
+                     HtmlAttributes="@HTMLProps"
+                     DataSource="@DataSource"
+                     ShowHeader="true"
+                     ShowCheckBox="true"
+                     HeaderTitle="CheckList">
+            <ListViewFieldSettings Id="Id" Text="Text"></ListViewFieldSettings>
+        </EjsListView>
+    </div>
+    <div style="margin: 10px;">
+        <EjsListView @ref="NestedList"
+                     HtmlAttributes="@HTMLProps"
+                     DataSource="@NestedDataSource"
+                     ShowHeader="true"
+                     ShowCheckBox="true"
+                     HeaderTitle="NestedList">
+            <ListViewFieldSettings Id="Id" Text="Text" Child="Child"></ListViewFieldSettings>
+        </EjsListView>
+    </div>
+</div>
+
+<div style="display: flex;flex-wrap: wrap;justify-content: space-between;">
+    <div class="padding">
+        <div class="bold">Selected item</div>
+        <div class="italic">@(SelectedItemValue?.Text ?? "Nothing Yet")</div>
+        <button class="e-btn e-info" @onclick="@GetSelectedItems">Get Selected items</button>
+    </div>
+
+    <div class="padding">
+        <div class="bold">Find item</div>
+        <div class="italic">@(FindItemValue?.Text ?? "Nothing Yet")</div>
+        <button class="e-btn e-info" @onclick="@FindItem">Find item</button>
+    </div>
+
+    <div class="padding">
+        <div class="bold">Check item</div>
+        <div class="italic">Void</div>
+        <button class="e-btn e-info" @onclick="@CheckItem">Check item</button>
+    </div>
+
+    <div class="padding">
+        <div class="bold">UnCheck item</div>
+        <div class="italic">Void</div>
+        <button class="e-btn e-info" @onclick="@UnCheckItem">UnCheck item</button>
+    </div>
+
+    <div class="padding">
+        <div class="bold">CheckAll items</div>
+        <div class="italic">Void</div>
+        <button class="e-btn e-info" @onclick="@CheckAllItems">CheckAll items</button>
+    </div>
+
+    <div class="padding">
+        <div class="bold">UnCheckAll items</div>
+        <div class="italic">Void</div>
+        <button class="e-btn e-info" @onclick="@UnCheckAllItems">UnCheckAll items</button>
+    </div>
+
+    <div class="padding">
+        <div class="bold">Go back in NestedList</div>
+        <div class="italic">Void</div>
+        <button class="e-btn e-info" @onclick="@GoBack">Go Back</button>
+    </div>
+
+    <div class="padding">
+        <div class="bold">Add item in List</div>
+        <div class="italic">Void</div>
+        <button class="e-btn e-info" @onclick="@AddItem">Add item</button>
+    </div>
+
+    <div class="padding">
+        <div class="bold">Remove item in List</div>
+        <div class="italic">Void</div>
+        <button class="e-btn e-info" @onclick="@RemoveItem">Remove item</button>
+    </div>
+
+    <div class="padding">
+        <div class="bold">Disable Item</div>
+        <div class="italic">Void</div>
+        <button class="e-btn e-info" @onclick="@DisableItem">Disable item</button>
+    </div>
+
+    <div class="padding">
+        <div class="bold">Enable Item</div>
+        <div class="italic">Void</div>
+        <button class="e-btn e-info" @onclick="@EnableItem">Enable item</button>
+    </div>
+
+    <div class="padding">
+        <div class="bold">Hide Item</div>
+        <div class="italic">Void</div>
+        <button class="e-btn e-info" @onclick="@HideItem">Hide item</button>
+    </div>
+
+    <div class="padding">
+        <div class="bold">Show Item</div>
+        <div class="italic">Void</div>
+        <button class="e-btn e-info" @onclick="@ShowItem">Show item</button>
+    </div>
+</div>
+
+@code {
+    [Inject]
+    protected IJSRuntime JsRuntime { get; set; }
+
+    List<DataModel> _DataModel = new List<DataModel>();
+
+    EjsListView NormalList;
+
+    EjsListView CheckList;
+
+    EjsListView NestedList;
+
+    SelectedItem SelectedItemValue;
+
+    DataModel FindItemValue;
+
+    Dictionary<string, object> HTMLProps = new Dictionary<string, object>() {
+        {"style" , "border: 1px dashed blue"}
+    };
+
+    List<DataModel> DataSource = new List<DataModel>()
+{
+        new DataModel{ Id = "1", Text = "Data 1"},
+        new DataModel{ Id = "2", Text = "Data 2"},
+        new DataModel{ Id = "3", Text = "Data 3"},
+        new DataModel{ Id = "4", Text = "Data 4"},
+    };
+
+    List<DataModel> NestedDataSource = new List<DataModel>()
+{
+        new DataModel{ Id = "1", Text = "Data 1", Child = new List<DataModel>(){ new DataModel { Id="1-1", Text = "Child Data 1"} }},
+        new DataModel{ Id = "2", Text = "Data 2", Child = new List<DataModel>(){ new DataModel { Id="2-1", Text = "Child Data 2"} }},
+        new DataModel{ Id = "3", Text = "Data 3", Child = new List<DataModel>(){ new DataModel { Id="3-1", Text = "Child Data 3"} }},
+        new DataModel{ Id = "4", Text = "Data 4", Child = new List<DataModel>(){ new DataModel { Id="4-1", Text = "Child Data 4"} }},
+    };
+
+    async void GetSelectedItems()
+    {
+        var item = await NormalList.GetSelectedItems();
+        if (item != null)
+        {
+            SelectedItemValue = JsonConvert.DeserializeObject<SelectedItem>(item.ToString());
+            this.StateHasChanged();
+        }
+    }
+
+    async void FindItem()
+    {
+        DataModel data = new DataModel { Id = "1", Text = "Data 1" };
+        var item = await NormalList.FindItem(data);
+        if (item != null)
+        {
+            FindItemValue = JsonConvert.DeserializeObject<DataModel>(item.ToString());
+            this.StateHasChanged();
+        }
+    }
+
+    void CheckItem()
+    {
+        DataModel data = new DataModel { Id = "1", Text = "Data 1" };
+        CheckList.CheckItem(data);
+    }
+
+    void UnCheckItem()
+    {
+        DataModel data = new DataModel { Id = "1", Text = "Data 1" };
+        CheckList.UncheckItem(data);
+    }
+
+    void CheckAllItems()
+    {
+        CheckList.CheckAllItems();
+    }
+
+    void UnCheckAllItems()
+    {
+        CheckList.UncheckAllItems();
+    }
+
+    void GoBack()
+    {
+        NestedList.Back();
+    }
+
+    void AddItem()
+    {
+        DataModel[] data = new DataModel[] { new DataModel { Id = "5", Text = "New Data 5" } };
+        NormalList.AddItem(data, null);
+    }
+
+    void RemoveItem()
+    {
+        DataModel data = new DataModel { Id = "1", Text = "Data 1" };
+        NormalList.RemoveItem(data);
+    }
+
+    void DisableItem()
+    {
+        DataModel data = new DataModel { Id = "1", Text = "Data 1" };
+        NormalList.DisableItem(data);
+        CheckList.DisableItem(data);
+        NestedList.DisableItem(data);
+    }
+
+    void EnableItem()
+    {
+        DataModel data = new DataModel { Id = "1", Text = "Data 1" };
+        NormalList.EnableItem(data);
+        CheckList.EnableItem(data);
+        NestedList.EnableItem(data);
+    }
+
+    void HideItem()
+    {
+        DataModel data = new DataModel { Id = "2", Text = "Data 2" };
+        NormalList.HideItem(data);
+        CheckList.HideItem(data);
+        NestedList.HideItem(data);
+    }
+
+    void ShowItem()
+    {
+        DataModel data = new DataModel { Id = "2", Text = "Data 2" };
+        NormalList.ShowItem(data);
+        CheckList.ShowItem(data);
+        NestedList.ShowItem(data);
+    }
+
+    class DataModel
+    {
+        public string Id { get; set; }
+        public string Text { get; set; }
+        public List<DataModel> Child { get; set; }
+    }
+
+    class SelectedItem
+    {
+        [JsonProperty("data")]
+        public DataModel Data { get; set; }
+
+        [JsonProperty("item")]
+        public DOM Item { get; set; }
+
+        [JsonProperty("text")]
+        public string Text { get; set; }
+    }
+}
+
+<style>
+    .padding {
+        margin: 10px;
+    }
+
+        .padding * {
+            margin: 5px 10px;
+        }
+
+    .e-listview {
+        margin: 10px;
+    }
+
+    .bold {
+        font-weight: bold;
+    }
+
+    .italic {
+        font-style: italic;
+    }
+</style>

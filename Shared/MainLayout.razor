@@ -4,14 +4,16 @@
 @inject Microsoft.AspNetCore.Components.IUriHelper UriHelper
 @inject SampleService SampleService
 
-<div class="sidebar">
-    <NavMenu />
-</div>
+@*<div class="sidebar">
+        <NavMenu />
+    </div>*@
 
 <div class="main">
     <div class="top-row px-4">
-        <button class="e-btn e-success button" @onclick="@OnStartClick">Start</button>
+
         <button class="e-btn e-info button" @onclick="@OnPrevClick">Prev</button>
+        <button class="e-btn e-primary button" @onclick="@OnHomeClick">Home</button>
+        @*<button class="e-btn e-success button" @onclick="@OnStartClick">Start</button>*@
         <button class="e-btn e-info button" @onclick="@OnNextClick">Next</button>
     </div>
 
@@ -30,6 +32,11 @@
     void OnStartClick()
     {
         UriHelper.NavigateTo(UriHelper.GetBaseUri() + SampleService.Samples[0].Substring(1));
+    }
+
+    void OnHomeClick()
+    {
+        UriHelper.NavigateTo(UriHelper.GetBaseUri());
     }
 
     void OnNextClick()

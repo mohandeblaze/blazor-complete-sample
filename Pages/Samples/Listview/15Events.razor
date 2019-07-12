@@ -1,13 +1,13 @@
-@page "/listview/15ListEvents"
+@page "/listview/15Events"
 
-<EjsListView DataSource="@dataSource"
+<EjsListView DataSource="@DataSource"
              Selected="@((e) => OnSelect(e))"
              OnActionBegin="@((e) => { actionBegin = true; this.StateHasChanged(); })"
              OnActionComplete="@((e) => { actionComplete = true; this.StateHasChanged(); })"
              OnActionFailure="@((e) => { actionFailure = true; this.StateHasChanged(); })"
              ShowHeader="true"
              HeaderTitle="@HeaderTitle"
-             HtmlAttributes="@htmlattr">
+             HtmlAttributes="@HTMLProps">
     <ListViewFieldSettings Id="Id" Text="Text"></ListViewFieldSettings>
 </EjsListView>
 
@@ -41,11 +41,11 @@
 
     bool actionFailure = false;
 
-    Dictionary<string, object> htmlattr = new Dictionary<string, object>() {
+    Dictionary<string, object> HTMLProps = new Dictionary<string, object>() {
         {"style" , "border: 1px dashed blue"}
     };
 
-    List<DataModel> dataSource = new List<DataModel>()
+    List<DataModel> DataSource = new List<DataModel>()
 {
         new DataModel{ Id = "1", Text = "1"},
         new DataModel{ Id = "2", Text = "2"},

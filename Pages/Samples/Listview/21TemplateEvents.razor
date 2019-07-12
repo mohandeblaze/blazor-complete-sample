@@ -3,7 +3,7 @@
 
 <div class="list-item-container">
     <div style="flex: 1">
-        <EjsListView ID="groupedList" DataSource="@dataSource" ModelType="@dataModel" ShowHeader="true" CssClass="e-list-template" HeaderTitle="Settings" Width="400">
+        @*<EjsListView ID="groupedList" DataSource="@DataSource" ModelType="@dataModel" ShowHeader="true" CssClass="e-list-template" HeaderTitle="Settings" Width="400">
             <ListViewFieldSettings Id="Id" Text="Name"></ListViewFieldSettings>
             <ListViewTemplates>
                 <Template>
@@ -15,7 +15,7 @@
                     </div>
                 </Template>
             </ListViewTemplates>
-        </EjsListView>
+        </EjsListView>*@
     </div>
     <div style="flex: 1">
         <h4>Selected item: @selectedItem</h4>
@@ -25,7 +25,7 @@
 @code {
     string selectedItem = null;
 
-    List<DataModel> dataSource = new List<DataModel>()
+    List<DataModel> DataSource = new List<DataModel>()
 {
         new DataModel { Name= "WI-FI", Content = "Disabled", Id = "1", Class = "wifi", Category = "Wireless & networks", Order = 0 },
         new DataModel { Name= "Bluetooth", Content = "Disabled", Id = "2", Class = "bluetooth", Category = "Wireless & networks", Order = 0 },
