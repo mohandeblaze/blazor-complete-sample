@@ -1,14 +1,21 @@
 @page "/tooltip/11defaulttooltip"
 
-<EjsTooltip  Content="@content">
-	<button>Hover Me</button>
+<h4 class="sample-title">Tooltip With Template</h4>
+
+
+<EjsTooltip Content="@content" HtmlAttributes="@HTMLProps">
+    <button>Hover Me</button>
     <TooltipTemplates>
         <Content>
             <h3>Template</h3>
+            <EjsButton>Button</EjsButton>
         </Content>
     </TooltipTemplates>
 </EjsTooltip>
 
 @code {
     string content = "This is tooltip";
+Dictionary<string, object> HTMLProps = new Dictionary<string, object>() {
+        {"style" , "border: 1px dashed blue"}
+    };
 }

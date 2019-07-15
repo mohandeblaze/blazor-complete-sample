@@ -1,5 +1,7 @@
 @page "/listview/15Events"
 
+<h4 class="sample-title">Listview Events</h4>
+
 <EjsListView DataSource="@DataSource"
              Selected="@((e) => OnSelect(e))"
              OnActionBegin="@((e) => { actionBegin = true; this.StateHasChanged(); })"

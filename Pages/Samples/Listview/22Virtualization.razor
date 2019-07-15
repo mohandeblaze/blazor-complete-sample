@@ -1,5 +1,8 @@
 @page "/listview/22Virtualization"
 
+<h4 class="sample-title">List Virtualization</h4>
+
+
 <Ejslistview id="ui-list" DataSource="@Data" Template="@Template" EnableVirtualization="true" CssClass="e-list-template" HeaderTitle="Contacts"
              Height=500 ShowHeader="true">
     <listViewFieldSettings Text="name"></listViewFieldSettings>
@@ -8,7 +11,7 @@
 
 @code{
 
-    string Template =  "<div class='e-list-wrapper e-list-avatar'>" +
+    string Template = "<div class='e-list-wrapper e-list-avatar'>" +
                  "<span id=\"${$imgUrl ? \'hideUI\' : \'showUI\' }\" class='e-avatar e-avatar-circle' icon='${icon}'> " +
             "${icon}</span> <img id=\"${$imgUrl ? \'showUI\' : \'hideUI\' }\" class='e-avatar e-avatar-circle' src=\"${$imgUrl ?  $imgUrl : \' \' }\" />" +
             "<span class='e-list-content'>${name}</span></div>";

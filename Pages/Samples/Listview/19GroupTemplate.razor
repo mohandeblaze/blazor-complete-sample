@@ -1,26 +1,28 @@
 @page "/listview/19GroupTemplate"
 
-@*<EjsListView ID="groupedList" DataSource="@DataSource" ModelType="@model" ShowHeader="true" CssClass="e-list-template" HeaderTitle="Settings">
+<h4 class="sample-title">List Group Template</h4>
+
+<EjsListView ID="groupedList" DataSource="@DataSource" ModelType="@model" ShowHeader="true" CssClass="e-list-template" HeaderTitle="Settings">
     <ListViewFieldSettings Id="Id" Text="Name" GroupBy="Category"></ListViewFieldSettings>
     <ListViewTemplates>
         <Template>
             <div class="settings e-list-wrapper e-list-multi-line e-list-avatar">
-                <span class="icon e-avatar @context.Class"></span>
-                <span class="e-list-item-header">@context.Name</span>
-                <span class="e-list-content">@context.Content</span>
+                <span class="icon e-avatar @((context as dynamic).Class)"></span>
+                <span class="e-list-item-header">@((context as dynamic).Name)</span>
+                <span class="e-list-content">@((context as dynamic).Content)</span>
             </div>
         </Template>
         <GroupTemplate>
             <div class="e-list-wrapper">
-                <span class="e-list-item-content">@context.Name</span>
+                <span class="e-list-item-content">@((context as dynamic).Name)</span>
             </div>
         </GroupTemplate>
     </ListViewTemplates>
-</EjsListView>*@
+</EjsListView>
 
 @code {
     List<DataModel> DataSource = new List<DataModel>()
-    {
+{
         new DataModel { Name= "WI-FI", Content = "Disabled", Id = "1", Class = "wifi", Category = "Wireless & networks", Order = 0 },
         new DataModel { Name= "Bluetooth", Content = "Disabled", Id = "2", Class = "bluetooth", Category = "Wireless & networks", Order = 0 },
         new DataModel { Name= "SIM cards", Id = "3", Content = "AT&T", Class = "sim", Category = "Wireless & networks", Order = 0 },
@@ -58,30 +60,30 @@
         border-color: rgba(0, 0, 0, 0.12);
     }
 
-    /* ListView header alignment */
+        /* ListView header alignment */
 
-    #groupedList.e-listview .e-headertext:after {
-        font-family: 'e-icons';
-        position: absolute;
-        content: "\e712";
-        right: 16px;
-    }
+        #groupedList.e-listview .e-headertext:after {
+            font-family: 'e-icons';
+            position: absolute;
+            content: "\e712";
+            right: 16px;
+        }
 
-    #groupedList.e-listview .e-list-header {
-        color: white;
-        height: 57px;
-        background-color: #56697f;
-        padding-left: 15px;
-        position: sticky;
-        top: -1px;
-        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-    }
+        #groupedList.e-listview .e-list-header {
+            color: white;
+            height: 57px;
+            background-color: #56697f;
+            padding-left: 15px;
+            position: sticky;
+            top: -1px;
+            box-shadow: 0 1px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+        }
 
-    #groupedList.e-listview .e-list-header .e-text {
-        font-family: sans-serif;
-        font-size: 18px;
-        line-height: 26px;
-    }
+            #groupedList.e-listview .e-list-header .e-text {
+                font-family: sans-serif;
+                font-size: 18px;
+                line-height: 26px;
+            }
 
     /* ListView template customization */
 

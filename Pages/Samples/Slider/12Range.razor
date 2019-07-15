@@ -1,9 +1,11 @@
 @page "/slider/12range"
 
-<EjsSlider  Value="@value" Type="SliderType.Range">
-    <SliderLimitData Enabled="true" MinStart="10" MinEnd="40" ></SliderLimitData>
+<h4 class="sample-title">Range Slider</h4>
+
+<EjsSlider Value="@value" Type="SliderType.Range">
+    <SliderLimitData Enabled="true" MinStart="10" MinEnd="40"></SliderLimitData>
 </EjsSlider>
 
 @code {
-    int[] value = {20, 80};
+    int[] value = { 20, 80 };
 }

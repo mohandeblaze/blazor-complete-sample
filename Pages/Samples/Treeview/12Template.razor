@@ -1,28 +1,30 @@
 @page "/Treeview/12Template"
 
+<h4 class="sample-title">Treeview Template</h4>
+
 <div class="control_wrapper">
     <EjsTreeView ID="tree" ModelType="@modelType" LoadOnDemand="false">
         <TreeViewFieldsSettings Id="Id" Text="Name" ParentID="Pid" HasChildren="HasChild" Selected="Selected" Expanded="Expanded" DataSource="@localData"></TreeViewFieldsSettings>
-        @*<TreeViewTemplates>
+        <TreeViewTemplates>
             <NodeTemplate>
                 <div>
                     <div class="treeviewdiv">
                         <div style="float:left">
-                            <span class="treeName">@context.Name</span>
+                            <span class="treeName">@((context as dynamic).Name)</span>
                         </div>
                         @{
 
-                            @if (@context.Count != 0)
+                            @if ((context as dynamic).Count != 0)
                             {
                                 <div style="margin-right: 5px; float:right">
-                                    <span class="treeCount e-badge e-badge-primary">@context.Count</span>
+                                    <span class="treeCount e-badge e-badge-primary">@((context as dynamic).Count)</span>
                                 </div>
                             }
                         }
                     </div>
                 </div>
             </NodeTemplate>
-        </TreeViewTemplates>*@
+        </TreeViewTemplates>
     </EjsTreeView>
 </div>
 

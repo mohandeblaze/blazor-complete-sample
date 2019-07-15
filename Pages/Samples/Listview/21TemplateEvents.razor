@@ -1,21 +1,25 @@
 @page "/listview/21TemplateEvents"
 
+<h4 class="sample-title">Template with Native Events</h4>
+
 
 <div class="list-item-container">
     <div style="flex: 1">
-        @*<EjsListView ID="groupedList" DataSource="@DataSource" ModelType="@dataModel" ShowHeader="true" CssClass="e-list-template" HeaderTitle="Settings" Width="400">
+        <EjsListView ID="groupedList" DataSource="@DataSource" ModelType="@dataModel" ShowHeader="true" CssClass="e-list-template" HeaderTitle="Settings" Width="400">
             <ListViewFieldSettings Id="Id" Text="Name"></ListViewFieldSettings>
             <ListViewTemplates>
                 <Template>
                     <div class="list-item-container">
-                        <div class="list-item-text" @onclick="@((e) => { onClick(context.Name); })">@context.Name</div>
+                        <div class="list-item-text" @onclick="@((e) => { onClick((context as dynamic).Name); })">@((context as dynamic).Name)</div>
                         <div class="list-item-button">
-                            <a class="btn btn-primary" href="/models/@context.Id">Enter</a>
+                            <EjsButton IsPrimary="true">
+                                <a href="/models/@((context as dynamic).Id)">Enter</a>
+                            </EjsButton>
                         </div>
                     </div>
                 </Template>
             </ListViewTemplates>
-        </EjsListView>*@
+        </EjsListView>
     </div>
     <div style="flex: 1">
         <h4>Selected item: @selectedItem</h4>
@@ -73,5 +77,9 @@
 
     .list-item-button {
         flex: 0;
+    }
+
+    .e-btn a {
+        color: white;
     }
 </style>

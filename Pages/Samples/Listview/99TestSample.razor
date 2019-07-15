@@ -1,22 +1,25 @@
 @page "/listview/99TestSample"
 
-@*<EjsListView ID="list" DataSource="@ListData" CssClass="e-list-template" ModelType="@_DataModel">
+<h4 class="sample-title">Test Sample</h4>
+
+
+<EjsListView ID="list" DataSource="@ListData" CssClass="e-list-template" ModelType="@_DataModel">
     <ListViewFieldSettings Id="Id" Text="Name" GroupBy="Category"></ListViewFieldSettings>
     <ListViewTemplates>
         <Template>
             <div class="e-list-wrapper e-list-multi-line e-list-avatar">
-                <img class="e-avatar e-avatar-circle" src=@context.Image style="background:#BCBCBC" />
-                <span class="e-list-item-header">@context.Name</span>
-                <span class="e-list-content">@context.Contact</span>
+                <img class="e-avatar e-avatar-circle" src=@((context as dynamic).Image) style="background:#BCBCBC" />
+                <span class="e-list-item-header">@((context as dynamic).Name)</span>
+                <span class="e-list-content">@((context as dynamic).Contact)</span>
             </div>
         </Template>
         <GroupTemplate>
             <div>
-                <span class="category">Type: @context.Name</span>
+                <span class="category">Type: @((context as dynamic).Name)</span>
             </div>
         </GroupTemplate>
     </ListViewTemplates>
-</EjsListView>*@
+</EjsListView>
 
 @code{
 

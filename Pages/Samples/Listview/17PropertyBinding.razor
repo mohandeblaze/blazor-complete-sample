@@ -1,5 +1,7 @@
 @page "/listview/17PropertyBinding"
 
+<h4 class="sample-title">List Property Binding</h4>
+
 <EjsListView DataSource="@DataSource" ShowHeader="true" HeaderTitle="@HeaderTitle">
     <ListViewFieldSettings Id="Id" Text="Text"></ListViewFieldSettings>
 </EjsListView>
@@ -21,7 +23,7 @@
     };
 
     List<DataModel> DataSource = new List<DataModel>()
-    {
+{
         new DataModel{ Id = "1", Text = "1"},
         new DataModel{ Id = "2", Text = "2"},
         new DataModel{ Id = "3", Text = "3"},
@@ -31,7 +33,7 @@
     void onClick()
     {
         DataSource = new List<DataModel>()
-        {
+    {
             new DataModel{ Id = "1", Text = "Changed 1"},
             new DataModel{ Id = "2", Text = "Changed 2"},
             new DataModel{ Id = "3", Text = "Changed 3"},

@@ -1,0 +1,109 @@
+@page "/Treeview/19PropertyBinding"
+
+<h4 class="sample-title">Treeview Property Binding</h4>
+
+<div class="sample-container">
+    <EjsTreeView @ref="Treeview" AllowEditing="@AllowEditing" AllowMultiSelection="@AllowMultiSelection" AllowDragAndDrop="@AllowDragAndDrop">
+        <TreeViewFieldsSettings DataSource="@_DataSource" Id="nodeId" ParentID="pid" Text="nodeText" HasChildren="hasChild" Expanded="expanded" Child="@child"></TreeViewFieldsSettings>
+    </EjsTreeView>
+</div>
+
+<div>
+    <button class="e-btn e-info" @onclick="@ChangeData">Change Datasource</button>
+    <button class="e-btn e-info" @onclick="@(() => { AllowMultiSelection = !AllowMultiSelection;})">Toggle AllowMultiSelection</button>
+    <button class="e-btn e-info" @onclick="@(() => { AllowEditing= !AllowEditing;})">Toggle AllowEditing</button>
+    <button class="e-btn e-info" @onclick="@(() => { AllowDragAndDrop = !AllowDragAndDrop;})">Toggle AllowDragAndDrop</button>
+</div>
+
+@code {
+    EjsTreeView Treeview;
+    object child;
+    List<DataSource> _DataSource = new List<DataSource>();
+    bool AllowEditing = true;
+    bool AllowMultiSelection = true;
+    bool AllowDragAndDrop = true;
+
+    List<DataSource> NewDataSource = new List<DataSource>();
+
+    void ChangeData()
+    {
+        NewDataSource.Add(new DataSource
+        {
+            nodeId = "01",
+            nodeText = "Local Disk (C:)",
+            child = new List<Childitem>()
+        {
+                new Childitem { nodeId = "01-01", nodeText = "Program Files" },
+                new Childitem { nodeId = "01-02", nodeText = "Users"},
+                new Childitem { nodeId = "01-03", nodeText = "Windows" }
+            },
+        });
+        _DataSource = NewDataSource;
+        Treeview.DataBind();
+    }
+
+    protected override void OnInit()
+    {
+        base.OnInit();
+        _DataSource.Add(new DataSource
+        {
+            nodeId = "01",
+            nodeText = "Local Disk (C:)",
+            child = new List<Childitem>()
+{
+                new Childitem { nodeId = "01-01", nodeText = "Program Files" },
+                new Childitem { nodeId = "01-02", nodeText = "Users"},
+                new Childitem { nodeId = "01-03", nodeText = "Windows" }
+            },
+        });
+
+        _DataSource.Add(new DataSource
+        {
+            nodeId = "02",
+            nodeText = "Local Disk (D:)",
+            child = new List<Childitem>()
+{
+                new Childitem { nodeId = "02-01", nodeText = "Personals" },
+                new Childitem { nodeId = "02-02", nodeText = "Projects" },
+                new Childitem { nodeId = "02-02", nodeText = "Office" }
+            },
+        });
+
+        _DataSource.Add(new DataSource
+        {
+            nodeId = "03",
+            nodeText = "Local Disk (E:)",
+            child = new List<Childitem>()
+{
+                new Childitem { nodeId = "03-01", nodeText = "Pictures" },
+                new Childitem { nodeId = "03-02", nodeText = "Documents", icon = "docx" },
+                new Childitem { nodeId = "03-03", nodeText = "Study Materials" }
+            },
+        });
+        this.child = "child";
+    }
+
+    public class DataSource
+    {
+        public string nodeId { get; set; }
+        public string nodeText { get; set; }
+        public string icon { get; set; }
+        public bool selected { get; set; }
+        public List<Childitem> child;
+
+    }
+
+    public class Childitem
+    {
+        public string nodeId { get; set; }
+        public string nodeText { get; set; }
+        public string icon { get; set; }
+        public bool selected { get; set; }
+    }
+}
+
+<style>
+    .sample-container {
+        display: flex;
+    }
+</style>

@@ -1,7 +1,17 @@
 @page "/slider/11default"
 
-<EjsSlider @bind-Value="@slider"></EjsSlider>
+<h4 class="sample-title">Simple Slider</h4>
+
+<EjsSlider @bind-Value="@slider" HtmlAttributes="@HTMLProps"></EjsSlider>
+
+<br />
+
+<div class="sample-title">@slider</div>
 
 @code {
     object slider = 60;
+
+    Dictionary<string, object> HTMLProps = new Dictionary<string, object>() {
+        {"style" , "border: 1px dashed blue"}
+    };
 }

@@ -1,19 +1,21 @@
 @page "/listview/18Template"
 
-@*<EjsListView DataSource="@DataSource" ModelType="@model" ShowHeader="true">
+<h4 class="sample-title">List All Templates</h4>
+
+<EjsListView DataSource="@DataSource" ModelType="@model" ShowHeader="true">
     <ListViewFieldSettings Id="Id" Text="Text" GroupBy="Type"></ListViewFieldSettings>
     <ListViewTemplates>
         <Template>
-            <div>Template item @context.Text</div>
+            <div>Template item @((context as dynamic).Text)</div>
         </Template>
         <GroupTemplate>
-            <div>Group Template @context.Text</div>
+            <div>Group Template @((context as dynamic).Text)</div>
         </GroupTemplate>
         <HeaderTemplate>
             <h3>H3 Template</h3>
         </HeaderTemplate>
     </ListViewTemplates>
-</EjsListView>*@
+</EjsListView>
 
 @code {
     List<MyModel> DataSource = new List<MyModel>()
