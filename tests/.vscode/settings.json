@@ -1,9 +1,26 @@
 {
     "cSpell.ignoreWords": [
+        "changevalue",
+        "checkall",
         "checkitem",
         "content",
+        "disableditems",
+        "enableditems",
         "firstlist",
         "getselecteditem",
-        "secondlist"
+        "goback",
+        "hideitem",
+        "hideitems",
+        "nestedafterback",
+        "nestedfirstlevel",
+        "propertychanged",
+        "secondlist",
+        "showitem",
+        "showitems",
+        "templateevent",
+        "templateeventnavigation",
+        "thirdlist",
+        "uncheckall",
+        "uncheckitem"
     ]
 }

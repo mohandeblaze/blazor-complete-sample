@@ -5,6 +5,12 @@
     "/Listview/13GroupList",
     "/Listview/14RemoteList",
     "/Listview/15Events",
-    "/Listview/16PublicMethods"
+    "/Listview/16PublicMethods",
+    "/Listview/17PropertyBinding",
+    "/Listview/18Template",
+    "/Listview/19GroupTemplate",
+    "/Listview/21TemplateEvents",
+    "/Listview/22Virtualization",
+    "/Listview/23RTL"
   ]
 }

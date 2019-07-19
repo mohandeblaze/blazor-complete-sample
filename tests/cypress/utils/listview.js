@@ -73,24 +73,162 @@ function publicMethods(sampleName) {
     .click()
     .should('have.class', 'e-active');
   cy.get('#getselecteditem').click();
+  cy.wait(200);
   cy.get('#getselecteditem_content').contains('Data 1');
   matchScreenShot(`${sampleName}_getselecteditem`);
 
   cy.get('#checkitem').click();
+  cy.wait(200);
+  cy.get('#secondlist').within($el => {
+    cy.get('.e-list-item.e-level-1:first').should('have.class', 'e-active');
+  });
+  matchScreenShot(`${sampleName}_checkitem`);
+
+  cy.get('#uncheckitem').click();
+  cy.wait(200);
+  cy.get('#secondlist').within($el => {
+    cy.get('.e-list-item.e-level-1:first').should('not.have.class', 'e-active');
+  });
+  matchScreenShot(`${sampleName}_uncheckitem`);
+
+  cy.get('#checkall').click();
+  cy.wait(200);
+  cy.get('#secondlist').within(() => {
+    cy.get('.e-list-item.e-level-1:first').should('have.class', 'e-active');
+  });
+
+  cy.get('#secondlist').within(() => {
+    cy.get('.e-list-item.e-level-1:last').should('have.class', 'e-active');
+  });
+
+  matchScreenShot(`${sampleName}_checkall`);
+
+  cy.get('#uncheckall').click();
+  cy.wait(200);
+  cy.get('#secondlist').within(() => {
+    cy.get('.e-list-item.e-level-1:first').should('not.have.class', 'e-active');
+  });
+
+  cy.get('#secondlist').within(() => {
+    cy.get('.e-list-item.e-level-1:last').should('not.have.class', 'e-active');
+  });
+
+  matchScreenShot(`${sampleName}_uncheckall`);
+
+  cy.get('#thirdlist').within(() => {
+    cy.get('.e-list-item.e-level-1:first').click();
+  });
+
+  matchScreenShot(`${sampleName}_nestedfirstlevel`);
+  cy.get('#goback').click();
+  cy.wait(400);
+  matchScreenShot(`${sampleName}_nestedafterback`);
+
+  cy.get('#disableitem').click();
+  cy.wait(200);
+  cy.get('#firstlist')
+    .get('.e-list-item.e-level-1:first')
+    .should('have.class', 'e-disabled');
   cy.get('#secondlist')
     .get('.e-list-item.e-level-1:first')
-    .should('have.class', 'e-active');
-  matchScreenShot(`${sampleName}_checkitem`);
+    .should('have.class', 'e-disabled');
+  cy.get('#thirdlist')
+    .get('.e-list-item.e-level-1:first')
+    .should('have.class', 'e-disabled');
+  matchScreenShot(`${sampleName}_disableditems`);
+
+  cy.get('#enableitem').click();
+  cy.wait(200);
+  cy.get('#firstlist')
+    .get('.e-list-item.e-level-1:first')
+    .should('not.have.class', 'e-disabled');
+  cy.get('#secondlist')
+    .get('.e-list-item.e-level-1:first')
+    .should('not.have.class', 'e-disabled');
+  cy.get('#thirdlist')
+    .get('.e-list-item.e-level-1:first')
+    .should('not.have.class', 'e-disabled');
+  matchScreenShot(`${sampleName}_enableditems`);
+
+  cy.get('#hideitem').click();
+  cy.wait(200);
+  cy.get('#firstlist').within(() => {
+    cy.get('li')
+      .eq(1)
+      .should('not.be.visible');
+  });
+
+  cy.get('#secondlist').within(() => {
+    cy.get('li')
+      .eq(1)
+      .should('not.be.visible');
+  });
+  cy.get('#thirdlist').within(() => {
+    cy.get('li')
+      .eq(1)
+      .should('not.be.visible');
+  });
+  matchScreenShot(`${sampleName}_hideitems`);
+
+  cy.get('#showitem').click();
+  cy.wait(200);
+  cy.get('#firstlist').within(() => {
+    cy.get('li')
+      .eq(1)
+      .should('be.visible');
+  });
+
+  cy.get('#secondlist').within(() => {
+    cy.get('li')
+      .eq(1)
+      .should('be.visible');
+  });
+  cy.get('#thirdlist').within(() => {
+    cy.get('li')
+      .eq(1)
+      .should('be.visible');
+  });
+  matchScreenShot(`${sampleName}_showitems`);
 }
 
-function propertyBinding(sampleName) {}
+function propertyBinding(sampleName) {
+  matchScreenShot(sampleName);
 
-function template(sampleName) {}
+  cy.get('#changevalue').click();
+  cy.wait(200);
+  matchScreenShot(`${sampleName}_propertychanged`);
+}
 
-function groupTemplate(sampleName) {}
+function template(sampleName) {
+  matchScreenShot(sampleName);
+}
 
-function templateEvents(sampleName) {}
+function groupTemplate(sampleName) {
+  matchScreenShot(sampleName);
+}
 
-function virtualization(sampleName) {}
+function templateEvents(sampleName) {
+  matchScreenShot(sampleName);
 
-function rtl(sampleName) {}
+  cy.get('.list-item-text')
+    .eq(0)
+    .click();
+  cy.wait(300);
+
+  matchScreenShot(`${sampleName}_templateevent`);
+
+  cy.get('.list-item-button')
+    .eq(0)
+    .within(() => {
+      cy.get('a').click();
+    });
+  matchScreenShot(`${sampleName}_templateeventnavigation`);
+}
+
+function virtualization(sampleName) {
+  matchScreenShot(sampleName);
+}
+
+function rtl(sampleName) {
+  matchScreenShot(sampleName);
+}
