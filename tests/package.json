@@ -1,0 +1,28 @@
+{
+  "name": "tests",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm start && cypress run",
+    "e2e": "cypress run",
+    "cy:run": "cypress run",
+    "cy:run:record": "cypress run --record",
+    "cy:open": "cypress open",
+    "cleanup": "del \\s mochawesome-report",
+    "merge_reports": "mochawesome-merge --reportDir mochawesome-report > mochawesome-report/output.json",
+    "generate_mochawesome_report": "marge mochawesome-report/output.json",
+    "e2e_mochawesome": "cypress run && npm run merge_reports && npm run generate_mochawesome_report"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^12.6.8",
+    "cypress": "^3.4.0",
+    "cypress-image-snapshot": "^3.1.1",
+    "mocha": "5.2.0",
+    "mochawesome": "^4.0.1",
+    "mochawesome-merge": "^2.0.1"
+  },
+  "dependencies": {}
+}
