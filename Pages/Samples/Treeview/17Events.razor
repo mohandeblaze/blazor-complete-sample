@@ -6,6 +6,8 @@
     <div class="control_wrapper">
         <EjsTreeView id="treedata"
                      AllowEditing="true"
+                     AllowDragAndDrop="true"
+                     AllowMultiSelection="true"
                      Created="@((e) => { EventTriggeredList.Add("Created");  this.StateHasChanged();})"
                      DataBound="@((e) => { EventTriggeredList.Add("DataBound");  this.StateHasChanged(); })"
                      DataSourceChanged="@((e) => { EventTriggeredList.Add("DataSourceChanged"); this.StateHasChanged(); })"
@@ -13,7 +15,8 @@
                      OnKeyPress="@((e) => { EventTriggeredList.Add("OnKeyPress"); this.StateHasChanged(); })"
                      NodeEdited="@((e) => { EventTriggeredList.Add("NodeEdited"); this.StateHasChanged(); })"
                      NodeEditing="@((e) => { EventTriggeredList.Add("NodeEditing"); this.StateHasChanged(); })"
-                     NodeSelected="@((e) => { EventTriggeredList.Add("NodeSelected"); this.StateHasChanged(); })">
+                     NodeSelected="@((e) => { EventTriggeredList.Add("NodeSelected"); this.StateHasChanged(); })"
+                     >
             <TreeViewFieldsSettings DataSource="@parentitem" Id="nodeId" ParentID="pid" Text="nodeText" HasChildren="hasChild" Expanded="expanded" Child="@child"></TreeViewFieldsSettings>
         </EjsTreeView>
     </div>
@@ -99,8 +102,8 @@
 <style>
 
     .control_wrapper {
-        margin: 10px;
-        width: 250px;
+        padding: 10px;
+        width: 350px;
         overflow: hidden;
     }
 

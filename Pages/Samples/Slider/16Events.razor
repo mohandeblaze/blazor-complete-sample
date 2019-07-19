@@ -1,0 +1,49 @@
+@page "/slider/16events"
+
+<h4 class="sample-title">Public Events</h4>
+
+<div class="control_section">
+    <div class="control_wrapper">
+        <EjsSlider @bind-Value="@Value"
+                   Created="@((e)=> { EventTracker.Add("Created"); this.StateHasChanged(); })"
+                   OnChange="@((e)=> { EventTracker.Add("OnChange "+e.Value); this.StateHasChanged(); })"
+                   ValueChange="@((e)=> { EventTracker.Add("ValueChange "+e.Value); this.StateHasChanged(); })">
+            <SliderLimitData Enabled="true" MinStart="10" MinEnd="40" MaxStart="60" MaxEnd="90"></SliderLimitData>
+            <SliderTooltipData IsVisible="true" Placement="TooltipPlacement.Before"></SliderTooltipData>
+        </EjsSlider>
+    </div>
+
+    <br />
+
+    <div class="sample-title">Current Slider Value @Value</div>
+
+    <div class="control_wrapper">
+        <h4>Event Trace</h4>
+        <ul style="list-style: none;padding: 0 20px;height: 200px;width: 300px;overflow: auto;">
+            @for (int i = EventTracker.Count - 1; i >= 0; i--)
+            {
+                <li>@EventTracker[i]</li>
+            }
+        </ul>
+    </div>
+</div>
+
+@code {
+    object Value = 60;
+    List<string> EventTracker = new List<string>();
+}
+
+
+<style>
+
+    .control_wrapper {
+        padding: 10px;
+        /*width: 250px;*/
+        overflow: hidden;
+    }
+
+    .control_section {
+        display: flex;
+        flex-direction: column;
+    }
+</style>

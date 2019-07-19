@@ -7,7 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ej2-blazor-source\Syncfusion.EJ2.Blazor\Syncfusion.EJ2.Blazor.csproj" />
+    <Compile Remove="tests\**" />
+    <Content Remove="tests\**" />
+    <EmbeddedResource Remove="tests\**" />
+    <None Remove="tests\**" />
   </ItemGroup>
 
+<ItemGroup>
+    <ProjectReference Include="..\ej2-blazor-source\Syncfusion.EJ2.Blazor\Syncfusion.EJ2.Blazor.csproj" />
+  </ItemGroup>
 </Project>

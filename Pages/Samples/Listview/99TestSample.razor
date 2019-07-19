@@ -7,15 +7,18 @@
     <ListViewFieldSettings Id="Id" Text="Name" GroupBy="Category"></ListViewFieldSettings>
     <ListViewTemplates>
         <Template>
-            <div class="e-list-wrapper e-list-multi-line e-list-avatar">
-                <img class="e-avatar e-avatar-circle" src=@((context as dynamic).Image) style="background:#BCBCBC" />
-                <span class="e-list-item-header">@((context as dynamic).Name)</span>
-                <span class="e-list-content">@((context as dynamic).Contact)</span>
-            </div>
+            @{
+                DataModel ContextData = context as DataModel;
+                <div class="e-list-wrapper e-list-multi-line e-list-avatar">
+                    <img class="e-avatar e-avatar-circle" src=@ContextData.Image style="background:#BCBCBC" />
+                    <span class="e-list-item-header">@ContextData.Name</span>
+                    <span class="e-list-content">@ContextData.Contact</span>
+                </div>
+            }
         </Template>
         <GroupTemplate>
             <div>
-                <span class="category">Type: @((context as dynamic).Name)</span>
+                <span class="category">Type: @((context as DataModel).Name)</span>
             </div>
         </GroupTemplate>
     </ListViewTemplates>

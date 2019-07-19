@@ -1,6 +1,7 @@
 ﻿@page "/"
 @using System.IO
 @using Data
+@using Newtonsoft.Json
 
 <div class="component-container">
     @foreach (var compName in SampleData.Keys)
@@ -48,6 +49,8 @@
             SampleService.Samples.Add(filename);
             Console.WriteLine(filename + " >>>>> " + filename.LastIndexOf('/') + " >> into >> " + filename.Substring(filename.LastIndexOf('/') + 3));
         }
+        string JsonData = JsonConvert.SerializeObject(SampleData);
+        System.IO.File.WriteAllText(System.Environment.CurrentDirectory+@"\routes.json", JsonData);
 
         base.OnInit();
     }

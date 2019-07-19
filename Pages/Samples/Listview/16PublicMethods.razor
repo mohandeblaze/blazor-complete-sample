@@ -6,7 +6,8 @@
 
 <div style="display: flex;">
     <div style="margin: 10px;">
-        <EjsListView @ref="NormalList"
+        <EjsListView ID="firstlist" 
+                     @ref="NormalList"
                      HtmlAttributes="@HTMLProps"
                      DataSource="@DataSource"
                      ShowHeader="true"
@@ -16,7 +17,8 @@
     </div>
 
     <div style="margin: 10px;">
-        <EjsListView @ref="CheckList"
+        <EjsListView ID="secondlist"
+                     @ref="CheckList"
                      HtmlAttributes="@HTMLProps"
                      DataSource="@DataSource"
                      ShowHeader="true"
@@ -26,7 +28,8 @@
         </EjsListView>
     </div>
     <div style="margin: 10px;">
-        <EjsListView @ref="NestedList"
+        <EjsListView ID="thirdlist"
+                     @ref="NestedList"
                      HtmlAttributes="@HTMLProps"
                      DataSource="@NestedDataSource"
                      ShowHeader="true"
@@ -40,8 +43,8 @@
 <div style="display: flex;flex-wrap: wrap;justify-content: flex-start;">
     <div class="padding">
         <div class="bold">Selected item</div>
-        <div class="italic">@(SelectedItemValue?.Text ?? "Nothing Yet")</div>
-        <button class="e-btn e-info" @onclick="@GetSelectedItems">Get Selected items</button>
+        <div id="getselecteditem_content" class="italic">@(SelectedItemValue?.Text ?? "Nothing Yet")</div>
+        <button id="getselecteditem" class="e-btn e-info" @onclick="@GetSelectedItems">Get Selected items</button>
     </div>
 
     <div class="padding">
@@ -53,7 +56,7 @@
     <div class="padding">
         <div class="bold">Check item</div>
         <div class="italic">Void</div>
-        <button class="e-btn e-info" @onclick="@CheckItem">Check item</button>
+        <button id="checkitem" class="e-btn e-info" @onclick="@CheckItem">Check item</button>
     </div>
 
     <div class="padding">

@@ -1,10 +1,31 @@
 @page "/tooltip/11defaulttooltip"
 
-<h4 class="sample-title">Tooltip With Template</h4>
+<h4 class="sample-title">Simple Tooltip</h4>
 
+<EjsTooltip HtmlAttributes="@HTMLProps">
+    <button>Template</button>
+    <TooltipTemplates>
+        <Content>
+            <h3>Template</h3>
+            <EjsButton>Button</EjsButton>
+        </Content>
+    </TooltipTemplates>
+</EjsTooltip>
 
-<EjsTooltip Content="@content" HtmlAttributes="@HTMLProps">
-    <button>Hover Me</button>
+<EjsTooltip Content="@content" OpensOn="Click" OpenDelay="500">
+    <button>OpensOn & opendelay</button>
+</EjsTooltip>
+
+<EjsTooltip Content="@content" IsSticky="true" ShowTipPointer="false">
+    <button>IsSticky & showTipPointer</button>
+</EjsTooltip>
+
+<EjsTooltip Content="@content" TipPointerPosition="TipPointerPosition.Start">
+    <button>TipPointerPosition</button>
+</EjsTooltip>
+
+<EjsTooltip Content="@content" MouseTrail="true">
+    <button>TipPointerPosition</button>
     <TooltipTemplates>
         <Content>
             <h3>Template</h3>
@@ -19,3 +40,9 @@ Dictionary<string, object> HTMLProps = new Dictionary<string, object>() {
         {"style" , "border: 1px dashed blue"}
     };
 }
+
+<style>
+    .e-lib.e-tooltip {
+        display: inline-block;
+    }
+</style>

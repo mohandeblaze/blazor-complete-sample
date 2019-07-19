@@ -9,14 +9,18 @@
             <ListViewFieldSettings Id="Id" Text="Name"></ListViewFieldSettings>
             <ListViewTemplates>
                 <Template>
-                    <div class="list-item-container">
-                        <div class="list-item-text" @onclick="@((e) => { onClick((context as dynamic).Name); })">@((context as dynamic).Name)</div>
-                        <div class="list-item-button">
-                            <EjsButton IsPrimary="true">
-                                <a href="/models/@((context as dynamic).Id)">Enter</a>
-                            </EjsButton>
+                    @{
+                        DataModel ContextData = context as DataModel;
+                        <div class="list-item-container">
+                            <div class="list-item-text" @onclick="@((e) => { onClick(ContextData.Name); })">@ContextData.Name</div>
+                            <div class="list-item-button">
+                                <EjsButton IsPrimary="true">
+                                    <a href="/models/@ContextData.Id">Enter</a>
+                                </EjsButton>
+                            </div>
                         </div>
-                    </div>
+                    }
+
                 </Template>
             </ListViewTemplates>
         </EjsListView>

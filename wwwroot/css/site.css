@@ -12,6 +12,10 @@ a {
     color: #0366d6;
 }
 
+#cypress-target {
+    padding: 25px;
+}
+
 app {
     position: relative;
     display: flex;

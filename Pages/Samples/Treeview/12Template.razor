@@ -7,22 +7,24 @@
         <TreeViewFieldsSettings Id="Id" Text="Name" ParentID="Pid" HasChildren="HasChild" Selected="Selected" Expanded="Expanded" DataSource="@localData"></TreeViewFieldsSettings>
         <TreeViewTemplates>
             <NodeTemplate>
-                <div>
-                    <div class="treeviewdiv">
-                        <div style="float:left">
-                            <span class="treeName">@((context as dynamic).Name)</span>
-                        </div>
-                        @{
-
-                            @if ((context as dynamic).Count != 0)
-                            {
-                                <div style="margin-right: 5px; float:right">
-                                    <span class="treeCount e-badge e-badge-primary">@((context as dynamic).Count)</span>
-                                </div>
+                @{
+                    TreeData ContextData = context as TreeData;
+                    <div>
+                        <div class="treeviewdiv">
+                            <div style="float:left">
+                                <span class="treeName">@ContextData.Name</span>
+                            </div>
+                            @{
+                                @if (ContextData.Count != 0)
+                                {
+                                    <div style="margin-right: 5px; float:right">
+                                        <span class="treeCount e-badge e-badge-primary">@ContextData.Count</span>
+                                    </div>
+                                }
                             }
-                        }
+                        </div>
                     </div>
-                </div>
+                }
             </NodeTemplate>
         </TreeViewTemplates>
     </EjsTreeView>
