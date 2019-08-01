@@ -6,13 +6,13 @@
 
 <div style="display: flex;">
     <div style="margin: 10px;">
-        <EjsTreeView @ref="@NormalTreeview" AllowEditing="true">
+        <EjsTreeView @ref="@NormalTreeview" AllowEditing="true" TValue="Parentitem">
             <TreeViewFieldsSettings DataSource="@parentitem" Id="nodeId" ParentID="pid" Text="nodeText" HasChildren="hasChild" Expanded="expanded" Child="@child"></TreeViewFieldsSettings>
         </EjsTreeView>
     </div>
 
     <div style="margin: 10px;">
-        <EjsTreeView @ref="@CheckTreeview" AllowEditing="true" ShowCheckBox="true">
+        <EjsTreeView @ref="@CheckTreeview" AllowEditing="true" ShowCheckBox="true" TValue="Parentitem">
             <TreeViewFieldsSettings DataSource="@parentitem" Id="nodeId" ParentID="pid" Text="nodeText" HasChildren="hasChild" Expanded="expanded" Child="@child"></TreeViewFieldsSettings>
         </EjsTreeView>
     </div>
@@ -94,9 +94,9 @@
 @code{
     object child;
 
-    EjsTreeView NormalTreeview;
+    EjsTreeView<Parentitem> NormalTreeview;
 
-    EjsTreeView CheckTreeview;
+    EjsTreeView<Parentitem> CheckTreeview;
 
     List<Parentitem> parentitem = new List<Parentitem>();
 
@@ -168,7 +168,7 @@
 
     async void GetTreeData()
     {
-        List<object> treeData = await NormalTreeview.GetTreeData();
+        List<Parentitem> treeData = await NormalTreeview.GetTreeData();
         string sData = JsonConvert.SerializeObject(treeData);
         GetParentitem = JsonConvert.DeserializeObject<List<Parentitem>>(sData);
         this.StateHasChanged();

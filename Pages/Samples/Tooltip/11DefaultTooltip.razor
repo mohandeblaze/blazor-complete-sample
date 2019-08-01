@@ -3,7 +3,7 @@
 <h4 class="sample-title">Simple Tooltip</h4>
 
 <EjsTooltip HtmlAttributes="@HTMLProps">
-    <button>Template</button>
+    <button class="e-btn">Template</button>
     <TooltipTemplates>
         <Content>
             <h3>Template</h3>
@@ -13,30 +13,24 @@
 </EjsTooltip>
 
 <EjsTooltip Content="@content" OpensOn="Click" OpenDelay="500">
-    <button>OpensOn & opendelay</button>
+    <button class="e-btn">OpensOn & opendelay</button>
 </EjsTooltip>
 
 <EjsTooltip Content="@content" IsSticky="true" ShowTipPointer="false">
-    <button>IsSticky & showTipPointer</button>
+    <button class="e-btn">IsSticky & showTipPointer</button>
 </EjsTooltip>
 
 <EjsTooltip Content="@content" TipPointerPosition="TipPointerPosition.Start">
-    <button>TipPointerPosition</button>
+    <button class="e-btn">TipPointerPosition</button>
 </EjsTooltip>
 
 <EjsTooltip Content="@content" MouseTrail="true">
-    <button>TipPointerPosition</button>
-    <TooltipTemplates>
-        <Content>
-            <h3>Template</h3>
-            <EjsButton>Button</EjsButton>
-        </Content>
-    </TooltipTemplates>
+    <button class="e-btn">TipPointerPosition</button>
 </EjsTooltip>
 
 @code {
     string content = "This is tooltip";
-Dictionary<string, object> HTMLProps = new Dictionary<string, object>() {
+    Dictionary<string, object> HTMLProps = new Dictionary<string, object>() {
         {"style" , "border: 1px dashed blue"}
     };
 }

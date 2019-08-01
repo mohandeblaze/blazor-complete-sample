@@ -2,17 +2,6 @@
 
 <h4 class="sample-title">Listview Events</h4>
 
-<EjsListView DataSource="@DataSource"
-             Selected="@((e) => OnSelect(e))"
-             OnActionBegin="@((e) => { actionBegin = true; this.StateHasChanged(); })"
-             OnActionComplete="@((e) => { actionComplete = true; this.StateHasChanged(); })"
-             OnActionFailure="@((e) => { actionFailure = true; this.StateHasChanged(); })"
-             ShowHeader="true"
-             HeaderTitle="@HeaderTitle"
-             HtmlAttributes="@HTMLProps">
-    <ListViewFieldSettings Id="Id" Text="Text"></ListViewFieldSettings>
-</EjsListView>
-
 <br />
 
 <h4>Action begin tiggered: @actionBegin</h4>
@@ -28,6 +17,19 @@
 <br />
 
 <h4>Current Selected item: <span id="selected-item">@selecteditem</span></h4>
+
+<br />
+
+<EjsListView DataSource="@DataSource"
+             ShowHeader="true"
+             HeaderTitle="@HeaderTitle"
+             HtmlAttributes="@HTMLProps">
+    <ListViewFieldSettings Id="Id" Text="Text"></ListViewFieldSettings>
+    <ListViewEvents TValue="DataModel" Selected="@((e) => OnSelect(e))"
+                    OnActionBegin="@((e) => { actionBegin = true;  })"
+                    OnActionComplete="@((e) => { actionComplete = true;  })"
+                    OnActionFailure="@((e) => { actionFailure = true;  })"></ListViewEvents>
+</EjsListView>
 
 @code {
     [Inject]
@@ -55,10 +57,9 @@
         new DataModel{ Id = "4", Text = "4"},
     };
 
-    void OnSelect(Syncfusion.EJ2.Blazor.Lists.SelectEventArgs selectEventArgs)
+    void OnSelect(Syncfusion.EJ2.Blazor.Lists.SelectEventArgs<DataModel> selectEventArgs)
     {
-        selecteditem = selectEventArgs.Text;
-        this.StateHasChanged();
+        selecteditem = selectEventArgs.Data.Text;
     }
 
     class DataModel

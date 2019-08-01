@@ -4,14 +4,13 @@
 
 <div class="control-section">
     <div class="control_wrapper">
-        <EjsTreeView id="treedata" showCheckBox="true">
+        <EjsTreeView id="treedata" showCheckBox="true" TValue="Parentitem">
             <TreeViewFieldsSettings DataSource="@parentitem" Id="id" ParentID="pid" Text="name" HasChildren="hasChild" Expanded="expanded" Child="@child"></TreeViewFieldsSettings>
         </EjsTreeView>
     </div>
 </div>
 @code{
     object child;
-    List<object> treedata = new List<object>();
     List<Parentitem> parentitem = new List<Parentitem>();
     List<Childitem> childitem1 = new List<Childitem>();
     List<Childitem> childitem2 = new List<Childitem>();
@@ -191,7 +190,7 @@
     public class Childitem
     {
         public int id { get; set; }
-        public int pid { get; set; }
+        public int? pid { get; set; }
         public string name { get; set; }
 
     }

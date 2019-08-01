@@ -8,16 +8,16 @@
                      AllowEditing="true"
                      AllowDragAndDrop="true"
                      AllowMultiSelection="true"
-                     Created="@((e) => { EventTriggeredList.Add("Created");  this.StateHasChanged();})"
-                     DataBound="@((e) => { EventTriggeredList.Add("DataBound");  this.StateHasChanged(); })"
-                     DataSourceChanged="@((e) => { EventTriggeredList.Add("DataSourceChanged"); this.StateHasChanged(); })"
-                     OnDrawNode="@((e) => { EventTriggeredList.Add("OnDrawNode"); this.StateHasChanged(); })"
-                     OnKeyPress="@((e) => { EventTriggeredList.Add("OnKeyPress"); this.StateHasChanged(); })"
-                     NodeEdited="@((e) => { EventTriggeredList.Add("NodeEdited"); this.StateHasChanged(); })"
-                     NodeEditing="@((e) => { EventTriggeredList.Add("NodeEditing"); this.StateHasChanged(); })"
-                     NodeSelected="@((e) => { EventTriggeredList.Add("NodeSelected"); this.StateHasChanged(); })"
-                     >
+                     TValue="Parentitem">
             <TreeViewFieldsSettings DataSource="@parentitem" Id="nodeId" ParentID="pid" Text="nodeText" HasChildren="hasChild" Expanded="expanded" Child="@child"></TreeViewFieldsSettings>
+            <TreeViewEvents TValue="Parentitem" Created="@((e) => { EventTriggeredList.Add("Created");  this.StateHasChanged();})"
+                            DataBound="@((e) => { EventTriggeredList.Add("DataBound");  this.StateHasChanged(); })"
+                            DataSourceChanged="@((e) => { EventTriggeredList.Add("DataSourceChanged"); this.StateHasChanged(); })"
+                            OnDrawNode="@((e) => { EventTriggeredList.Add("OnDrawNode"); this.StateHasChanged(); })"
+                            OnKeyPress="@((e) => { EventTriggeredList.Add("OnKeyPress"); this.StateHasChanged(); })"
+                            NodeEdited="@((e) => { EventTriggeredList.Add("NodeEdited"); this.StateHasChanged(); })"
+                            NodeEditing="@((e) => { EventTriggeredList.Add("NodeEditing"); this.StateHasChanged(); })"
+                            NodeSelected="@((e) => { EventTriggeredList.Add("NodeSelected"); this.StateHasChanged(); })"></TreeViewEvents>
         </EjsTreeView>
     </div>
 
@@ -49,7 +49,7 @@
             nodeId = "01",
             nodeText = "Local Disk (C:)",
             child = new List<Childitem>()
-    {
+{
                 new Childitem { nodeId = "01-01", nodeText = "Program Files" },
                 new Childitem { nodeId = "01-02", nodeText = "Users"},
                 new Childitem { nodeId = "01-03", nodeText = "Windows" }
@@ -73,7 +73,7 @@
             nodeId = "03",
             nodeText = "Local Disk (E:)",
             child = new List<Childitem>()
-    {
+{
                 new Childitem { nodeId = "03-01", nodeText = "Pictures" },
                 new Childitem { nodeId = "03-02", nodeText = "Documents", icon = "docx" },
                 new Childitem { nodeId = "03-03", nodeText = "Study Materials" }

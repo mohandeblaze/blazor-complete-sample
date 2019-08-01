@@ -47,10 +47,19 @@
                 value.Add(filename);
             }
             SampleService.Samples.Add(filename);
-            Console.WriteLine(filename + " >>>>> " + filename.LastIndexOf('/') + " >> into >> " + filename.Substring(filename.LastIndexOf('/') + 3));
+            // Console.WriteLine(filename + " >>>>> " + filename.LastIndexOf('/') + " >> into >> " + filename.Substring(filename.LastIndexOf('/') + 3));
         }
         string JsonData = JsonConvert.SerializeObject(SampleData);
-        System.IO.File.WriteAllText(System.Environment.CurrentDirectory+@"\routes.json", JsonData);
+
+        try
+        {
+            System.IO.File.WriteAllText(System.Environment.CurrentDirectory + @"\routes.json", JsonData);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+
 
         base.OnInit();
     }

@@ -2,10 +2,83 @@
 
 <h4 class="sample-title">Range Slider</h4>
 
-<EjsSlider Value="@value" Type="SliderType.Range">
-    <SliderLimitData Enabled="true" MinStart="10" MinEnd="40"></SliderLimitData>
-</EjsSlider>
+<div class="content-wrapper">
+    <div class="sliderwrap">
+        <label class="userselect">Simple Range</label>
+        <EjsSlider @bind-Value="@value" Type="SliderType.Range">
+            <SliderLimitData Enabled="true" MinStart="10" MinEnd="40"></SliderLimitData>
+        </EjsSlider>
+        <br />
+
+        <h4 class="sample-title">@value[0] - @value[1]</h4>
+
+        <br />
+    </div>
+
+    <div class="sliderwrap">
+        <label class="userselect">Simple Custom Value</label>
+        <EjsSlider @bind-Value="@defaultCustomValue" CustomValues="@custom"></EjsSlider>
+        <br />
+
+        <h4 class="sample-title">@custom[defaultCustomValue]</h4>
+
+        <br />
+    </div>
+
+    <div class="sliderwrap">
+        <label class="userselect">Range Custom Value</label>
+        <EjsSlider @bind-Value="@rangeCustomValue" Type="SliderType.Range" CustomValues="@custom"></EjsSlider>
+        <br />
+
+        <h4 class="sample-title">@custom[rangeCustomValue[0]] - @custom[rangeCustomValue[1]]</h4>
+
+        <br />
+    </div>
+</div>
 
 @code {
     int[] value = { 20, 80 };
+    int defaultCustomValue = 1;
+    int[] rangeCustomValue = new int[] { 1, 2 };
+    string[] custom = new string[] { "one", "two", "three", "four", "five" };
+
+
 }
+
+<style>
+    .content-wrapper {
+        width: 52%;
+        margin: 0 auto;
+        min-width: 185px;
+    }
+
+    .sliderwrap {
+        margin-top: 45px;
+    }
+
+    .e-bigger .content-wrapper {
+        width: 80%;
+    }
+
+    .sliderwrap label {
+        padding-bottom: 50px;
+        font-size: 13px;
+        font-weight: 500;
+        margin-top: 15px;
+    }
+
+    .userselect {
+        -webkit-user-select: none;
+        /* Safari 3.1+ */
+        -moz-user-select: none;
+        /* Firefox 2+ */
+        -ms-user-select: none;
+        /* IE 10+ */
+        user-select: none;
+        /* Standard syntax */
+    }
+
+    .property-custom td {
+        padding: 5px;
+    }
+</style>

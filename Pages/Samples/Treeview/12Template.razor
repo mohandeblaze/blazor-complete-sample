@@ -1,49 +1,123 @@
 @page "/Treeview/12Template"
 
 <h4 class="sample-title">Treeview Template</h4>
+<div style="display: flex;">
+    <div class="padding">
+        <div class="bold">Add Nodes</div>
+        <div class="italic">Void</div>
+        <button class="e-btn e-info" @onclick="@AddNodes">Add Nodes</button>
+    </div>
 
-<div class="control_wrapper">
-    <EjsTreeView ID="tree" ModelType="@modelType" LoadOnDemand="false">
-        <TreeViewFieldsSettings Id="Id" Text="Name" ParentID="Pid" HasChildren="HasChild" Selected="Selected" Expanded="Expanded" DataSource="@localData"></TreeViewFieldsSettings>
-        <TreeViewTemplates>
-            <NodeTemplate>
-                @{
-                    TreeData ContextData = context as TreeData;
-                    <div>
-                        <div class="treeviewdiv">
-                            <div style="float:left">
-                                <span class="treeName">@ContextData.Name</span>
-                            </div>
-                            @{
-                                @if (ContextData.Count != 0)
-                                {
-                                    <div style="margin-right: 5px; float:right">
-                                        <span class="treeCount e-badge e-badge-primary">@ContextData.Count</span>
-                                    </div>
-                                }
-                            }
+    <div class="padding">
+        <div class="bold">Remove Nodes</div>
+        <div class="italic">Void</div>
+        <button class="e-btn e-info" @onclick="@RemoveNodes">Remove Nodes</button>
+    </div>
+</div>
+<div class="flex-container">
+    <div class="control_wrapper">
+        <h4>LoadOnDemand: True</h4>
+        <EjsTreeView ModelType="@modelType" LoadOnDemand="true" AllowEditing="true" AllowDragAndDrop="true" @ref="@NormalTreeview1" TValue="TreeData">
+            <TreeViewFieldsSettings Id="Id" Text="Name" ParentID="Pid" HasChildren="HasChild" Selected="Selected" Expanded="Expanded" DataSource="@LocalData"></TreeViewFieldsSettings>
+            <TreeViewTemplates>
+                <NodeTemplate>
+                    @{
+                        TreeData ContextData = context as TreeData;
+                        <div>
+                            <span class="treeName">@ContextData.Name</span>
                         </div>
-                    </div>
-                }
-            </NodeTemplate>
-        </TreeViewTemplates>
-    </EjsTreeView>
+                    }
+                </NodeTemplate>
+            </TreeViewTemplates>
+        </EjsTreeView>
+    </div>
+
+    <div class="control_wrapper">
+        <h4>LoadOnDemand: False</h4>
+        <EjsTreeView ModelType="@modelType" LoadOnDemand="false" AllowEditing="true" AllowDragAndDrop="true" @ref="@NormalTreeview" TValue="TreeData">
+            <TreeViewFieldsSettings Id="Id" Text="Name" ParentID="Pid" HasChildren="HasChild" Selected="Selected" Expanded="Expanded" DataSource="@LocalData"></TreeViewFieldsSettings>
+            <TreeViewTemplates>
+                <NodeTemplate>
+                    @{
+                        TreeData ContextData = context as TreeData;
+                        <div>
+                            <span class="treeName">@ContextData.Name</span>
+                        </div>
+                    }
+                </NodeTemplate>
+            </TreeViewTemplates>
+        </EjsTreeView>
+    </div>
+
+    <div class="control_wrapper">
+        <h4>DataManager</h4>
+        <EjsTreeView ModelType="@ModelType" AllowEditing="true" AllowDragAndDrop="true" @ref="@RemoteTreeview"  TValue="TreeData">
+            <TreeViewFieldsSettings Query="new ej.data.Query().from('Employees').select('EmployeeID,FirstName,Title').take(5)" Id="EmployeeID" Text="FirstName" HasChildren="EmployeeID"  TValue="TreeData">
+                <EjsDataManager url="https://services.odata.org/V4/Northwind/Northwind.svc" Adaptor="Syncfusion.EJ2.Blazor.Adaptors.ODataV4Adaptor" CrossDomain="true"></EjsDataManager>
+                <TreeViewFieldChild Query="new ej.data.Query().from('Orders').select('OrderID,EmployeeID,ShipName').take(5)" Id="OrderID" Text="ShipName" ParentID="EmployeeID"  TValue="TreeData">
+                    <EjsDataManager url="https://services.odata.org/V4/Northwind/Northwind.svc" Adaptor="Syncfusion.EJ2.Blazor.Adaptors.ODataV4Adaptor" CrossDomain="true"></EjsDataManager>
+                </TreeViewFieldChild>
+            </TreeViewFieldsSettings>
+            <TreeViewTemplates>
+                <NodeTemplate>
+                    @{
+                        DataModel dataModel = context as DataModel;
+                        if (dataModel.FirstName != default(string))
+                        {
+                            <div>
+                                Template item @dataModel.FirstName
+                            </div>
+                        }
+                        else
+                        {
+                            <div>
+                                Template item @dataModel.ShipName
+                            </div>
+                        }
+
+                    }
+                </NodeTemplate>
+            </TreeViewTemplates>
+        </EjsTreeView>
+    </div>
 </div>
 
 @functions{
 
-    List<TreeData> localData = new List<TreeData>();
+    List<TreeData> LocalData = new List<TreeData>();
     public TreeData modelType = new TreeData();
+    DataModel ModelType = new DataModel();
+    EjsTreeView<TreeData> NormalTreeview;
+    EjsTreeView<TreeData> RemoteTreeview;
+    EjsTreeView<TreeData> NormalTreeview1;
+
+    void AddNodes()
+    {
+        TreeData[] parentitem = new TreeData[] { new TreeData { Id = 99, Name = "New item" } };
+        Object[] items = new Object[] { new { EmployeeID = 99, Text = "New items" } };
+        NormalTreeview.AddNodes(parentitem, null, null, null);
+        NormalTreeview1.AddNodes(parentitem, null, null, null);
+        RemoteTreeview.AddNodes(items, null, null, null);
+    }
+
+    void RemoveNodes()
+    {
+        string[] NodeId = { "99" };
+        NormalTreeview.RemoveNodes(NodeId);
+        NormalTreeview1.RemoveNodes(NodeId);
+        RemoteTreeview.RemoveNodes(NodeId);
+    }
+
     protected override void OnInit()
     {
         base.OnInit();
-        localData.Add(new TreeData
+        LocalData.Add(new TreeData
         {
             Id = 1,
             Name = "Favorites",
             HasChild = true,
         });
-        localData.Add(new TreeData
+        LocalData.Add(new TreeData
         {
             Id = 2,
             Pid = 1,
@@ -51,28 +125,27 @@
             Count = 4
 
         });
-        localData.Add(new TreeData
+        LocalData.Add(new TreeData
         {
             Id = 3,
             Pid = 1,
             Name = "Sent Items"
         });
 
-        localData.Add(new TreeData
+        LocalData.Add(new TreeData
         {
             Id = 4,
             Pid = 1,
             Name = "Marketing Reports",
             Count = 6
         });
-        localData.Add(new TreeData
+        LocalData.Add(new TreeData
         {
             Id = 5,
             HasChild = true,
             Name = "My Folder",
-            Expanded = true
         });
-        localData.Add(new TreeData
+        LocalData.Add(new TreeData
         {
             Id = 6,
             Pid = 5,
@@ -80,40 +153,40 @@
             Selected = true,
             Count = 20
         });
-        localData.Add(new TreeData
+        LocalData.Add(new TreeData
         {
             Id = 7,
             Pid = 5,
             Name = "Drafts",
             Count = 5
         });
-        localData.Add(new TreeData
+        LocalData.Add(new TreeData
         {
             Id = 8,
             Pid = 5,
             Name = "Deleted Items"
         });
-        localData.Add(new TreeData
+        LocalData.Add(new TreeData
         {
             Id = 9,
             Pid = 5,
             Name = "Sent Items"
         });
-        localData.Add(new TreeData
+        LocalData.Add(new TreeData
         {
             Id = 10,
             Pid = 5,
             Name = "Sales Reports",
             Count = 4
         });
-        localData.Add(new TreeData
+        LocalData.Add(new TreeData
         {
             Id = 11,
             Pid = 5,
             Name = "Marketing Reports",
             Count = 6
         });
-        localData.Add(new TreeData
+        LocalData.Add(new TreeData
         {
             Id = 12,
             Pid = 5,
@@ -121,10 +194,17 @@
         });
 
     }
+
+    class DataModel
+    {
+        public string FirstName { get; set; }
+        public string ShipName { get; set; }
+    }
+
     public class TreeData
     {
         public int Id { get; set; }
-        public int Pid { get; set; }
+        public int? Pid { get; set; }
         public string Name { get; set; }
         public bool HasChild { get; set; }
         public bool Expanded { get; set; }
@@ -137,10 +217,7 @@
 <style>
 
     .control_wrapper {
-        max-width: 320px;
-        margin: auto;
-        border: 1px solid #dddddd;
-        border-radius: 3px;
+        width: 370px;
     }
 
     .e-treeview .e-list-text {
@@ -154,5 +231,35 @@
 
     .material .treeCount.e-badge {
         vertical-align: middle;
+    }
+
+    .e-treeview .e-list-item.e-active > .e-text-content .e-list-text {
+        display: inline-block;
+        width: auto;
+    }
+
+    .e-blazor-template {
+        display: inline-block;
+    }
+
+    .flex-container {
+        display: flex;
+        margin: 40px 0 0 0;
+    }
+
+    .padding {
+        margin: 10px;
+    }
+
+        .padding * {
+            margin: 5px 10px;
+        }
+
+    .bold {
+        font-weight: bold;
+    }
+
+    .italic {
+        font-style: italic;
     }
 </style>

@@ -6,7 +6,7 @@
 
 <div style="display: flex;">
     <div style="margin: 10px;">
-        <EjsListView ID="firstlist" 
+        <EjsListView ID="firstlist"
                      @ref="NormalList"
                      HtmlAttributes="@HTMLProps"
                      DataSource="@DataSource"
@@ -42,9 +42,61 @@
 
 <div style="display: flex;flex-wrap: wrap;justify-content: flex-start;">
     <div class="padding">
-        <div class="bold">Selected item</div>
-        <div id="getselecteditem_content" class="italic">@(SelectedItemValue?.Text ?? "Nothing Yet")</div>
+        <div class="bold">Normal List Selected item</div>
+        @{
+            @if (NormalListSelected != null)
+            {
+                @foreach (var itemValue in NormalListSelected)
+                {
+                    <div id="getselecteditem_content" class="italic">@(itemValue.Text)</div>
+                }
+            }
+            else
+            {
+                <div id="getselecteditem_content" class="italic">Nothing Yet</div>
+            }
+
+        }
+
         <button id="getselecteditem" class="e-btn e-info" @onclick="@GetSelectedItems">Get Selected items</button>
+    </div>
+
+    <div class="padding">
+        <div class="bold">Check List Selected item</div>
+        @{
+            @if (CheckListSelected != null)
+            {
+                @foreach (var itemValue in CheckListSelected)
+                {
+                    <div id="getselecteditem_content" class="italic">@(itemValue.Text)</div>
+                }
+            }
+            else
+            {
+                <div id="getselecteditem_content" class="italic">Nothing Yet</div>
+            }
+
+        }
+
+    </div>
+
+    <div class="padding">
+        <div class="bold">Nested List Selected item</div>
+        @{
+            @if (NestedListSelected != null)
+            {
+                @foreach (var itemValue in NestedListSelected)
+                {
+                    <div id="getselecteditem_content" class="italic">@(itemValue.Text)</div>
+                }
+            }
+            else
+            {
+                <div id="getselecteditem_content" class="italic">Nothing Yet</div>
+            }
+
+        }
+
     </div>
 
     <div class="padding">
@@ -126,13 +178,17 @@
 
     List<DataModel> _DataModel = new List<DataModel>();
 
-    EjsListView NormalList;
+    EjsListView<DataModel> NormalList;
 
-    EjsListView CheckList;
+    EjsListView<DataModel> CheckList;
 
-    EjsListView NestedList;
+    EjsListView<DataModel> NestedList;
 
-    SelectedItem SelectedItemValue;
+    List<DataModel> NormalListSelected;
+
+    List<DataModel> CheckListSelected;
+
+    List<DataModel> NestedListSelected;
 
     DataModel FindItemValue;
 
@@ -158,12 +214,19 @@
 
     async void GetSelectedItems()
     {
-        var item = await NormalList.GetSelectedItems();
-        if (item != null)
-        {
-            SelectedItemValue = JsonConvert.DeserializeObject<SelectedItem>(item.ToString());
-            this.StateHasChanged();
-        }
+        ListSelectedItem<DataModel> item = await NormalList.GetSelectedItems();
+
+        NormalListSelected = item.Data;
+
+        item = await CheckList.GetSelectedItems();
+
+        CheckListSelected = item.Data;
+
+        item = await NestedList.GetSelectedItems();
+
+        NestedListSelected = item.Data;
+
+        this.StateHasChanged();
     }
 
     async void FindItem()
@@ -172,7 +235,8 @@
         var item = await NormalList.FindItem(data);
         if (item != null)
         {
-            FindItemValue = JsonConvert.DeserializeObject<DataModel>(item.ToString());
+            // FindItemValue = JsonConvert.DeserializeObject<DataModel>(item.ToString());
+            FindItemValue = item;
             this.StateHasChanged();
         }
     }

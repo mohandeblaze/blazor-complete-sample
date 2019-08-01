@@ -4,149 +4,158 @@
 
 <div class="control-section">
     <div class="control_wrapper">
-        <EjsTreeView id="treedata" AllowEditing="true">
+        <EjsTreeView id="treedata" AllowEditing="true" TValue="DataModel">
             <TreeViewFieldsSettings DataSource="@treedata" Id="id" ParentID="pid" Text="name" HasChildren="hasChild" Expanded="expanded" Selected="is_selected"></TreeViewFieldsSettings>
         </EjsTreeView>
     </div>
 </div>
 
 @code{
-    List<object> treedata = new List<object>();
+    List<DataModel> treedata = new List<DataModel>();
+    class DataModel
+    {
+        public int id { get; set; }
+        public int? pid { get; set; }
+        public string name { get; set; }
+        public bool hasChild { get; set; }
+        public bool expanded { get; set; }
+
+    }
 
     protected override void OnInit()
     {
         base.OnInit();
-        this.treedata.Add(new
+        this.treedata.Add(new DataModel
         {
             id = 1,
             name = "Discover Music",
             hasChild = true,
             expanded = true
         });
-        this.treedata.Add(new
+        this.treedata.Add(new DataModel
         {
             id = 2,
             pid = 1,
             name = "Hot Singles",
 
         });
-        this.treedata.Add(new
+        this.treedata.Add(new DataModel
         {
             id = 3,
             pid = 1,
             name = "Rising Artists"
         });
 
-        this.treedata.Add(new
+        this.treedata.Add(new DataModel
         {
             id = 4,
             pid = 1,
             name = "Live Music"
         });
-        this.treedata.Add(new
+        this.treedata.Add(new DataModel
         {
             id = 5,
             hasChild = true,
             name = "Sales and Events",
 
         });
-        this.treedata.Add(new
+        this.treedata.Add(new DataModel
         {
             id = 6,
             pid = 5,
             name = "100 Albums - $5 Each",
         });
-        this.treedata.Add(new
+        this.treedata.Add(new DataModel
         {
             id = 7,
             pid = 5,
             name = "Hip-Hop and R&B Sale"
         });
-        this.treedata.Add(new
+        this.treedata.Add(new DataModel
         {
             id = 8,
             pid = 5,
             name = "CD Deals"
         });
-        this.treedata.Add(new
+        this.treedata.Add(new DataModel
         {
             id = 10,
             hasChild = true,
             name = "Categories"
         });
-        this.treedata.Add(new
+        this.treedata.Add(new DataModel
         {
             id = 11,
             pid = 10,
             name = "Bestselling Albums",
 
         });
-        this.treedata.Add(new
+        this.treedata.Add(new DataModel
         {
             id = 12,
             pid = 10,
             name = "New Releases"
         });
-        this.treedata.Add(new
+        this.treedata.Add(new DataModel
         {
             id = 13,
             pid = 10,
             name = "Bestselling Songs"
         });
-        this.treedata.Add(new
+        this.treedata.Add(new DataModel
         {
             id = 14,
             hasChild = true,
             name = "MP3 Albums"
         });
-        this.treedata.Add(new
+        this.treedata.Add(new DataModel
         {
             id = 15,
             pid = 14,
             name = "Rock"
 
         });
-        this.treedata.Add(new
+        this.treedata.Add(new DataModel
         {
             id = 16,
             name = "Gospel",
             pid = 14,
 
         });
-        this.treedata.Add(new
+        this.treedata.Add(new DataModel
         {
             id = 17,
             pid = 14,
             name = "Latin Music"
 
         });
-        this.treedata.Add(new
+        this.treedata.Add(new DataModel
         {
             id = 18,
             pid = 14,
             name = "Jazz"
 
         });
-        this.treedata.Add(new
+        this.treedata.Add(new DataModel
         {
             id = 19,
             hasChild = true,
             name = "More in Music"
 
         });
-        this.treedata.Add(new
+        this.treedata.Add(new DataModel
         {
             id = 20,
             pid = 19,
             name = "Music Trade-In"
         });
-        this.treedata.Add(new
+        this.treedata.Add(new DataModel
         {
             id = 21,
             name = "Redeem a Gift Card",
             pid = 19
         });
-        this.treedata.Add(new
+        this.treedata.Add(new DataModel
         {
             id = 22,
             pid = 19,

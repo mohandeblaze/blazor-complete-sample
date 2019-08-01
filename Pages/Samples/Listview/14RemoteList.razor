@@ -15,13 +15,14 @@
 <br />
 
 <EjsListView ShowHeader="true"
+             TValue="DataModel"
              HeaderTitle="@HeaderTitle"
-             Query="new ej.data.Query().from('Products').select('ProductID,ProductName').take(10)"
-             OnActionBegin="@((e) => { actionBegin = true; this.StateHasChanged(); })"
-             OnActionComplete="@((e) => { actionComplete = true; this.StateHasChanged(); })"
-             OnActionFailure="@((e) => { actionFailure = true; this.StateHasChanged(); })">
+             Query="new ej.data.Query().from('Products').select('ProductID,ProductName').take(10)">
     <EjsDataManager Adaptor="Syncfusion.EJ2.Blazor.Adaptors.ODataAdaptor" CrossDomain="true" Url="//js.syncfusion.com/demos/ejServices/Wcf/Northwind.svc/"></EjsDataManager>
     <ListViewFieldSettings Id="ProductID" Text="ProductName"></ListViewFieldSettings>
+    <ListViewEvents TValue="DataModel" OnActionBegin="@((e) => { actionBegin = true; })"
+                    OnActionComplete="@((e) => { actionComplete = true;  })"
+                    OnActionFailure="@((e) => { actionFailure = true;  })"></ListViewEvents>
 </EjsListView>
 
 @code {
@@ -37,5 +38,12 @@
     protected override void OnInit()
     {
         base.OnInit();
+    }
+
+    class DataModel
+    {
+        public string Id { get; set; }
+        public string Text { get; set; }
+
     }
 }
