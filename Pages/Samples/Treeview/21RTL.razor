@@ -1,10 +1,10 @@
 @page "/Treeview/21rtl"
 
-<h4 class="sample-title">Simple Treeview</h4>
+<h4 class="sample-title">RTL Treeview</h4>
 
 <div class="control-section">
     <div class="control_wrapper">
-        <EjsTreeView id="treedata" HtmlAttributes="@HTMLProps" EnableRtl="true" TValue="Parentitem">
+        <EjsTreeView ID="treedata" HtmlAttributes="@HTMLProps" EnableRtl="true" TValue="Parentitem">
             <TreeViewFieldsSettings DataSource="@parentitem" Id="nodeId" ParentID="pid" Text="nodeText" HasChildren="hasChild" Expanded="expanded" Child="@child"></TreeViewFieldsSettings>
         </EjsTreeView>
     </div>
@@ -16,9 +16,9 @@
     Dictionary<string, object> HTMLProps = new Dictionary<string, object>() {
         {"style" , "border: 1px dashed blue"}
     };
-    protected override void OnInit()
+    protected override void OnInitialized()
     {
-        base.OnInit();
+        base.OnInitialized();
         this.parentitem.Add(new Parentitem
         {
             nodeId = "01",

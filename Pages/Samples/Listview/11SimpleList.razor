@@ -1,20 +1,21 @@
 @page "/listview/11SimpleList"
 @using System.Collections.ObjectModel
+@using Model
 
 <h4 class="sample-title">Simple List with ObservableCollection</h4>
 
 <EjsListView HtmlAttributes="@HTMLProps"
              DataSource="@DataSource"
              ShowHeader="true"
-             HeaderTitle="@HeaderTitle">
-
-    <ListViewFieldSettings Id="Id" Text="Text"></ListViewFieldSettings>
-
+             HeaderTitle="@HeaderTitle"
+             Height="500">
+    <ListViewFieldSettings Id="Id" Text="Text" HtmlAttributes="HtmlProperties"></ListViewFieldSettings>
 </EjsListView>
 <div>
     <button @onclick="@AddItem" class="e-btn e-info">Add item</button>
     <button @onclick="@RemoveItem" class="e-btn e-info">Remove item</button>
 </div>
+
 @code {
     string HeaderTitle = "Listview header";
 
@@ -22,30 +23,29 @@
         {"style" , "border: 1px dashed blue"}
     };
 
-    ObservableCollection<DataModel> DataSource = new ObservableCollection<DataModel>()
-{
-        new DataModel{ Id = "1", Text = "Artwork"},
-        new DataModel{ Id = "2", Text = "Abstract"},
-        new DataModel{ Id = "3", Text = "Modern Painting"},
-        new DataModel{ Id = "4", Text = "Ceramics"},
-        new DataModel{ Id = "5", Text = "Animation Art"},
-        new DataModel{ Id = "6", Text = "Oil Painting"},
-    };
+    ObservableCollection<ListDataModel> DataSource = new ObservableCollection<ListDataModel>();
+
+    protected override void OnInitialized()
+    {
+        for (int i = 0; i < 200; i++)
+        {
+            DataSource.Add(new ListDataModel { Id = i.ToString(), Text = "Text " + i.ToString() });
+        }
+    }
 
     void AddItem()
     {
-        DataSource.Add(new DataModel { Id = "7", Text = "Test item" });
+        DataSource.Add(new ListDataModel { Id = "7", Text = "Test item" });
     }
 
     void RemoveItem()
     {
         DataSource.RemoveAt(0);
     }
-
-    class DataModel
-    {
-        public string Id { get; set; }
-        public string Text { get; set; }
-
-    }
 }
+
+<style>
+    .e-listview {
+        overflow: auto;
+    }
+</style>

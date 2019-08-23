@@ -17,7 +17,7 @@
 <div class="flex-container">
     <div class="control_wrapper">
         <h4>LoadOnDemand: True</h4>
-        <EjsTreeView ModelType="@modelType" LoadOnDemand="true" AllowEditing="true" AllowDragAndDrop="true" @ref="@NormalTreeview1" TValue="TreeData">
+        <EjsTreeView ModelType="@modelType" LoadOnDemand="true" AllowEditing="true" AllowDragAndDrop="true" @ref="@NormalTreeview1" @ref:suppressField TValue="TreeData">
             <TreeViewFieldsSettings Id="Id" Text="Name" ParentID="Pid" HasChildren="HasChild" Selected="Selected" Expanded="Expanded" DataSource="@LocalData"></TreeViewFieldsSettings>
             <TreeViewTemplates>
                 <NodeTemplate>
@@ -34,7 +34,7 @@
 
     <div class="control_wrapper">
         <h4>LoadOnDemand: False</h4>
-        <EjsTreeView ModelType="@modelType" LoadOnDemand="false" AllowEditing="true" AllowDragAndDrop="true" @ref="@NormalTreeview" TValue="TreeData">
+        <EjsTreeView ModelType="@modelType" LoadOnDemand="false" AllowEditing="true" AllowDragAndDrop="true" @ref="@NormalTreeview" @ref:suppressField TValue="TreeData">
             <TreeViewFieldsSettings Id="Id" Text="Name" ParentID="Pid" HasChildren="HasChild" Selected="Selected" Expanded="Expanded" DataSource="@LocalData"></TreeViewFieldsSettings>
             <TreeViewTemplates>
                 <NodeTemplate>
@@ -51,7 +51,7 @@
 
     <div class="control_wrapper">
         <h4>DataManager</h4>
-        <EjsTreeView ModelType="@ModelType" AllowEditing="true" AllowDragAndDrop="true" @ref="@RemoteTreeview"  TValue="TreeData">
+        <EjsTreeView ModelType="@ModelType" AllowEditing="true" AllowDragAndDrop="true" @ref="@RemoteTreeview" @ref:suppressField  TValue="TreeData">
             <TreeViewFieldsSettings Query="new ej.data.Query().from('Employees').select('EmployeeID,FirstName,Title').take(5)" Id="EmployeeID" Text="FirstName" HasChildren="EmployeeID"  TValue="TreeData">
                 <EjsDataManager url="https://services.odata.org/V4/Northwind/Northwind.svc" Adaptor="Syncfusion.EJ2.Blazor.Adaptors.ODataV4Adaptor" CrossDomain="true"></EjsDataManager>
                 <TreeViewFieldChild Query="new ej.data.Query().from('Orders').select('OrderID,EmployeeID,ShipName').take(5)" Id="OrderID" Text="ShipName" ParentID="EmployeeID"  TValue="TreeData">
@@ -108,9 +108,9 @@
         RemoteTreeview.RemoveNodes(NodeId);
     }
 
-    protected override void OnInit()
+    protected override void OnInitialized()
     {
-        base.OnInit();
+        base.OnInitialized();
         LocalData.Add(new TreeData
         {
             Id = 1,

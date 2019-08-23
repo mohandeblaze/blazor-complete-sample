@@ -1,6 +1,7 @@
 @page "/listview/16PublicMethods"
 @using Newtonsoft.Json
 @using Syncfusion.EJ2.Blazor
+@using Model
 
 <h4 class="sample-title">List Public Methods</h4>
 
@@ -8,6 +9,7 @@
     <div style="margin: 10px;">
         <EjsListView ID="firstlist"
                      @ref="NormalList"
+                     @ref:suppressField
                      HtmlAttributes="@HTMLProps"
                      DataSource="@DataSource"
                      ShowHeader="true"
@@ -19,6 +21,7 @@
     <div style="margin: 10px;">
         <EjsListView ID="secondlist"
                      @ref="CheckList"
+                     @ref:suppressField
                      HtmlAttributes="@HTMLProps"
                      DataSource="@DataSource"
                      ShowHeader="true"
@@ -30,12 +33,19 @@
     <div style="margin: 10px;">
         <EjsListView ID="thirdlist"
                      @ref="NestedList"
+                     @ref:suppressField
                      HtmlAttributes="@HTMLProps"
                      DataSource="@NestedDataSource"
                      ShowHeader="true"
-                     ShowCheckBox="true"
-                     HeaderTitle="NestedList">
+                     ShowCheckBox="false"
+                     HeaderTitle="NestedList"
+                     ModelType="@model">
             <ListViewFieldSettings Id="Id" Text="Text" Child="Child"></ListViewFieldSettings>
+            <ListViewTemplates>
+                <Template>
+                    <div>Template item @((context as ListDataModel).Text)</div>
+                </Template>
+            </ListViewTemplates>
         </EjsListView>
     </div>
 </div>
@@ -97,6 +107,12 @@
 
         }
 
+    </div>
+
+    <div class="padding">
+        <div class="bold">Select item</div>
+        <div class="italic">Void</div>
+        <button class="e-btn e-info" @onclick="@SelectItem">Select item</button>
     </div>
 
     <div class="padding">
@@ -173,48 +189,93 @@
 </div>
 
 @code {
-    [Inject]
-    protected IJSRuntime JsRuntime { get; set; }
+    List<ListDataModel> _DataModel = new List<ListDataModel>();
 
-    List<DataModel> _DataModel = new List<DataModel>();
+    EjsListView<ListDataModel> NormalList;
 
-    EjsListView<DataModel> NormalList;
+    EjsListView<ListDataModel> CheckList;
 
-    EjsListView<DataModel> CheckList;
+    EjsListView<ListDataModel> NestedList;
 
-    EjsListView<DataModel> NestedList;
+    List<ListDataModel> NormalListSelected;
 
-    List<DataModel> NormalListSelected;
+    List<ListDataModel> CheckListSelected;
 
-    List<DataModel> CheckListSelected;
+    List<ListDataModel> NestedListSelected;
 
-    List<DataModel> NestedListSelected;
+    ListDataModel FindItemValue;
 
-    DataModel FindItemValue;
+    ListDataModel model = new ListDataModel();
 
     Dictionary<string, object> HTMLProps = new Dictionary<string, object>() {
-        {"style" , "border: 1px dashed blue"}
+        { "style", "border: 1px dashed blue" }
     };
 
-    List<DataModel> DataSource = new List<DataModel>()
-{
-        new DataModel{ Id = "1", Text = "Data 1"},
-        new DataModel{ Id = "2", Text = "Data 2"},
-        new DataModel{ Id = "3", Text = "Data 3"},
-        new DataModel{ Id = "4", Text = "Data 4"},
+    List<ListDataModel> DataSource = new List<ListDataModel>() {
+        new ListDataModel {
+            Id = "1",
+            Text = "Data 1"
+        },
+        new ListDataModel {
+            Id = "2",
+            Text = "Data 2"
+        },
+        new ListDataModel {
+            Id = "3",
+            Text = "Data 3"
+        },
+        new ListDataModel {
+            Id = "4",
+            Text = "Data 4"
+        },
     };
 
-    List<DataModel> NestedDataSource = new List<DataModel>()
-{
-        new DataModel{ Id = "1", Text = "Data 1", Child = new List<DataModel>(){ new DataModel { Id="1-1", Text = "Child Data 1"} }},
-        new DataModel{ Id = "2", Text = "Data 2", Child = new List<DataModel>(){ new DataModel { Id="2-1", Text = "Child Data 2"} }},
-        new DataModel{ Id = "3", Text = "Data 3", Child = new List<DataModel>(){ new DataModel { Id="3-1", Text = "Child Data 3"} }},
-        new DataModel{ Id = "4", Text = "Data 4", Child = new List<DataModel>(){ new DataModel { Id="4-1", Text = "Child Data 4"} }},
+    List<ListDataModel> NestedDataSource = new List<ListDataModel>() {
+        new ListDataModel {
+            Id = "1",
+            Text = "Data 1",
+            Child = new List < ListDataModel > () {
+                new ListDataModel {
+                    Id = "1-1",
+                    Text = "Child Data 1"
+                }
+            }
+        },
+        new ListDataModel {
+            Id = "2",
+            Text = "Data 2",
+            Child = new List < ListDataModel > () {
+                new ListDataModel {
+                    Id = "2-1",
+                    Text = "Child Data 2"
+                }
+            }
+        },
+        new ListDataModel {
+            Id = "3",
+            Text = "Data 3",
+            Child = new List < ListDataModel > () {
+                new ListDataModel {
+                    Id = "3-1",
+                    Text = "Child Data 3"
+                }
+            }
+        },
+        new ListDataModel {
+            Id = "4",
+            Text = "Data 4",
+            Child = new List < ListDataModel > () {
+                new ListDataModel {
+                    Id = "4-1",
+                    Text = "Child Data 4"
+                }
+            }
+        },
     };
 
     async void GetSelectedItems()
     {
-        ListSelectedItem<DataModel> item = await NormalList.GetSelectedItems();
+        ListSelectedItem<ListDataModel> item = await NormalList.GetSelectedItems();
 
         NormalListSelected = item.Data;
 
@@ -229,13 +290,22 @@
         this.StateHasChanged();
     }
 
+    void SelectItem()
+    {
+        NormalList.SelectItem(DataSource[0]);
+        NestedList.SelectItem(NestedDataSource[0]);
+    }
+
     async void FindItem()
     {
-        DataModel data = new DataModel { Id = "1", Text = "Data 1" };
+        ListDataModel data = new ListDataModel
+        {
+            Id = "1",
+            Text = "Data 1"
+        };
         var item = await NormalList.FindItem(data);
         if (item != null)
         {
-            // FindItemValue = JsonConvert.DeserializeObject<DataModel>(item.ToString());
             FindItemValue = item;
             this.StateHasChanged();
         }
@@ -243,13 +313,21 @@
 
     void CheckItem()
     {
-        DataModel data = new DataModel { Id = "1", Text = "Data 1" };
+        ListDataModel data = new ListDataModel
+        {
+            Id = "1",
+            Text = "Data 1"
+        };
         CheckList.CheckItem(data);
     }
 
     void UnCheckItem()
     {
-        DataModel data = new DataModel { Id = "1", Text = "Data 1" };
+        ListDataModel data = new ListDataModel
+        {
+            Id = "1",
+            Text = "Data 1"
+        };
         CheckList.UncheckItem(data);
     }
 
@@ -270,19 +348,32 @@
 
     void AddItem()
     {
-        DataModel[] data = new DataModel[] { new DataModel { Id = "5", Text = "New Data 5" } };
+        ListDataModel[] data = new ListDataModel[] {
+            new ListDataModel {
+                Id = "5",
+                Text = "New Data 5"
+            }
+        };
         NormalList.AddItem(data, null);
     }
 
     void RemoveItem()
     {
-        DataModel data = new DataModel { Id = "1", Text = "Data 1" };
+        ListDataModel data = new ListDataModel
+        {
+            Id = "1",
+            Text = "Data 1"
+        };
         NormalList.RemoveItem(data);
     }
 
     void DisableItem()
     {
-        DataModel data = new DataModel { Id = "1", Text = "Data 1" };
+        ListDataModel data = new ListDataModel
+        {
+            Id = "1",
+            Text = "Data 1"
+        };
         NormalList.DisableItem(data);
         CheckList.DisableItem(data);
         NestedList.DisableItem(data);
@@ -290,7 +381,11 @@
 
     void EnableItem()
     {
-        DataModel data = new DataModel { Id = "1", Text = "Data 1" };
+        ListDataModel data = new ListDataModel
+        {
+            Id = "1",
+            Text = "Data 1"
+        };
         NormalList.EnableItem(data);
         CheckList.EnableItem(data);
         NestedList.EnableItem(data);
@@ -298,7 +393,11 @@
 
     void HideItem()
     {
-        DataModel data = new DataModel { Id = "2", Text = "Data 2" };
+        ListDataModel data = new ListDataModel
+        {
+            Id = "2",
+            Text = "Data 2"
+        };
         NormalList.HideItem(data);
         CheckList.HideItem(data);
         NestedList.HideItem(data);
@@ -306,29 +405,14 @@
 
     void ShowItem()
     {
-        DataModel data = new DataModel { Id = "2", Text = "Data 2" };
+        ListDataModel data = new ListDataModel
+        {
+            Id = "2",
+            Text = "Data 2"
+        };
         NormalList.ShowItem(data);
         CheckList.ShowItem(data);
         NestedList.ShowItem(data);
-    }
-
-    class DataModel
-    {
-        public string Id { get; set; }
-        public string Text { get; set; }
-        public List<DataModel> Child { get; set; }
-    }
-
-    class SelectedItem
-    {
-        [JsonProperty("data")]
-        public DataModel Data { get; set; }
-
-        [JsonProperty("item")]
-        public DOM Item { get; set; }
-
-        [JsonProperty("text")]
-        public string Text { get; set; }
     }
 }
 

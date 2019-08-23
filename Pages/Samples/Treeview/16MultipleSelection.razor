@@ -4,176 +4,184 @@
 
 <div class="control-section">
     <div class="control_wrapper">
-        <EjsTreeView id="treedata" AllowMultiSelection="true" TValue="object">
-            <TreeViewFieldsSettings DataSource="@treedata" Id="id" ParentID="pid" Text="name" HasChildren="hasChild" Expanded="expanded" Selected="is_selected"></TreeViewFieldsSettings>
+        <EjsTreeView TValue="TreeData" AllowMultiSelection="true">
+            <TreeViewFieldsSettings DataSource="@TreeDataSource" Id="Id" ParentID="Pid" Text="Name" HasChildren="HasChild" Expanded="Expanded" Selected="IsSelected"></TreeViewFieldsSettings>
         </EjsTreeView>
     </div>
 </div>
 
 @code{
-    List<object> treedata = new List<object>();
+    List<TreeData> TreeDataSource = new List<TreeData>();
 
-    protected override void OnInit()
+    protected override void OnInitialized()
     {
-        base.OnInit();
-        this.treedata.Add(new
+        base.OnInitialized();
+        TreeDataSource.Add(new TreeData
         {
-            id = 1,
-            name = "Australia",
-            hasChild = true,
-            expanded = true
+            Id = 1,
+            Name = "Australia",
+            HasChild = true,
+            Expanded = true
         });
-        this.treedata.Add(new
+        TreeDataSource.Add(new TreeData
         {
-            id = 2,
-            pid = 1,
-            name = "New South Wales",
-            is_selected = true
+            Id = 2,
+            Pid = 1,
+            Name = "New South Wales",
+            IsSelected = true
 
 
         });
-        this.treedata.Add(new
+        TreeDataSource.Add(new TreeData
         {
-            id = 3,
-            pid = 1,
-            name = "Victoria"
+            Id = 3,
+            Pid = 1,
+            Name = "Victoria"
         });
 
-        this.treedata.Add(new
+        TreeDataSource.Add(new TreeData
         {
-            id = 4,
-            pid = 1,
-            name = "South Australia"
+            Id = 4,
+            Pid = 1,
+            Name = "South Australia"
         });
-        this.treedata.Add(new
+        TreeDataSource.Add(new TreeData
         {
-            id = 6,
-            pid = 1,
-            name = "Western Australia",
-            is_selected = true
+            Id = 6,
+            Pid = 1,
+            Name = "Western Australia",
+            IsSelected = true
 
         });
-        this.treedata.Add(new
+        TreeDataSource.Add(new TreeData
         {
-            id = 7,
-            name = "Brazil",
-            hasChild = true
+            Id = 7,
+            Name = "Brazil",
+            HasChild = true
         });
-        this.treedata.Add(new
+        TreeDataSource.Add(new TreeData
         {
-            id = 8,
-            pid = 7,
-            name = "Paran�"
+            Id = 8,
+            Pid = 7,
+            Name = "Paraná"
         });
-        this.treedata.Add(new
+        TreeDataSource.Add(new TreeData
         {
-            id = 9,
-            pid = 7,
-            name = "Cear�"
+            Id = 9,
+            Pid = 7,
+            Name = "Ceará"
         });
-        this.treedata.Add(new
+        TreeDataSource.Add(new TreeData
         {
-            id = 10,
-            pid = 7,
-            name = "Acre"
+            Id = 10,
+            Pid = 7,
+            Name = "Acre"
         });
-        this.treedata.Add(new
+        TreeDataSource.Add(new TreeData
         {
-            id = 11,
-            name = "China",
-            hasChild = true
+            Id = 11,
+            Name = "China",
+            HasChild = true
         });
-        this.treedata.Add(new
+        TreeDataSource.Add(new TreeData
         {
-            id = 12,
-            pid = 11,
-            name = "Guangzhou",
+            Id = 12,
+            Pid = 11,
+            Name = "Guangzhou",
         });
-        this.treedata.Add(new
+        TreeDataSource.Add(new TreeData
         {
-            id = 13,
-            pid = 11,
-            name = "Shanghai"
+            Id = 13,
+            Pid = 11,
+            Name = "Shanghai"
         });
-        this.treedata.Add(new
+        TreeDataSource.Add(new TreeData
         {
-            id = 14,
-            pid = 11,
-            name = "Beijing"
+            Id = 14,
+            Pid = 11,
+            Name = "Beijing"
         });
-        this.treedata.Add(new
+        TreeDataSource.Add(new TreeData
         {
-            id = 15,
-            pid = 11,
-            name = "Shantou"
+            Id = 15,
+            Pid = 11,
+            Name = "Shantou"
 
         });
-        this.treedata.Add(new
+        TreeDataSource.Add(new TreeData
         {
-            id = 16,
-            name = "France",
-            hasChild = true
+            Id = 16,
+            Name = "France",
+            HasChild = true
 
         });
-        this.treedata.Add(new
+        TreeDataSource.Add(new TreeData
         {
-            id = 17,
-            pid = 16,
-            name = "Pays de la Loire"
+            Id = 17,
+            Pid = 16,
+            Name = "Pays de la Loire"
 
         });
-        this.treedata.Add(new
+        TreeDataSource.Add(new TreeData
         {
-            id = 18,
-            pid = 16,
-            name = "Aquitaine"
+            Id = 18,
+            Pid = 16,
+            Name = "Aquitaine"
 
         });
-        this.treedata.Add(new
+        TreeDataSource.Add(new TreeData
         {
-            id = 19,
-            pid = 16,
-            name = "Brittany"
+            Id = 19,
+            Pid = 16,
+            Name = "Brittany"
 
         });
-        this.treedata.Add(new
+        TreeDataSource.Add(new TreeData
         {
-            id = 20,
-            pid = 16,
-            name = "Lorraine"
+            Id = 20,
+            Pid = 16,
+            Name = "Lorraine"
         });
-        this.treedata.Add(new
+        TreeDataSource.Add(new TreeData
         {
-            id = 21,
-            name = "India",
-            hasChild = true
+            Id = 21,
+            Name = "India",
+            HasChild = true
 
         });
-        this.treedata.Add(new
+        TreeDataSource.Add(new TreeData
         {
-            id = 22,
-            pid = 21,
-            name = "Assam"
+            Id = 22,
+            Pid = 21,
+            Name = "Assam"
 
         });
-        this.treedata.Add(new
+        TreeDataSource.Add(new TreeData
         {
-            id = 23,
-            pid = 21,
-            name = "Bihar"
+            Id = 23,
+            Pid = 21,
+            Name = "Bihar"
         });
-        this.treedata.Add(new
+        TreeDataSource.Add(new TreeData
         {
-            id = 24,
-            pid = 21,
-            name = "Tamil Nadu"
+            Id = 24,
+            Pid = 21,
+            Name = "Tamil Nadu"
 
         });
     }
+
+    class TreeData
+    {
+        public int Id { get; set; }
+        public int? Pid { get; set; }
+        public bool HasChild { get; set; }
+        public bool Expanded { get; set; }
+        public bool IsSelected { get; set; }
+        public string Name { get; set; }
+    }
 }
-
 <style>
-
     .control_wrapper {
         max-width: 500px;
         margin: auto;

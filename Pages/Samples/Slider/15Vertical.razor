@@ -2,61 +2,85 @@
 
 <h4 class="sample-title">Slider in Vertical</h4>
 
-<div class="content-wrapper">
-    <table class="slider_table">
-        <tbody>
-            <tr>
-                <td>
-                    <div class="sliderwrap">
-                        <EJSSlider ID="default" Value="30" Orientation="@SliderOrientation.Vertical">
-                            <SliderTicksData Placement="@placement"></SliderTicksData>
-                            <SliderTooltipData IsVisible="@enableTooltip"></SliderTooltipData>
-                        </EJSSlider>
-                    </div>
-                </td>
-                <td>
-                    <div class="sliderwrap">
-                        <EJSSlider ID="minrange" Type=SliderType.MinRange Orientation="@SliderOrientation.Vertical" Value="30">
-                            <SliderTicksData Placement="@placement"></SliderTicksData>
-                            <SliderTooltipData IsVisible="@enableTooltip"></SliderTooltipData>
-                        </EJSSlider>
-                    </div>
-                </td>
-                <td>
-                    <div class="sliderwrap">
-                        <EJSSlider ID="range" Orientation="@SliderOrientation.Vertical" Type=SliderType.Range Value="@val">
-                            <SliderTicksData Placement="@placement"></SliderTicksData>
-                            <SliderTooltipData IsVisible="@enableTooltip"></SliderTooltipData>
-                        </EJSSlider>
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+<div class="col-lg-8 control-section sb-property-border">
+    <div class="content-wrapper">
+        <table class="slider_table">
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="sliderwrap">
+                            <EjsSlider Orientation="@SliderOrientation.Vertical" @bind-Value="@Default" TValue="int">
+                                <SliderTicksData Placement="@(EnableTicks ? Placement.Before : Placement.None)" LargeStep="20"></SliderTicksData>
+                                <SliderTooltipData IsVisible="@EnableTooltip"></SliderTooltipData>
+                            </EjsSlider>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="sliderwrap">
+                            <EjsSlider Type=SliderType.MinRange Orientation="@SliderOrientation.Vertical" @bind-Value="@MinRange" TValue="int">
+                                <SliderTicksData Placement="@(EnableTicks ? Placement.Before : Placement.None)" LargeStep="20"></SliderTicksData>
+                                <SliderTooltipData IsVisible="@EnableTooltip"></SliderTooltipData>
+                            </EjsSlider>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="sliderwrap">
+                            <EjsSlider Orientation="@SliderOrientation.Vertical" Type=SliderType.Range @bind-Value="@Range" TValue="int[]">
+                                <SliderTicksData Placement="@(EnableTicks ? Placement.Before : Placement.None)" LargeStep="20"></SliderTicksData>
+                                <SliderTooltipData IsVisible="@EnableTooltip"></SliderTooltipData>
+                            </EjsSlider>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 
+<div class="col-lg-4 property-section">
+
+    <div class="property-panel-section">
+        <div class="property-panel-header">Properties</div><div class="property-panel-content">
+            <table id="property" title="Properties" class="property-panel-table">
+                <tbody>
+                    <tr>
+                        <td style="width: 50%">
+                            <div class="userselect">Ticks</div>
+                        </td>
+                        <td style="width: 50%;padding-right: 10px">
+                            <div style="padding-left: 0;padding-top: 0">
+                                <input type="checkbox" @bind-value="@EnableTicks" />
+                                @*<EjsCheckBox @bind-Checked="@EnableTicks"></EjsCheckBox>*@
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr id="slider-showon">
+                        <td style="width: 50%">
+                            <div class="userselect">Tooltip</div>
+                        </td>
+                        <td style="width: 50%;padding-right: 10px">
+                            <div style="padding-left: 0;padding-top: 0">
+                                <input type="checkbox" @bind-value="@EnableTooltip" />
+                                @*<EjsCheckBox @bind-Checked="@EnableTooltip"></EjsCheckBox>*@
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 
 @code{
-    int[] val = { 30, 70 };
-    Placement placement = Placement.None;
-    bool enableTooltip = false;
-
-    //void onChange(Syncfusion.EJ2.Blazor.Buttons.ChangeEventArgs args)
-    //{
-    //    placement = args.Checked ? Placement.Before : Placement.None;
-
-    //}
-
-    //void onTooltipChange(Syncfusion.EJ2.Blazor.Buttons.ChangeEventArgs args)
-    //{
-    //    enableTooltip = args.Checked ? true : false;
-
-    //}
-
+    int Default = 30;
+    int MinRange = 30;
+    int[] Range = { 30, 70 };
+    bool EnableTooltip = false;
+    bool EnableTicks = false;
 }
 
 <style>
-
 
     .content-wrapper {
         width: 80%;

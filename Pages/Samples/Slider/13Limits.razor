@@ -5,19 +5,19 @@
 <div class="content-wrapper">
     <div class='sliderwrap'>
         <label class="userselect">MinRange Slider With Limits</label>
-        <EJSSlider id="minrange" Value="25" Min="0" Max="100" Type=SliderType.MinRange>
+        <EjsSlider ID="minrange" Value="25" Min="0" Max="100" Type=SliderType.MinRange>
             <SliderTicksData Placement="@Placement.Before" LargeStep="20" SmallStep="5" ShowSmallTicks="true"></SliderTicksData>
             <SliderTooltipData IsVisible="true" Placement="@TooltipPlacement.Before" ShowOn="@TooltipShowOn.Focus"></SliderTooltipData>
             <SliderLimitData Enabled="true" MinStart="@currentMinStart" MinEnd="@currentMinEnd"></SliderLimitData>
-        </EJSSlider>
+        </EjsSlider>
     </div>
     <div class='sliderwrap'>
         <label class="userselect">Range Slider With Limits</label>
-        <EJSSlider id="range" Value="@val" Min="0" Max="100" Type=SliderType.Range>
+        <EjsSlider ID="range" Value="@val" Min="0" Max="100" Type=SliderType.Range>
             <SliderTicksData Placement="@Placement.Before" LargeStep="20" SmallStep="5" ShowSmallTicks="true"></SliderTicksData>
             <SliderTooltipData IsVisible="true" Placement="@TooltipPlacement.Before" ShowOn="@TooltipShowOn.Focus"></SliderTooltipData>
             <SliderLimitData Enabled="true" MinStart="@currentMinStart" MinEnd="@currentMinEnd" MaxStart="@currentMaxStart" MaxEnd="@currentMaxEnd"></SliderLimitData>
-        </EJSSlider>
+        </EjsSlider>
     </div>
 </div>
 

@@ -1,0 +1,123 @@
+@page "/Treeview/99testsample"
+@using System.Collections.ObjectModel
+
+<h4 class="sample-title">Simple Treeview with ObservableCollection</h4>
+
+<div class="control-section">
+    <div class="control_wrapper">
+        <EjsTreeView id="treedata" HtmlAttributes="@HTMLProps" TValue="Parentitem" LoadOnDemand="true">
+            <TreeViewFieldsSettings DataSource="@parentitem" Id="nodeId" ParentID="pid" Text="nodeText" HasChildren="hasChild" Expanded="expanded" Child="@child"></TreeViewFieldsSettings>
+        </EjsTreeView>
+    </div>
+</div>
+
+<div>
+    <button @onclick="@AddItem" class="e-btn e-info">Add item</button>
+    <button @onclick="@RemoveItem" class="e-btn e-info">Remove item</button>
+</div>
+
+@code{
+    object child;
+    ObservableCollection<Parentitem> parentitem = new ObservableCollection<Parentitem>();
+    Dictionary<string, object> HTMLProps = new Dictionary<string, object>() {
+        {"style" , "border: 1px dashed blue"}
+    };
+
+    string[] sel = new string[] { "02" };
+
+    void AddItem()
+    {
+        parentitem.Add(new Parentitem { nodeId = "99", nodeText = "Test item" });
+        parentitem[0].child.Add(new Childitem { nodeId = "98", nodeText = "New child" });
+    }
+
+    void RemoveItem()
+    {
+        parentitem.RemoveAt(0);
+    }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        for (int i = 0; i < 500; i++)
+        {
+            parentitem.Add(new Parentitem
+            {
+                nodeId = i.ToString(),
+                nodeText = "Text " + i.ToString(),
+                child = new ObservableCollection<Childitem>()
+        {
+                    new Childitem { nodeId = "01-01" + i.ToString(), nodeText = "Child 1 " + i.ToString() },
+                    new Childitem { nodeId = "01-02" + i.ToString(), nodeText = "Child 2 " + i.ToString() },
+                },
+            });
+        }
+
+        //        this.parentitem.Add(new Parentitem
+        //        {
+        //            nodeId = "01",
+        //            nodeText = "Local Disk (C:)",
+        //            expanded = true,
+        //            child = new ObservableCollection<Childitem>()
+        //{
+        //                new Childitem { nodeId = "01-01", nodeText = "Program Files" },
+        //                new Childitem { nodeId = "01-02", nodeText = "Users", expanded = true },
+        //                new Childitem { nodeId = "01-03", nodeText = "Windows" }
+        //            },
+        //        });
+
+        //        this.parentitem.Add(new Parentitem
+        //        {
+        //            nodeId = "02",
+        //            nodeText = "Local Disk (D:)",
+        //            child = new ObservableCollection<Childitem>()
+        //{
+        //                new Childitem { nodeId = "02-01", nodeText = "Personals" },
+        //                new Childitem { nodeId = "02-02", nodeText = "Projects" },
+        //                new Childitem { nodeId = "02-02", nodeText = "Office" }
+        //            },
+        //        });
+
+        //        this.parentitem.Add(new Parentitem
+        //        {
+        //            nodeId = "03",
+        //            nodeText = "Local Disk (E:)",
+        //            child = new ObservableCollection<Childitem>()
+        //{
+        //                new Childitem { nodeId = "03-01", nodeText = "Pictures" },
+        //                new Childitem { nodeId = "03-02", nodeText = "Documents", icon = "docx" },
+        //                new Childitem { nodeId = "03-03", nodeText = "Study Materials" }
+        //            },
+        //        });
+        //        this.child = "child";
+    }
+    public class Parentitem
+    {
+        public string nodeId { get; set; }
+        public string nodeText { get; set; }
+        public string icon { get; set; }
+        public bool expanded { get; set; }
+        public bool selected { get; set; }
+        public ObservableCollection<Childitem> child { get; set; }
+
+    }
+    public class Childitem
+    {
+        public string nodeId { get; set; }
+        public string nodeText { get; set; }
+        public string icon { get; set; }
+        public bool expanded { get; set; }
+        public bool selected { get; set; }
+    }
+}
+
+<style>
+
+    .control_wrapper {
+        max-width: 500px;
+        margin: auto;
+        border: 1px solid #dddddd;
+        border-radius: 3px;
+    }
+</style>

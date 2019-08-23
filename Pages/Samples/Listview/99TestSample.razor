@@ -1,71 +1,53 @@
 @page "/listview/99TestSample"
+@using System.Collections.ObjectModel
+@using Model
 
-<h4 class="sample-title">Test Sample</h4>
+<h4 class="sample-title">Test sample</h4>
 
+<EjsListView HtmlAttributes="@HTMLProps"
+             DataSource="@DataSource"
+             ShowHeader="true"
+             HeaderTitle="@HeaderTitle"
+             Height="500"
+             EnableVirtualization="true">
 
-<EjsListView ID="list" DataSource="@ListData" CssClass="e-list-template" ModelType="@_DataModel">
-    <ListViewFieldSettings Id="Id" Text="Name" GroupBy="Category"></ListViewFieldSettings>
-    <ListViewTemplates>
-        <Template>
-            @{
-                DataModel ContextData = context as DataModel;
-                <div class="e-list-wrapper e-list-multi-line e-list-avatar">
-                    <img class="e-avatar e-avatar-circle" src=@ContextData.Image style="background:#BCBCBC" />
-                    <span class="e-list-item-header">@ContextData.Name</span>
-                    <span class="e-list-content">@ContextData.Contact</span>
-                </div>
-            }
-        </Template>
-        <GroupTemplate>
-            <div>
-                <span class="category">Type: @((context as DataModel).Name)</span>
-            </div>
-        </GroupTemplate>
-    </ListViewTemplates>
+    <ListViewFieldSettings Id="Id" Text="Text" HtmlAttributes="HtmlProperties"></ListViewFieldSettings>
 </EjsListView>
+<div>
+    <button @onclick="@AddItem" class="e-btn e-info">Add item</button>
+    <button @onclick="@RemoveItem" class="e-btn e-info">Remove item</button>
+</div>
 
-@code{
+@code {
+    string HeaderTitle = "Listview header";
 
-    List<DataModel> ListData = new List<DataModel>();
+    Dictionary<string, object> HTMLProps = new Dictionary<string, object>() {
+        {"style" , "border: 1px dashed blue"}
+    };
 
-    DataModel _DataModel = new DataModel();
+    ObservableCollection<ListDataModel> DataSource = new ObservableCollection<ListDataModel>();
 
-    protected override void OnInit()
+    protected override void OnInitialized()
     {
-        base.OnInit();
-
-        ListData.Add(new DataModel { Name = "Nancy", Contact = "(206) 555-985774", Id = "1", Image = "https://ej2.syncfusion.com/demos/src/grid/images/1.png", Category = "Experience" });
-        ListData.Add(new DataModel { Name = "Janet", Contact = "(206) 555-3412", Id = "2", Image = "https://ej2.syncfusion.com/demos/src/grid/images/3.png", Category = "Fresher" });
-        ListData.Add(new DataModel { Name = "Margaret", Contact = "(206) 555-8122", Id = "4", Image = "https://ej2.syncfusion.com/demos/src/grid/images/4.png", Category = "Experience" });
-        ListData.Add(new DataModel { Name = "Andrew ", Contact = "(206) 555-9482", Id = "5", Image = "https://ej2.syncfusion.com/demos/src/grid/images/2.png", Category = "Experience" });
-        ListData.Add(new DataModel { Name = "Steven", Contact = "(71) 555-4848", Id = "6", Image = "https://ej2.syncfusion.com/demos/src/grid/images/5.png", Category = "Fresher" });
-        ListData.Add(new DataModel { Name = "Michael", Contact = "(71) 555-7773", Id = "7", Image = "https://ej2.syncfusion.com/demos/src/grid/images/6.png", Category = "Experience" });
-        ListData.Add(new DataModel { Name = "Robert", Contact = "(71) 555-5598", Id = "8", Image = "https://ej2.syncfusion.com/demos/src/grid/images/7.png", Category = "Fresher" });
-        ListData.Add(new DataModel { Name = "Laura", Contact = "(206) 555-1189", Id = "9", Image = "https://ej2.syncfusion.com/demos/src/grid/images/8.png", Category = "Experience" });
+        for (int i = 0; i < 5000; i++)
+        {
+            DataSource.Add(new ListDataModel { Id = i.ToString(), Text = "Text " + i.ToString() });
+        }
     }
 
-    class DataModel
+    void AddItem()
     {
-        public string Name { get; set; }
-        public string Contact { get; set; }
-        public string Id { get; set; }
-        public string Image { get; set; }
-        public string Category { get; set; }
+        DataSource.Add(new ListDataModel { Id = "7", Text = "Test item" });
     }
 
+    void RemoveItem()
+    {
+        DataSource.RemoveAt(0);
+    }
 }
 
 <style>
-    .e-listview.e-control {
-        width: 400px;
-    }
-
-    #List .e-list-group-item {
-        height: 56px;
-        line-height: 56px;
-    }
-
-    #List .count {
-        float: right;
+    .e-listview {
+        overflow: auto;
     }
 </style>

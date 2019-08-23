@@ -1,35 +1,40 @@
 @page "/listview/12CheckList"
+@using Model
 
 <h4 class="sample-title">CheckList</h4>
 
-<EjsListView HtmlAttributes="@HTMLProps" ShowCheckBox="true" DataSource="@DataSource" ShowHeader="true" HeaderTitle="@HeaderTitle">
+<EjsListView HtmlAttributes="@HTMLProps"
+             ShowCheckBox="true"
+             DataSource="@DataSource"
+             ShowHeader="true"
+             HeaderTitle="@HeaderTitle"
+             @ref="ListView"
+             @ref:suppressField
+             ModelType="@model">
     <ListViewFieldSettings Id="Id" Text="Text"></ListViewFieldSettings>
+    <ListViewEvents TValue="ListDataModel"
+                    OnActionComplete="@(() => ListView.SelectItem(DataSource[0]))"
+                    Selected="@((e) => SelectedItem = e.Text)"></ListViewEvents>
 </EjsListView>
+<br />
+<h4>Current Selected item: <span id="selected-item">@SelectedItem</span></h4>
 
 @code {
-    [Inject]
-    protected IJSRuntime JsRuntime { get; set; }
-
+    EjsListView<ListDataModel> ListView;
     string HeaderTitle = "Listview header";
-
+    string SelectedItem = "";
+    ListDataModel model = new ListDataModel();
     Dictionary<string, object> HTMLProps = new Dictionary<string, object>() {
         {"style" , "border: 1px dashed blue"}
     };
 
-    List<DataModel> DataSource = new List<DataModel>()
+    List<ListDataModel> DataSource = new List<ListDataModel>()
 {
-        new DataModel{ Id = "1", Text = "Artwork"},
-        new DataModel{ Id = "2", Text = "Abstract"},
-        new DataModel{ Id = "3", Text = "Modern Painting"},
-        new DataModel{ Id = "4", Text = "Ceramics"},
-        new DataModel{ Id = "5", Text = "Animation Art"},
-        new DataModel{ Id = "6", Text = "Oil Painting"},
+        new ListDataModel{ Id = "1", Text = "Artwork"},
+        new ListDataModel{ Id = "2", Text = "Abstract"},
+        new ListDataModel{ Id = "3", Text = "Modern Painting"},
+        new ListDataModel{ Id = "4", Text = "Ceramics"},
+        new ListDataModel{ Id = "5", Text = "Animation Art"},
+        new ListDataModel{ Id = "6", Text = "Oil Painting"},
     };
-
-    class DataModel
-    {
-        public string Id { get; set; }
-        public string Text { get; set; }
-    }
-
 }

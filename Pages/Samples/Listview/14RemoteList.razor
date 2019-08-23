@@ -1,4 +1,5 @@
 @page "/listview/14remotelist"
+@using Model
 
 <h4 class="sample-title">Remote List</h4>
 
@@ -15,12 +16,16 @@
 <br />
 
 <EjsListView ShowHeader="true"
-             TValue="DataModel"
+             TValue="ListDataModel"
              HeaderTitle="@HeaderTitle"
              Query="new ej.data.Query().from('Products').select('ProductID,ProductName').take(10)">
-    <EjsDataManager Adaptor="Syncfusion.EJ2.Blazor.Adaptors.ODataAdaptor" CrossDomain="true" Url="//js.syncfusion.com/demos/ejServices/Wcf/Northwind.svc/"></EjsDataManager>
-    <ListViewFieldSettings Id="ProductID" Text="ProductName"></ListViewFieldSettings>
-    <ListViewEvents TValue="DataModel" OnActionBegin="@((e) => { actionBegin = true; })"
+    <EjsDataManager Adaptor="Syncfusion.EJ2.Blazor.Adaptors.ODataAdaptor"
+                    CrossDomain="true"
+                    Url="//js.syncfusion.com/demos/ejServices/Wcf/Northwind.svc/"></EjsDataManager>
+    <ListViewFieldSettings Id="ProductID"
+                           Text="ProductName"></ListViewFieldSettings>
+    <ListViewEvents TValue="ListDataModel"
+                    OnActionBegin="@((e) => { actionBegin = true; })"
                     OnActionComplete="@((e) => { actionComplete = true;  })"
                     OnActionFailure="@((e) => { actionFailure = true;  })"></ListViewEvents>
 </EjsListView>
@@ -34,16 +39,4 @@
     bool actionComplete = false;
 
     bool actionFailure = false;
-
-    protected override void OnInit()
-    {
-        base.OnInit();
-    }
-
-    class DataModel
-    {
-        public string Id { get; set; }
-        public string Text { get; set; }
-
-    }
 }

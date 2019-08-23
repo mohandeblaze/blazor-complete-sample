@@ -20,8 +20,8 @@
         object child;
         ObservableCollection<Parentitem> parentitem = new ObservableCollection<Parentitem>();
         Dictionary<string, object> HTMLProps = new Dictionary<string, object>() {
-        {"style" , "border: 1px dashed blue"}
-    };
+            {"style" , "border: 1px dashed blue"}
+        };
 
         string[] sel = new string[] { "02" };
 
@@ -36,9 +36,9 @@
             parentitem.RemoveAt(0);
         }
 
-    protected override void OnInit()
+    protected override void OnInitialized()
     {
-        base.OnInit();
+        base.OnInitialized();
         this.parentitem.Add(new Parentitem
         {
             nodeId = "01",

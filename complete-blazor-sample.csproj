@@ -13,7 +13,8 @@
     <None Remove="tests\**" />
   </ItemGroup>
 
-<ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\ej2-blazor-source\Syncfusion.EJ2.Blazor\Syncfusion.EJ2.Blazor.csproj" />
   </ItemGroup>
+
 </Project>

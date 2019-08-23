@@ -1,15 +1,17 @@
 @page "/listview/23rtl"
-@using Microsoft.JSInterop
+@using Model
 
 <h4 class="sample-title">List RTL</h4>
 
-<EjsListView HtmlAttributes="@HTMLProps" EnableRtl="true" DataSource="@DataSource" ShowHeader="true" HeaderTitle="@HeaderTitle">
+<EjsListView HtmlAttributes="@HTMLProps"
+             EnableRtl="true"
+             DataSource="@DataSource"
+             ShowHeader="true"
+             HeaderTitle="@HeaderTitle">
     <ListViewFieldSettings Id="Id" Text="Text"></ListViewFieldSettings>
 </EjsListView>
 
 @code {
-    [Inject]
-    protected IJSRuntime JsRuntime { get; set; }
 
     string HeaderTitle = "Listview header";
 
@@ -17,23 +19,11 @@
         {"style" , "border: 1px dashed blue"}
     };
 
-    List<DataModel> DataSource = new List<DataModel>()
+    List<ListDataModel> DataSource = new List<ListDataModel>()
 {
-        new DataModel{ Id = "1", Text = "1"},
-        new DataModel{ Id = "2", Text = "2"},
-        new DataModel{ Id = "3", Text = "3"},
-        new DataModel{ Id = "4", Text = "4"},
+        new ListDataModel{ Id = "1", Text = "1"},
+        new ListDataModel{ Id = "2", Text = "2"},
+        new ListDataModel{ Id = "3", Text = "3"},
+        new ListDataModel{ Id = "4", Text = "4"},
     };
-
-    protected override void OnAfterRender()
-    {
-        // this.JsRuntime.Ejs().EnableRipple(true).EnableRtl(true);
-    }
-
-    class DataModel
-    {
-        public string Id { get; set; }
-        public string Text { get; set; }
-    }
-
 }

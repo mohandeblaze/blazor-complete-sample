@@ -6,13 +6,13 @@
 
 <div style="display: flex;">
     <div style="margin: 10px;">
-        <EjsTreeView @ref="@NormalTreeview" AllowEditing="true" TValue="Parentitem">
+        <EjsTreeView @ref="@NormalTreeview" @ref:suppressField AllowEditing="true" TValue="Parentitem">
             <TreeViewFieldsSettings DataSource="@parentitem" Id="nodeId" ParentID="pid" Text="nodeText" HasChildren="hasChild" Expanded="expanded" Child="@child"></TreeViewFieldsSettings>
         </EjsTreeView>
     </div>
 
     <div style="margin: 10px;">
-        <EjsTreeView @ref="@CheckTreeview" AllowEditing="true" ShowCheckBox="true" TValue="Parentitem">
+        <EjsTreeView @ref="@CheckTreeview" @ref:suppressField AllowEditing="true" ShowCheckBox="true" TValue="Parentitem">
             <TreeViewFieldsSettings DataSource="@parentitem" Id="nodeId" ParentID="pid" Text="nodeText" HasChildren="hasChild" Expanded="expanded" Child="@child"></TreeViewFieldsSettings>
         </EjsTreeView>
     </div>
@@ -62,15 +62,15 @@
     </div>
 
     <div class="padding">
-        <div class="bold">EnableNodes</div>
-        <div class="italic">Void</div>
-        <button class="e-btn e-info" @onclick="@EnableNodes">EnableNodes</button>
-    </div>
-
-    <div class="padding">
         <div class="bold">DisableNodes</div>
         <div class="italic">Void</div>
         <button class="e-btn e-info" @onclick="@DisableNodes">DisableNodes</button>
+    </div>
+
+    <div class="padding">
+        <div class="bold">EnableNodes</div>
+        <div class="italic">Void</div>
+        <button class="e-btn e-info" @onclick="@EnableNodes">EnableNodes</button>
     </div>
 
     <div class="padding">
@@ -174,9 +174,9 @@
         this.StateHasChanged();
     }
 
-    protected override void OnInit()
+    protected override void OnInitialized()
     {
-        base.OnInit();
+        base.OnInitialized();
         this.parentitem.Add(new Parentitem
         {
             nodeId = "01",

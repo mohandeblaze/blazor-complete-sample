@@ -8,15 +8,9 @@
             <SliderLimitData Enabled="true" MinStart="10" MinEnd="40" MaxStart="60" MaxEnd="90"></SliderLimitData>
             <SliderTooltipData IsVisible="true" Placement="TooltipPlacement.Before"></SliderTooltipData>
             <SliderEvents TValue="int"
-                          Created="@((e)=> {
-                                        EventTracker.Add("Created"); this.StateHasChanged();
-                                    })"
-                          OnChange="@((e)=> {
-                                        EventTracker.Add("OnChange "+e.Value); this.StateHasChanged();
-                                    })"
-                          ValueChange="@((e)=> {
-                                        EventTracker.Add("ValueChange "+e.Value); this.StateHasChanged();
-                                    })"></SliderEvents>
+                          Created="@((e)=> { EventTracker.Add("Created"); this.StateHasChanged(); })"
+                          OnChange="@((e)=> { EventTracker.Add("OnChange "+e.Value); this.StateHasChanged(); })"
+                          ValueChange="@((e)=> { EventTracker.Add("ValueChange "+e.Value); this.StateHasChanged(); })"></SliderEvents>
         </EjsSlider>
     </div>
 
@@ -25,15 +19,9 @@
             <SliderLimitData Enabled="true" MinStart="10" MinEnd="40" MaxStart="60" MaxEnd="90"></SliderLimitData>
             <SliderTooltipData IsVisible="true" Placement="TooltipPlacement.Before"></SliderTooltipData>
             <SliderEvents TValue="int[]"
-                          Created="@((e)=> {
-                                        EventTracker.Add("Created"); this.StateHasChanged();
-                                    })"
-                          OnChange="@((e)=> {
-                                        EventTracker.Add("OnChange " + e.Value[0] + " - " + e.Value[1]); this.StateHasChanged();
-                                    })"
-                          ValueChange="@((e)=> {
-                                        EventTracker.Add("ValueChange "+ e.Value[0] + " - " + e.Value[1]); this.StateHasChanged();
-                                    })"></SliderEvents>
+                          Created="@((e)=> { EventTracker.Add("Created"); this.StateHasChanged(); })"
+                          OnChange="@((e)=> { EventTracker.Add("OnChange " + e.Value[0] + " - " + e.Value[1]); this.StateHasChanged(); })"
+                          ValueChange="@((e)=> { EventTracker.Add("ValueChange "+ e.Value[0] + " - " + e.Value[1]); this.StateHasChanged(); })"></SliderEvents>
         </EjsSlider>
     </div>
     <br />

@@ -1,4 +1,5 @@
 @page "/listview/17PropertyBinding"
+@using Model
 
 <h4 class="sample-title">List Property Binding</h4>
 
@@ -13,40 +14,30 @@
 </div>
 
 @code {
-    [Inject]
-    protected IJSRuntime JsRuntime { get; set; }
-
     string HeaderTitle = "Listview header";
 
     Dictionary<string, object> HTMLProps = new Dictionary<string, object>() {
         {"style" , "border: 1px dashed blue"}
     };
 
-    List<DataModel> DataSource = new List<DataModel>()
+    List<ListDataModel> DataSource = new List<ListDataModel>()
 {
-        new DataModel{ Id = "1", Text = "1"},
-        new DataModel{ Id = "2", Text = "2"},
-        new DataModel{ Id = "3", Text = "3"},
-        new DataModel{ Id = "4", Text = "4"},
+        new ListDataModel{ Id = "1", Text = "1"},
+        new ListDataModel{ Id = "2", Text = "2"},
+        new ListDataModel{ Id = "3", Text = "3"},
+        new ListDataModel{ Id = "4", Text = "4"},
     };
 
     void onClick()
     {
-        DataSource = new List<DataModel>()
-    {
-            new DataModel{ Id = "1", Text = "Changed 1"},
-            new DataModel{ Id = "2", Text = "Changed 2"},
-            new DataModel{ Id = "3", Text = "Changed 3"},
-            new DataModel{ Id = "4", Text = "Changed 4"},
+        DataSource = new List<ListDataModel>()
+        {
+            new ListDataModel{ Id = "1", Text = "Changed 1"},
+            new ListDataModel{ Id = "2", Text = "Changed 2"},
+            new ListDataModel{ Id = "3", Text = "Changed 3"},
+            new ListDataModel{ Id = "4", Text = "Changed 4"},
         };
 
         HeaderTitle = "This is new Header";
     }
-
-    class DataModel
-    {
-        public string Id { get; set; }
-        public string Text { get; set; }
-    }
-
 }

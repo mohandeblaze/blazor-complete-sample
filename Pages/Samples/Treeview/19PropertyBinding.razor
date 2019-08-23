@@ -3,7 +3,7 @@
 <h4 class="sample-title">Treeview Property Binding</h4>
 
 <div class="sample-container">
-    <EjsTreeView @ref="Treeview" AllowEditing="@AllowEditing" AllowMultiSelection="@AllowMultiSelection" AllowDragAndDrop="@AllowDragAndDrop" TValue="DataSource">
+    <EjsTreeView @ref="Treeview" @ref:suppressField AllowEditing="@AllowEditing" AllowMultiSelection="@AllowMultiSelection" AllowDragAndDrop="@AllowDragAndDrop" TValue="DataSource">
         <TreeViewFieldsSettings DataSource="@_DataSource" Id="nodeId" ParentID="pid" Text="nodeText" HasChildren="hasChild" Expanded="expanded" Child="@child"></TreeViewFieldsSettings>
     </EjsTreeView>
 </div>
@@ -42,9 +42,9 @@
         Treeview.DataBind();
     }
 
-    protected override void OnInit()
+    protected override void OnInitialized()
     {
-        base.OnInit();
+        base.OnInitialized();
         _DataSource.Add(new DataSource
         {
             nodeId = "01",

@@ -27,7 +27,7 @@
 @code {
     Dictionary<string, List<string>> SampleData = new Dictionary<string, List<string>>();
 
-    protected override void OnInit()
+    protected override void OnInitialized()
     {
         SampleService.Samples = new List<string>();
         string[] files = Directory.GetFiles(System.Environment.CurrentDirectory + "\\Pages\\Samples", "*.razor", SearchOption.AllDirectories);
@@ -61,7 +61,7 @@
         }
 
 
-        base.OnInit();
+        base.OnInitialized();
     }
 }
 

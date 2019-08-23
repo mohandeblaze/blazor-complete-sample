@@ -1,20 +1,16 @@
 @page "/listview/18Template"
+@using Model
 
 <h4 class="sample-title">List All Templates</h4>
 
-<EjsListView DataSource="@DataSource" ModelType="@model" ShowHeader="true">
+<EjsListView DataSource="@DataSource" ModelType="@ModelInstance" ShowHeader="true">
     <ListViewFieldSettings Id="Id" Text="Text" GroupBy="Type"></ListViewFieldSettings>
     <ListViewTemplates>
         <Template>
-            @{
-                MyModel Data = context as MyModel;
-
-                <div>Template item @((context as MyModel).Text)</div>
-            }
-
+             <div>Template item @((context as ListDataModel).Text)</div>
         </Template>
         <GroupTemplate>
-            <div>Group Template @((context as MyModel).Text)</div>
+            <div>Group Template @((context as ListDataModel).Text)</div>
         </GroupTemplate>
         <HeaderTemplate>
             <h3>H3 Template</h3>
@@ -23,20 +19,13 @@
 </EjsListView>
 
 @code {
-    List<MyModel> DataSource = new List<MyModel>()
-{
-        new MyModel{ Id = "1", Text = "1", Type="Odd"},
-        new MyModel{ Id = "2", Text = "2", Type="Even"},
-        new MyModel{ Id = "3", Text = "3", Type="Odd"},
-        new MyModel{ Id = "4", Text = "4", Type="Even"},
+    ListDataModel ModelInstance = new ListDataModel();
+    List<ListDataModel> DataSource = new List<ListDataModel>()
+    {
+        new ListDataModel{ Id = "1", Text = "1", Type="Odd"},
+        new ListDataModel{ Id = "2", Text = "2", Type="Even"},
+        new ListDataModel{ Id = "3", Text = "3", Type="Odd"},
+        new ListDataModel{ Id = "4", Text = "4", Type="Even"},
     };
 
-    MyModel model = new MyModel();
-
-    class MyModel
-    {
-        public string Id { get; set; }
-        public string Text { get; set; }
-        public string Type { get; set; }
-    }
 }

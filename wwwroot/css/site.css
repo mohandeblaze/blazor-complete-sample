@@ -12,6 +12,14 @@ a {
     color: #0366d6;
 }
 
+.e-listview {
+    visibility: visible !important;
+}
+
+.e-treeview {
+    visibility: visible !important;
+}
+
 #cypress-target {
     padding: 25px;
 }

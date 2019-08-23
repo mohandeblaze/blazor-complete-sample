@@ -4,7 +4,7 @@
 
 <div class="control-section">
     <div class="control_wrapper">
-        <EjsTreeView id="treedata" AllowEditing="true" TValue="DataModel">
+        <EjsTreeView ID="treedata" AllowEditing="true" TValue="DataModel">
             <TreeViewFieldsSettings DataSource="@treedata" Id="id" ParentID="pid" Text="name" HasChildren="hasChild" Expanded="expanded" Selected="is_selected"></TreeViewFieldsSettings>
         </EjsTreeView>
     </div>
@@ -22,9 +22,9 @@
 
     }
 
-    protected override void OnInit()
+    protected override void OnInitialized()
     {
-        base.OnInit();
+        base.OnInitialized();
         this.treedata.Add(new DataModel
         {
             id = 1,

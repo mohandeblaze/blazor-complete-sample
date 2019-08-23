@@ -5,11 +5,11 @@
 <div class="control-section">
     <div class="row">
         <div class="col-md-12">
-            <Ejsheatmap id="Container" DataSource="@HeatmapData" @ref="heatmap">
+            <EjsHeatMap ID="Container" DataSource="@HeatmapData" @ref="heatmap" @ref:suppressField>
                 <HeatMapXAxis Labels="@xLabels"></HeatMapXAxis>
                 <HeatMapYAxis Labels="@yLabels"></HeatMapYAxis>
                 <HeatMapTitle Text="Sales Revenue per Employee (in 1000 US$)"></HeatMapTitle>
-            </Ejsheatmap>
+            </EjsHeatMap>
         </div>
     </div>
 </div>

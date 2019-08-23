@@ -1,4 +1,5 @@
 @page "/listview/15Events"
+@using Model
 
 <h4 class="sample-title">Listview Events</h4>
 
@@ -25,16 +26,13 @@
              HeaderTitle="@HeaderTitle"
              HtmlAttributes="@HTMLProps">
     <ListViewFieldSettings Id="Id" Text="Text"></ListViewFieldSettings>
-    <ListViewEvents TValue="DataModel" Selected="@((e) => OnSelect(e))"
+    <ListViewEvents TValue="ListDataModel" Selected="@((e) => OnSelect(e))"
                     OnActionBegin="@((e) => { actionBegin = true;  })"
                     OnActionComplete="@((e) => { actionComplete = true;  })"
                     OnActionFailure="@((e) => { actionFailure = true;  })"></ListViewEvents>
 </EjsListView>
 
 @code {
-    [Inject]
-    protected IJSRuntime JsRuntime { get; set; }
-
     string HeaderTitle = "Listview header";
 
     string selecteditem = "null";
@@ -49,23 +47,16 @@
         {"style" , "border: 1px dashed blue"}
     };
 
-    List<DataModel> DataSource = new List<DataModel>()
+    List<ListDataModel> DataSource = new List<ListDataModel>()
 {
-        new DataModel{ Id = "1", Text = "1"},
-        new DataModel{ Id = "2", Text = "2"},
-        new DataModel{ Id = "3", Text = "3"},
-        new DataModel{ Id = "4", Text = "4"},
+        new ListDataModel{ Id = "1", Text = "1"},
+        new ListDataModel{ Id = "2", Text = "2"},
+        new ListDataModel{ Id = "3", Text = "3"},
+        new ListDataModel{ Id = "4", Text = "4"},
     };
 
-    void OnSelect(Syncfusion.EJ2.Blazor.Lists.SelectEventArgs<DataModel> selectEventArgs)
+    void OnSelect(Syncfusion.EJ2.Blazor.Lists.SelectEventArgs<ListDataModel> selectEventArgs)
     {
         selecteditem = selectEventArgs.Data.Text;
     }
-
-    class DataModel
-    {
-        public string Id { get; set; }
-        public string Text { get; set; }
-    }
-
 }

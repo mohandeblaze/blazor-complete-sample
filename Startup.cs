@@ -29,6 +29,15 @@ namespace complete_blazor_sample
             services.AddServerSideBlazor();
             services.AddSingleton<WeatherForecastService>();
             services.AddSingleton<SampleService>();
+            services.AddSignalR(o =>
+            {
+                o.EnableDetailedErrors = true;
+            });
+            services.AddServerSideBlazor().AddHubOptions(o =>
+            {
+                o.MaximumReceiveMessageSize = 102400000;
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,12 +58,12 @@ namespace complete_blazor_sample
             app.UseStaticFiles();
 
             app.UseRouting();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapBlazorHub();
                 endpoints.MapFallbackToPage("/_Host");
             });
+            
         }
     }
 }

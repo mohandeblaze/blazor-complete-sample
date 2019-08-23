@@ -1,74 +1,103 @@
 @page "/Slider/14Tooltip"
+@using EJ2Inputs = Syncfusion.EJ2.Blazor.Inputs
 
 <h4 class="sample-title">Slider with Tooltip</h4>
 
-<div class="content-wrapper">
-    <div class="sliderwrap">
-        <label class="userselect">Default Slider</label>
-        <EJSSlider ID="default" Value="30" ShowButtons="true">
-            <SliderTooltipData IsVisible="true" ShowOn="@currentShowOn" Placement="@currentPalacement"></SliderTooltipData>
-        </EJSSlider>
+<div class="col-lg-8 control-section sb-property-border">
+    <div class="content-wrapper">
+        <div class="sliderwrap">
+            <label class="userselect">Default Slider</label>
+            <EjsSlider @bind-Value="@Default" ShowButtons="true">
+                <SliderTooltipData IsVisible="true" Placement="CurrentTooltipPlacement" ShowOn="@CurrentTooltipShowOn"></SliderTooltipData>
+            </EjsSlider>
+        </div>
+        <div class="sliderwrap">
+            <label class="userselect">Range Slider</label>
+            <EjsSlider Type=SliderType.Range @bind-Value="@Range" ShowButtons="true">
+                <SliderTooltipData IsVisible="true" Placement="CurrentTooltipPlacement" ShowOn="@CurrentTooltipShowOn"></SliderTooltipData>
+            </EjsSlider>
+        </div>
     </div>
-    <div class="sliderwrap">
-        <label class="userselect">Range Slider</label>
-        <EJSSlider ID="range" Type=SliderType.Range Value="@val" ShowButtons="true">
-            <SliderTooltipData IsVisible="true" ShowOn="@currentShowOn" Placement="@currentPalacement"></SliderTooltipData>
-        </EJSSlider>
+</div>
+
+<div class="col-lg-4 property-section">
+    <div class="property-panel-section">
+        <div class="property-panel-header">Properties</div><div class="property-panel-content">
+            <table id="property" title="Properties" class="property-panel-table">
+                <tbody>
+                    <tr>
+                        <td style="width: 50%">
+                            <div class="userselect">Placement</div>
+                        </td>
+                        <td style="width: 50%;padding-right: 10px">
+                            <div>
+                                <select>
+                                    @foreach (var item in TooltipType)
+                                    {
+                                        <option value="@item.Value">@item.Text</option>
+                                    }
+                                </select>
+                                @*<EjsDropDownList TValue="string" DataSource="@TooltipType" Placeholder="Select Ticks type">
+                                        <DropDownListFieldSettings Text="Text" Value="Value"></DropDownListFieldSettings>
+                                        <DropDownListEvents TValue="string" ValueChange="@(e => { Enum.TryParse<EJ2Inputs.TooltipPlacement>(e.Value, out CurrentTooltipPlacement); })"></DropDownListEvents>
+                                    </EjsDropDownList>*@
+                            </div>
+                        </td>
+                    </tr>
+                    <tr id="slider-showon">
+                        <td style="width: 50%">
+                            <div class="userselect">ShowOn</div>
+                        </td>
+                        <td style="width: 50%;padding-right: 10px">
+                            <div>
+                                <select>
+                                    @foreach (var item in ShowOnType)
+                                    {
+                                        <option value="@item.Value">@item.Text</option>
+                                    }
+                                </select>
+                                @*<EjsDropDownList TValue="string" DataSource="@ShowOnType" Placeholder="Select ShowOn type">
+                                        <DropDownListFieldSettings Text="Text" Value="Value"></DropDownListFieldSettings>
+                                        <DropDownListEvents TValue="string" ValueChange="@(e => { Enum.TryParse<EJ2Inputs.TooltipShowOn>(e.Value, out CurrentTooltipShowOn); })"></DropDownListEvents>
+                                    </EjsDropDownList>*@
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 
 @code{
-    int[] val = { 30, 70 };
-    List<object> placement = new List<object>();
-    List<object> showON = new List<object>();
+    int Default = 30;
+    int[] Range = new int[] { 30, 70 };
+    EJ2Inputs.TooltipPlacement CurrentTooltipPlacement;
+    EJ2Inputs.TooltipShowOn CurrentTooltipShowOn;
 
-    Dictionary<string, TooltipPlacement> PlacementTypes = new Dictionary<string, TooltipPlacement>();
-
-    Dictionary<string, TooltipShowOn> ShowOnTypes = new Dictionary<string, TooltipShowOn>();
-
-    TooltipShowOn currentShowOn = TooltipShowOn.Focus;
-    TooltipPlacement currentPalacement = TooltipPlacement.Before;
-
-    protected override void OnInit()
+    List<DropDownModel> TooltipType = new List<DropDownModel>()
     {
-        base.OnInit();
-        this.placement.Add(new { value = "Before", text = "Before" });
-        this.placement.Add(new { value = "After", text = "After" });
+        new DropDownModel { Text = "Before", Value = "0" },
+        new DropDownModel { Text = "After", Value = "1" },
+    };
 
-        PlacementTypes.Add("Before", TooltipPlacement.Before);
-        PlacementTypes.Add("After", TooltipPlacement.After);
+    List<DropDownModel> ShowOnType = new List<DropDownModel>()
+    {
+        new DropDownModel { Text = "Focus", Value = "0" },
+        new DropDownModel { Text = "Hover", Value = "1" },
+        new DropDownModel { Text = "Always", Value = "2" },
+        new DropDownModel { Text = "Auto", Value = "3" },
+    };
 
-        this.showON.Add(new { value = "Auto", text = "Auto" });
-        this.showON.Add(new { value = "Focus", text = "Focus" });
-        this.showON.Add(new { value = "Hover", text = "Hover" });
-        this.showON.Add(new { value = "Always", text = "Always" });
-
-        ShowOnTypes.Add("Auto", TooltipShowOn.Auto);
-        ShowOnTypes.Add("Focus", TooltipShowOn.Focus);
-        ShowOnTypes.Add("Hover", TooltipShowOn.Hover);
-        ShowOnTypes.Add("Always", TooltipShowOn.Always);
+    class DropDownModel
+    {
+        public string Id { get; set; }
+        public string Text { get; set; }
+        public string Value { get; set; }
     }
-
-    //void onPlacementChange(Syncfusion.EJ2.Blazor.DropDowns.ChangeEventArgs args)
-    //{
-    //    PlacementTypes.TryGetValue(args.Value.ToString(), out currentPalacement);
-    //    this.StateHasChanged();
-    //}
-
-    //void onShowOnChange(Syncfusion.EJ2.Blazor.DropDowns.ChangeEventArgs args)
-    //{
-    //    ShowOnTypes.TryGetValue(args.Value.ToString(), out currentShowOn);
-    //    this.StateHasChanged();
-    //}
 }
+
 <style>
-
-
-
-    .material #property tr#slider-showon {
-        display: none;
-    }
-
     .content-wrapper {
         width: 52%;
         margin: 0 auto;

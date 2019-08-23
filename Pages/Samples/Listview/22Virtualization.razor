@@ -1,21 +1,34 @@
 @page "/listview/22Virtualization"
-@using Syncfusion.EJ2.Blazor
+@using Model
 
 <h4 class="sample-title">List Virtualization</h4>
 
-
-
 <div style="display: flex;">
-    <Ejslistview id="ui-list" DataSource="@Data" @ref="@NormalList" Template="@Template" EnableVirtualization="true" CssClass="e-list-template" HeaderTitle="Contacts"
-                 Height=400 ShowHeader="true">
-        <listViewFieldSettings Text="name"></listViewFieldSettings>
-        <ListViewEvents TValue="DataModel" Selected="@((e) => OnSelect(e))"></ListViewEvents>
-    </Ejslistview>
+    <EjsListView ID="ui-list"
+                 DataSource="@Data"
+                 @ref="@NormalList"
+                 @ref:suppressField
+                 Template="@Template"
+                 EnableVirtualization="true"
+                 CssClass="e-list-template"
+                 HeaderTitle="Contacts"
+                 Height="400"
+                 ShowHeader="true">
+        <ListViewFieldSettings Id="Id" Text="Name"></ListViewFieldSettings>
+        <ListViewEvents TValue="ListDataModel" Selected="@((e) => OnSelect(e))"></ListViewEvents>
+    </EjsListView>
 
-    <Ejslistview DataSource="@Data" @ref="@CheckList" ShowCheckBox="true" EnableVirtualization="true" HeaderTitle="Contacts" Height=400 ShowHeader="true">
-        <listViewFieldSettings Text="name"></listViewFieldSettings>
-        <ListViewEvents TValue="DataModel" Selected="@((e) => OnSelect(e))"></ListViewEvents>
-    </Ejslistview>
+    <EjsListView DataSource="@Data"
+                 @ref="@CheckList"
+                 @ref:suppressField
+                 ShowCheckBox="true"
+                 EnableVirtualization="true"
+                 HeaderTitle="Contacts"
+                 Height="400"
+                 ShowHeader="true">
+        <ListViewFieldSettings Id="Id" Text="Name"></ListViewFieldSettings>
+        <ListViewEvents TValue="ListDataModel" Selected="@((e) => OnSelect(e))"></ListViewEvents>
+    </EjsListView>
 </div>
 <div>
     <h4>Current Selected item: <span id="selected-item">@selecteditem</span></h4>
@@ -29,7 +42,7 @@
             {
                 @foreach (var itemValue in NormalListSelected)
                 {
-                    <div id="getselecteditem_content" class="italic">@(itemValue.name)</div>
+                    <div id="getselecteditem_content" class="italic">@(itemValue.Name)</div>
                 }
             }
             else
@@ -49,7 +62,7 @@
             {
                 @foreach (var itemValue in CheckListSelected)
                 {
-                    <div id="getselecteditem_content" class="italic">@(itemValue.name)</div>
+                    <div id="getselecteditem_content" class="italic">@(itemValue.Name)</div>
                 }
             }
             else
@@ -64,34 +77,31 @@
 
 
 @code{
-    [Inject]
-    protected IJSRuntime JsRuntime { get; set; }
+    List<ListDataModel> NormalListSelected;
+    List<ListDataModel> CheckListSelected;
 
-    List<DataModel> NormalListSelected;
-    List<DataModel> CheckListSelected;
-
-    EjsListView<DataModel> NormalList;
-    EjsListView<DataModel> CheckList;
+    EjsListView<ListDataModel> NormalList;
+    EjsListView<ListDataModel> CheckList;
 
     string selecteditem = "null";
 
     string Template = "<div class='e-list-wrapper e-list-avatar'>" +
-                 "<span id=\"${$imgUrl ? \'hideUI\' : \'showUI\' }\" class='e-avatar e-avatar-circle' icon='${icon}'> " +
-            "${icon}</span> <img id=\"${$imgUrl ? \'showUI\' : \'hideUI\' }\" class='e-avatar e-avatar-circle' src=\"${$imgUrl ?  $imgUrl : \' \' }\" />" +
-            "<span class='e-list-content'>${name}</span></div>";
+                 "<span id=\"${$ImgUrl ? \'hideUI\' : \'showUI\' }\" class='e-avatar e-avatar-circle' icon='${Icon}'> " +
+            "${Icon}</span> <img id=\"${$ImgUrl ? \'showUI\' : \'hideUI\' }\" class='e-avatar e-avatar-circle' src=\"${$ImgUrl ?  $ImgUrl : \' \' }\" />" +
+            "<span class='e-list-content'>${Name}</span></div>";
 
-    List<DataModel> CommonData = new List<DataModel>();
-    List<DataModel> Data = new List<DataModel>();
+    List<ListDataModel> CommonData = new List<ListDataModel>();
+    List<ListDataModel> Data = new List<ListDataModel>();
 
 
-    void OnSelect(Syncfusion.EJ2.Blazor.Lists.SelectEventArgs<DataModel> selectEventArgs)
+    void OnSelect(Syncfusion.EJ2.Blazor.Lists.SelectEventArgs<ListDataModel> selectEventArgs)
     {
-        selecteditem = selectEventArgs.Data.name;
+        selecteditem = selectEventArgs.Data.Name;
     }
 
     async void GetSelectedItems()
     {
-        ListSelectedItem<DataModel> item = await NormalList.GetSelectedItems();
+        ListSelectedItem<ListDataModel> item = await NormalList.GetSelectedItems();
 
         NormalListSelected = item.Data;
 
@@ -102,38 +112,38 @@
         this.StateHasChanged();
     }
 
-    protected override void OnInit()
+    protected override void OnInitialized()
     {
-        base.OnInit();
+        base.OnInitialized();
 
-        CommonData.Add(new DataModel { name = "Nancy", imgUrl = "", icon = "N", id = "0" });
-        CommonData.Add(new DataModel { name = "Andrew", imgUrl = "", icon = "A", id = "1" });
-        CommonData.Add(new DataModel { name = "Janet", imgUrl = "", icon = "J", id = "2" });
-        CommonData.Add(new DataModel { name = "Margaret", icon = "", imgUrl = "https://ej2.syncfusion.com/demos/src/listview/images/margaret.png", id = "3" });
-        CommonData.Add(new DataModel { name = "Steven", imgUrl = "", icon = "S", id = "4" });
-        CommonData.Add(new DataModel { name = "Laura", icon = "", imgUrl = "https://ej2.syncfusion.com/demos/src/listview/images/laura.png", id = "5" });
-        CommonData.Add(new DataModel { name = "Robert", imgUrl = "", icon = "R", id = "6" });
-        CommonData.Add(new DataModel { name = "Michael", imgUrl = "", icon = "M", id = "7" });
-        CommonData.Add(new DataModel { name = "Albert", icon = "", imgUrl = "https://ej2.syncfusion.com/demos/src/listview/images/albert.png", id = "8" });
-        CommonData.Add(new DataModel { name = "Nolan", imgUrl = "", icon = "N", id = "9" });
+        CommonData.Add(new ListDataModel { Name = "Nancy", ImgUrl = "", Icon = "N", Id = "0" });
+        CommonData.Add(new ListDataModel { Name = "Andrew", ImgUrl = "", Icon = "A", Id = "1" });
+        CommonData.Add(new ListDataModel { Name = "Janet", ImgUrl = "", Icon = "J", Id = "2" });
+        CommonData.Add(new ListDataModel { Name = "Margaret", Icon = "", ImgUrl = "https://ej2.syncfusion.com/demos/src/listview/images/margaret.png", Id = "3" });
+        CommonData.Add(new ListDataModel { Name = "Steven", ImgUrl = "", Icon = "S", Id = "4" });
+        CommonData.Add(new ListDataModel { Name = "Laura", Icon = "", ImgUrl = "https://ej2.syncfusion.com/demos/src/listview/images/laura.png", Id = "5" });
+        CommonData.Add(new ListDataModel { Name = "Robert", ImgUrl = "", Icon = "R", Id = "6" });
+        CommonData.Add(new ListDataModel { Name = "Michael", ImgUrl = "", Icon = "M", Id = "7" });
+        CommonData.Add(new ListDataModel { Name = "Albert", Icon = "", ImgUrl = "https://ej2.syncfusion.com/demos/src/listview/images/albert.png", Id = "8" });
+        CommonData.Add(new ListDataModel { Name = "Nolan", ImgUrl = "", Icon = "N", Id = "9" });
 
-        List<DataModel> generateData(int no)
+        List<ListDataModel> generateData(int no)
         {
             int index = 0;
             int spyIndex = 0;
-            List<DataModel> data = new List<DataModel>();
+            List<ListDataModel> data = new List<ListDataModel>();
             for (int i = 0; i < no; i++)
             {
                 while (index == spyIndex)
                 {
                     index = new Random().Next(0, 10);
                 }
-                data.Add(new DataModel
+                data.Add(new ListDataModel
                 {
-                    name = CommonData[index].GetType().GetProperty("name").GetValue(CommonData[index], null).ToString(),
-                    icon = CommonData[index].GetType().GetProperty("icon").GetValue(CommonData[index], null).ToString(),
-                    imgUrl = CommonData[index].GetType().GetProperty("imgUrl").GetValue(CommonData[index], null).ToString(),
-                    id = i.ToString()
+                    Name = CommonData[index].GetType().GetProperty("Name").GetValue(CommonData[index], null).ToString(),
+                    Icon = CommonData[index].GetType().GetProperty("Icon").GetValue(CommonData[index], null).ToString(),
+                    ImgUrl = CommonData[index].GetType().GetProperty("ImgUrl").GetValue(CommonData[index], null).ToString(),
+                    Id = i.ToString()
                 });
                 spyIndex = index;
             }
@@ -142,15 +152,6 @@
         }
 
         Data = generateData(1000);
-    }
-
-    class DataModel
-    {
-        public string name { get; set; }
-        public string imgUrl { get; set; }
-        public string icon { get; set; }
-        public string id { get; set; }
-
     }
 }
 
