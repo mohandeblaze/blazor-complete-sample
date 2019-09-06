@@ -5,7 +5,7 @@
 <div class="control-section">
     <div class="row">
         <div class="col-md-12">
-            <EjsHeatMap ID="Container" DataSource="@HeatmapData" @ref="heatmap" @ref:suppressField>
+            <EjsHeatMap ID="Container" DataSource="@HeatmapData" @ref="heatmap" >
                 <HeatMapXAxis Labels="@xLabels"></HeatMapXAxis>
                 <HeatMapYAxis Labels="@yLabels"></HeatMapYAxis>
                 <HeatMapTitle Text="Sales Revenue per Employee (in 1000 US$)"></HeatMapTitle>
@@ -24,7 +24,7 @@
     };
     EjsHeatMap heatmap;
     public object HeatmapData { get; set; }
-    protected override void OnAfterRender()
+    protected override void OnAfterRender(bool intial)
     {
         HeatmapData = this.heatmap.DataSource = HeatMapData.GetDefaultData();
     }

@@ -36,7 +36,7 @@
                         </td>
                         <td style="width: 50%;padding-right: 10px">
                             <div>
-                                <input type="number" @bind-value="@Value"/>
+                                <input type="number" @bind="@Value"/>
                                 @*<EjsNumericTextBox TValue="int?" Value="@Value">
                                     <NumericTextBoxEvents TValue="int?" ValueChange="@(e => { Value = (int)e.Value; })"></NumericTextBoxEvents>
                                 </EjsNumericTextBox>*@
@@ -49,7 +49,7 @@
                         </td>
                         <td style="width: 50%;padding-right: 10px">
                             <div>
-                                <input type="number" @bind-value="@Min" />
+                                <input type="number" @bind="@Min" />
                                 @*<EjsNumericTextBox TValue="int?" Value="@Min">
                                     <NumericTextBoxEvents TValue="int?" ValueChange="@(e => { Min = (int)e.Value; })"></NumericTextBoxEvents>
                                 </EjsNumericTextBox>*@
@@ -62,7 +62,7 @@
                         </td>
                         <td style="width: 50%;padding-right: 10px">
                             <div>
-                                <input type="number" @bind-value="@Max" />
+                                <input type="number" @bind="@Max" />
                                 @*<EjsNumericTextBox TValue="int?" Value="@Max">
                                     <NumericTextBoxEvents TValue="int?" ValueChange="@(e => { Max = (int)e.Value; })"></NumericTextBoxEvents>
                                 </EjsNumericTextBox>*@
@@ -75,7 +75,7 @@
                         </td>
                         <td style="width: 50%;padding-right: 10px">
                             <div>
-                                <input type="number" @bind-value="@Step" />
+                                <input type="number" @bind="@Step" />
                                 @*<EjsNumericTextBox TValue="int?" Value="@Step" Min="0" Max="100">
                                     <NumericTextBoxEvents TValue="int?" ValueChange="@(e => { Step = (int)e.Value; })"></NumericTextBoxEvents>
                                 </EjsNumericTextBox>*@
@@ -86,14 +86,14 @@
                         <td style="width: 50%">
                             <div class="userselect" style="padding-left: 0">
                                 <label>Show Buttons</label>
-                                <input type="checkbox" @bind-value="@ShowButtons" />
+                                <input type="checkbox" @bind="@ShowButtons" />
                                 @*<EjsCheckBox @bind-Checked="@ShowButtons" Label="Show Buttons"></EjsCheckBox>*@
                             </div>
                         </td>
                         <td style="width: 50%;padding-right: 10px">
                             <div style="padding-left: 0;padding-top: 0">
                                 <label>Disable</label>
-                                <input type="checkbox" @bind-value="@Disabled" />
+                                <input type="checkbox" @bind="@Disabled" />
                                 @*<EjsCheckBox @bind-Checked="@Disabled" Label="Disable"></EjsCheckBox>*@
                             </div>
                         </td>
@@ -102,14 +102,14 @@
                         <td style="width: 50%;padding-right: 10px">
                             <div style="padding-left: 0;padding-top: 0">
                                 <label>Readonly</label>
-                                <input type="checkbox" @bind-value="@ReadOnly" />
+                                <input type="checkbox" @bind="@ReadOnly" />
                                 @*<EjsCheckBox @bind-Checked="@ReadOnly" Label="Readonly"></EjsCheckBox>*@
                             </div>
                         </td>
                         <td style="width: 50%">
                             <div class="userselect" style="padding-left: 0">
                                 <label>Orientation</label>
-                                <input type="checkbox" @bind-value="@Orientation" />
+                                <input type="checkbox" @bind="@Orientation" />
                                 @*<EjsCheckBox @bind-Checked="@Orientation" Label="Vertical Orientation"></EjsCheckBox>*@
                             </div>
                         </td>

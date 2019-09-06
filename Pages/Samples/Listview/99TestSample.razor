@@ -1,53 +1,148 @@
 @page "/listview/99TestSample"
-@using System.Collections.ObjectModel
-@using Model
 
 <h4 class="sample-title">Test sample</h4>
 
-<EjsListView HtmlAttributes="@HTMLProps"
-             DataSource="@DataSource"
-             ShowHeader="true"
-             HeaderTitle="@HeaderTitle"
-             Height="500"
-             EnableVirtualization="true">
+@using System.Collections.ObjectModel
+@using Syncfusion.EJ2.Blazor.Popups
+@using ListviewSort = Syncfusion.EJ2.Blazor.Lists.SortOrder
 
-    <ListViewFieldSettings Id="Id" Text="Text" HtmlAttributes="HtmlProperties"></ListViewFieldSettings>
-</EjsListView>
-<div>
-    <button @onclick="@AddItem" class="e-btn e-info">Add item</button>
-    <button @onclick="@RemoveItem" class="e-btn e-info">Remove item</button>
+<div id="container">
+    <div class="sample flex">
+        <div class="flex">
+            <div class="padding">
+                <EjsListView DataSource="@DataSource" ModelType="@ModelInstance">
+                    <ListViewFieldSettings Id="Id" Text="Text"></ListViewFieldSettings>
+                    <ListViewTemplates>
+                        <Template>
+                            @{
+                                ListDataModel currentData = (ListDataModel)context;
+                                <div class="e-list-wrapper e-list-multi-line e-list-avatar">
+                                    <span class="pic01 e-avatar e-avatar-circle"></span>
+                                    <span class="e-list-item-header">@currentData.Name</span>
+                                    <span class="e-list-content">@currentData.Contact</span>
+                                </div>
+                            }
+                        </Template>
+                    </ListViewTemplates>
+                </EjsListView>
+            </div>
+        </div>
+    </div>
 </div>
 
-@code {
-    string HeaderTitle = "Listview header";
+@code
+{
+    ListDataModel ModelInstance = new ListDataModel();
 
-    Dictionary<string, object> HTMLProps = new Dictionary<string, object>() {
-        {"style" , "border: 1px dashed blue"}
+    List<ListDataModel> DataSource = new List<ListDataModel> () {
+        new ListDataModel { Name = "Nancy", Contact = "(206) 555-985774", Id = "1", Image = "https://ej2.syncfusion.com/demos/src/grid/images/1.png", Category = "Experience" },
+        new ListDataModel { Name = "Janet", Contact = "(206) 555-3412", Id = "2", Image = "https://ej2.syncfusion.com/demos/src/grid/images/3.png", Category = "Fresher" },
+        new ListDataModel { Name = "Margaret", Contact = "(206) 555-8122", Id = "4", Image = "https://ej2.syncfusion.com/demos/src/grid/images/4.png", Category = "Experience" },
+        new ListDataModel { Name = "Andrew ", Contact = "(206) 555-9482", Id = "5", Image = "https://ej2.syncfusion.com/demos/src/grid/images/2.png", Category = "Experience" },
+        new ListDataModel { Name = "Steven", Contact = "(71) 555-4848", Id = "6", Image = "https://ej2.syncfusion.com/demos/src/grid/images/5.png", Category = "Fresher" },
     };
 
-    ObservableCollection<ListDataModel> DataSource = new ObservableCollection<ListDataModel>();
 
-    protected override void OnInitialized()
+    class ListDataModel
     {
-        for (int i = 0; i < 5000; i++)
+        public string Id
         {
-            DataSource.Add(new ListDataModel { Id = i.ToString(), Text = "Text " + i.ToString() });
+            get;
+            set;
+        }
+        public string Name
+        {
+            get;
+            set;
+        }
+        public string Image
+        {
+            get;
+            set;
+        }
+
+        public string Category
+        {
+            get;
+            set;
+        }
+
+        public string Contact
+        {
+            get;
+            set;
         }
     }
-
-    void AddItem()
-    {
-        DataSource.Add(new ListDataModel { Id = "7", Text = "Test item" });
-    }
-
-    void RemoveItem()
-    {
-        DataSource.RemoveAt(0);
-    }
 }
-
 <style>
-    .e-listview {
-        overflow: auto;
+    #container .e-listview {
+        box-shadow: 0 1px 4px #ddd;
+        border-bottom: 1px solid #ddd;
+    }
+
+    #container .flex {
+        display: flex;
+        flex-direction: column;
+        width: 400px;
+        margin: auto;
+    }
+
+    #container .e-listview .e-list-item {
+        height: 100px;
+        width: 100px;
+        float: left;
+        padding: 0;
+    }
+
+        #container .e-listview .e-list-item .e-blazor-template {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            height: 100%;
+        }
+
+        #container .e-listview .e-list-item .delete-icon {
+            font-size: 9px;
+            font-family: 'e-icons';
+        }
+
+    #container .e-listview .e-badge {
+        z-index: 10;
+        display: none;
+    }
+
+    #container .e-listview .e-hover .e-badge {
+        display: unset;
+    }
+
+    #container .e-listview .e-active .e-badge {
+        display: unset;
+    }
+
+    #container .e-listview .e-list-item .delete-icon::before {
+        content: '\e7fc';
+        color: white;
+    }
+
+    .sample {
+        justify-content: center;
+        min-height: 280px;
+    }
+
+    .padding {
+        padding: 4px;
+    }
+
+    .flex {
+        display: flex;
+    }
+
+    .flex__center {
+        justify-content: center;
+    }
+
+    .margin {
+        margin: 10px;
     }
 </style>

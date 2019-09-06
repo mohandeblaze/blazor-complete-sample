@@ -7,7 +7,7 @@
     <EjsListView ID="ui-list"
                  DataSource="@Data"
                  @ref="@NormalList"
-                 @ref:suppressField
+
                  Template="@Template"
                  EnableVirtualization="true"
                  CssClass="e-list-template"
@@ -20,7 +20,7 @@
 
     <EjsListView DataSource="@Data"
                  @ref="@CheckList"
-                 @ref:suppressField
+
                  ShowCheckBox="true"
                  EnableVirtualization="true"
                  HeaderTitle="Contacts"
@@ -52,7 +52,7 @@
 
         }
 
-        <button id="getselecteditem" class="e-btn e-info" @onclick="@GetSelectedItems">Get Selected items</button>
+        <button id="getselecteditem" class="e-btn e-info" @onclick="GetSelectedItems">Get Selected items</button>
     </div>
 
     <div class="padding">

@@ -3,7 +3,7 @@
 
 <h4 class="sample-title">List Group Template</h4>
 
-<EjsListView ID="groupedList"
+<EjsListView ID="templatesample"
              DataSource="@DataSource"
              ModelType="@ModelInstance"
              ShowHeader="true"
@@ -118,7 +118,7 @@
 <style>
     /* ListView position alignment */
 
-    #groupedList.e-listview {
+    #templatesample.e-listview {
         display: block;
         max-width: 350px;
         border: 1px solid;
@@ -128,14 +128,14 @@
 
         /* ListView header alignment */
 
-        #groupedList.e-listview .e-headertext:after {
+        #templatesample.e-listview .e-headertext:after {
             font-family: 'e-icons';
             position: absolute;
             content: "\e712";
             right: 16px;
         }
 
-        #groupedList.e-listview .e-list-header {
+        #templatesample.e-listview .e-list-header {
             color: white;
             height: 57px;
             background-color: #56697f;
@@ -145,7 +145,7 @@
             box-shadow: 0 1px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
         }
 
-            #groupedList.e-listview .e-list-header .e-text {
+            #templatesample.e-listview .e-list-header .e-text {
                 font-family: sans-serif;
                 font-size: 18px;
                 line-height: 26px;
@@ -160,133 +160,133 @@
         font-style: normal;
     }
 
-    #groupedList.e-listview .e-list-item {
+    #templatesample.e-listview .e-list-item {
         cursor: pointer;
     }
 
-    #groupedList.e-listview .e-content {
+    #templatesample.e-listview .e-content {
         height: 450px;
         overflow-y: scroll;
     }
 
-    #groupedList.e-listview .e-list-group-item {
+    #templatesample.e-listview .e-list-group-item {
         color: #837c7c;
         padding: 0;
         height: inherit;
     }
 
-    #groupedList.e-listview .icon {
+    #templatesample.e-listview .icon {
         background: transparent;
         font-family: 'e-icons';
         color: #FF4081;
     }
 
-    #groupedList.e-listview .wifi:before {
+    #templatesample.e-listview .wifi:before {
         content: "\e700";
         font-size: 25px;
     }
 
-    #groupedList.e-listview .bluetooth:before {
+    #templatesample.e-listview .bluetooth:before {
         content: "\e702";
         font-size: 25px;
     }
 
-    #groupedList.e-listview .sim:before {
+    #templatesample.e-listview .sim:before {
         content: "\e705";
         font-size: 25px;
     }
 
-    #groupedList.e-listview .display:before {
+    #templatesample.e-listview .display:before {
         content: "\e704";
         font-size: 25px;
     }
 
-    #groupedList.e-listview .sound:before {
+    #templatesample.e-listview .sound:before {
         content: "\e703";
         font-size: 25px;
     }
 
-    #groupedList.e-listview .battery:before {
+    #templatesample.e-listview .battery:before {
         content: "\e711";
         font-size: 25px;
     }
 
-    #groupedList.e-listview .user:before {
+    #templatesample.e-listview .user:before {
         content: "\e707";
         font-size: 25px;
     }
 
-    #groupedList.e-listview .location:before {
+    #templatesample.e-listview .location:before {
         content: "\e708";
         font-size: 25px;
     }
 
-    #groupedList.e-listview .security:before {
+    #templatesample.e-listview .security:before {
         content: "\e709";
         font-size: 25px;
     }
 
-    #groupedList.e-listview .language:before {
+    #templatesample.e-listview .language:before {
         content: "\e710";
         font-size: 25px;
     }
 
-    #groupedList.e-listview .e-hover {
+    #templatesample.e-listview .e-hover {
         transition: 0.5s;
     }
 
     /* ListView theme customization */
 
-    .bootstrap #groupedList.e-listview .e-list-header .e-text {
+    .bootstrap #templatesample.e-listview .e-list-header .e-text {
         line-height: 18px;
     }
 
-    .highcontrast #groupedList.e-listview .e-list-header .e-text {
+    .highcontrast #templatesample.e-listview .e-list-header .e-text {
         line-height: 26px;
     }
 
-    .highcontrast #groupedList.e-listview .e-list-header {
+    .highcontrast #templatesample.e-listview .e-list-header {
         color: #ffd939;
         background-color: #333333;
     }
 
-    .fabric #groupedList.e-listview .icon {
+    .fabric #templatesample.e-listview .icon {
         color: #0078D7;
     }
 
-    .bootstrap #groupedList.e-listview .icon {
+    .bootstrap #templatesample.e-listview .icon {
         color: #1073B1;
     }
 
-    .highcontrast #groupedList.e-listview .icon {
+    .highcontrast #templatesample.e-listview .icon {
         color: #fff;
     }
 
-    .highcontrast #groupedList.e-listview .e-active .icon {
+    .highcontrast #templatesample.e-listview .e-active .icon {
         color: black;
     }
 
-    .material #groupedList.e-list-template .e-active .e-list-item-header,
-    .material #groupedList.e-list-template .e-active .e-list-content {
+    .material #templatesample.e-list-template .e-active .e-list-item-header,
+    .material #templatesample.e-list-template .e-active .e-list-content {
         color: #FF4081;
     }
 
-    .fabric #groupedList.e-list-template .e-active .e-list-item-header,
-    .fabric #groupedList.e-list-template .e-active .e-list-content {
+    .fabric #templatesample.e-list-template .e-active .e-list-item-header,
+    .fabric #templatesample.e-list-template .e-active .e-list-content {
         color: black;
     }
 
-    .bootstrap #groupedList.e-list-template .e-active .e-list-item-header,
-    .bootstrap #groupedList.e-list-template .e-active .e-list-content {
+    .bootstrap #templatesample.e-list-template .e-active .e-list-item-header,
+    .bootstrap #templatesample.e-list-template .e-active .e-list-content {
         color: #1073B1;
     }
 
-    .highcontrast #groupedList.e-list-template .e-active .e-list-item-header,
-    .highcontrast #groupedList.e-list-template .e-active .e-list-content {
+    .highcontrast #templatesample.e-list-template .e-active .e-list-item-header,
+    .highcontrast #templatesample.e-list-template .e-active .e-list-content {
         color: #000;
     }
 
-    .bootstrap4 #groupedList.e-listview .e-active .icon {
+    .bootstrap4 #templatesample.e-listview .e-active .icon {
         color: #fff;
     }
 </style>

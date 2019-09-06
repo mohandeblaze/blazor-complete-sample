@@ -6,8 +6,7 @@
 
 <div class="list-item-container">
     <div style="flex: 1">
-        <EjsListView ID="groupedList"
-                     DataSource="@DataSource"
+        <EjsListView DataSource="@DataSource"
                      ModelType="@ModelInstance"
                      ShowHeader="true"
                      CssClass="e-list-template"
@@ -19,7 +18,7 @@
                     @{
                         ListDataModel ContextData = context as ListDataModel;
                         <div class="list-item-container">
-                            <div class="list-item-text" @onclick="@((e) => { onClick(ContextData.Name); })">@ContextData.Name</div>
+                            <div class="list-item-text" @onclick="((e) => { onClick(ContextData.Name); })">@ContextData.Name</div>
                             <div class="list-item-button">
                                 <EjsButton IsPrimary="true">
                                     <a href="/models/@ContextData.Id">Enter</a>

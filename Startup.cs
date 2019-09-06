@@ -29,6 +29,7 @@ namespace complete_blazor_sample
             services.AddServerSideBlazor();
             services.AddSingleton<WeatherForecastService>();
             services.AddSingleton<SampleService>();
+            services.AddHttpContextAccessor();
             services.AddSignalR(o =>
             {
                 o.EnableDetailedErrors = true;
@@ -63,7 +64,7 @@ namespace complete_blazor_sample
                 endpoints.MapBlazorHub();
                 endpoints.MapFallbackToPage("/_Host");
             });
-            
+
         }
     }
 }

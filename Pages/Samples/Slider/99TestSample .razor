@@ -6,10 +6,10 @@
     <div class="slider-content-wrapper">
         <div class="slider_container" id="slider_wrapper">
             <div class="slider_labelText userselect">Dynamic ticks color</div>
-            <EjsSlider ID="ticks_slider" @bind-Value="@Value" Step="5" Type="SliderType.Range" @ref="Slider" @ref:suppressField>
+            <EjsSlider ID="ticks_slider" @bind-Value="@Value" Step="5" Type="SliderType.Range" @ref="Slider" >
                 <SliderTicksData Placement="Placement.Before" LargeStep="20"></SliderTicksData>
                 <SliderTooltipData IsVisible="true" ShowOn="TooltipShowOn.Auto" Placement="TooltipPlacement.Before"></SliderTooltipData>
-                <SliderEvents TValue="int[]" TicksRendered="@TicksRendered" TicksRendering="@TicksRendering" OnTooltipChange="@OnTooltipChange"></SliderEvents>
+                <SliderEvents TValue="int[]" TicksRendered="@TicksRendered" TicksRendering="@TicksRendering"></SliderEvents>
             </EjsSlider>
         </div>
         <div class="slider_container">
@@ -29,7 +29,7 @@
 
     void TicksRendering(SliderTickEventArgs eventArgs)
     {
-        eventArgs.Text = "test";
+        eventArgs.Text = "test "+ eventArgs.Text;
     }
 
     void OnTooltipChange(SliderTooltipEventArgs<int[]> eventArgs)

@@ -3,16 +3,16 @@
 <h4 class="sample-title">Treeview Property Binding</h4>
 
 <div class="sample-container">
-    <EjsTreeView @ref="Treeview" @ref:suppressField AllowEditing="@AllowEditing" AllowMultiSelection="@AllowMultiSelection" AllowDragAndDrop="@AllowDragAndDrop" TValue="DataSource">
+    <EjsTreeView @ref="Treeview"  AllowEditing="@AllowEditing" AllowMultiSelection="@AllowMultiSelection" AllowDragAndDrop="@AllowDragAndDrop" TValue="DataSource">
         <TreeViewFieldsSettings DataSource="@_DataSource" Id="nodeId" ParentID="pid" Text="nodeText" HasChildren="hasChild" Expanded="expanded" Child="@child"></TreeViewFieldsSettings>
     </EjsTreeView>
 </div>
 
 <div>
-    <button class="e-btn e-info" @onclick="@ChangeData">Change Datasource</button>
-    <button class="e-btn e-info" @onclick="@(() => { AllowMultiSelection = !AllowMultiSelection;})">Toggle AllowMultiSelection</button>
-    <button class="e-btn e-info" @onclick="@(() => { AllowEditing= !AllowEditing;})">Toggle AllowEditing</button>
-    <button class="e-btn e-info" @onclick="@(() => { AllowDragAndDrop = !AllowDragAndDrop;})">Toggle AllowDragAndDrop</button>
+    <button class="e-btn e-info" @onclick="ChangeData">Change Datasource</button>
+    <button class="e-btn e-info" @onclick="(() => { AllowMultiSelection = !AllowMultiSelection;})">Toggle AllowMultiSelection</button>
+    <button class="e-btn e-info" @onclick="(() => { AllowEditing= !AllowEditing;})">Toggle AllowEditing</button>
+    <button class="e-btn e-info" @onclick="(() => { AllowDragAndDrop = !AllowDragAndDrop;})">Toggle AllowDragAndDrop</button>
 </div>
 
 @code {

@@ -9,7 +9,7 @@
     <div style="margin: 10px;">
         <EjsListView ID="firstlist"
                      @ref="NormalList"
-                     @ref:suppressField
+
                      HtmlAttributes="@HTMLProps"
                      DataSource="@DataSource"
                      ShowHeader="true"
@@ -21,7 +21,7 @@
     <div style="margin: 10px;">
         <EjsListView ID="secondlist"
                      @ref="CheckList"
-                     @ref:suppressField
+
                      HtmlAttributes="@HTMLProps"
                      DataSource="@DataSource"
                      ShowHeader="true"
@@ -33,7 +33,7 @@
     <div style="margin: 10px;">
         <EjsListView ID="thirdlist"
                      @ref="NestedList"
-                     @ref:suppressField
+
                      HtmlAttributes="@HTMLProps"
                      DataSource="@NestedDataSource"
                      ShowHeader="true"
@@ -68,7 +68,7 @@
 
         }
 
-        <button id="getselecteditem" class="e-btn e-info" @onclick="@GetSelectedItems">Get Selected items</button>
+        <button id="getselecteditem" class="e-btn e-info" @onclick="GetSelectedItems">Get Selected items</button>
     </div>
 
     <div class="padding">
@@ -112,79 +112,79 @@
     <div class="padding">
         <div class="bold">Select item</div>
         <div class="italic">Void</div>
-        <button class="e-btn e-info" @onclick="@SelectItem">Select item</button>
+        <button class="e-btn e-info" @onclick="SelectItem">Select item</button>
     </div>
 
     <div class="padding">
         <div class="bold">Find item</div>
         <div class="italic">@(FindItemValue?.Text ?? "Nothing Yet")</div>
-        <button class="e-btn e-info" @onclick="@FindItem">Find item</button>
+        <button class="e-btn e-info" @onclick="FindItem">Find item</button>
     </div>
 
     <div class="padding">
         <div class="bold">Check item</div>
         <div class="italic">Void</div>
-        <button id="checkitem" class="e-btn e-info" @onclick="@CheckItem">Check item</button>
+        <button id="checkitem" class="e-btn e-info" @onclick="CheckItem">Check item</button>
     </div>
 
     <div class="padding">
         <div class="bold">UnCheck item</div>
         <div class="italic">Void</div>
-        <button id="uncheckitem" class="e-btn e-info" @onclick="@UnCheckItem">UnCheck item</button>
+        <button id="uncheckitem" class="e-btn e-info" @onclick="UnCheckItem">UnCheck item</button>
     </div>
 
     <div class="padding">
         <div class="bold">CheckAll items</div>
         <div class="italic">Void</div>
-        <button id="checkall" class="e-btn e-info" @onclick="@CheckAllItems">CheckAll items</button>
+        <button id="checkall" class="e-btn e-info" @onclick="CheckAllItems">CheckAll items</button>
     </div>
 
     <div class="padding">
         <div class="bold">UnCheckAll items</div>
         <div class="italic">Void</div>
-        <button id="uncheckall" class="e-btn e-info" @onclick="@UnCheckAllItems">UnCheckAll items</button>
+        <button id="uncheckall" class="e-btn e-info" @onclick="UnCheckAllItems">UnCheckAll items</button>
     </div>
 
     <div class="padding">
         <div class="bold">Go back in NestedList</div>
         <div class="italic">Void</div>
-        <button id="goback" class="e-btn e-info" @onclick="@GoBack">Go Back</button>
+        <button id="goback" class="e-btn e-info" @onclick="GoBack">Go Back</button>
     </div>
 
     <div class="padding">
         <div class="bold">Add item in List</div>
         <div class="italic">Void</div>
-        <button class="e-btn e-info" @onclick="@AddItem">Add item</button>
+        <button class="e-btn e-info" @onclick="AddItem">Add item</button>
     </div>
 
     <div class="padding">
         <div class="bold">Remove item in List</div>
         <div class="italic">Void</div>
-        <button class="e-btn e-info" @onclick="@RemoveItem">Remove item</button>
+        <button class="e-btn e-info" @onclick="RemoveItem">Remove item</button>
     </div>
 
     <div class="padding">
         <div class="bold">Disable Item</div>
         <div class="italic">Void</div>
-        <button id="disableitem" class="e-btn e-info" @onclick="@DisableItem">Disable item</button>
+        <button id="disableitem" class="e-btn e-info" @onclick="DisableItem">Disable item</button>
     </div>
 
     <div class="padding">
         <div class="bold">Enable Item</div>
         <div class="italic">Void</div>
-        <button id="enableitem" class="e-btn e-info" @onclick="@EnableItem">Enable item</button>
+        <button id="enableitem" class="e-btn e-info" @onclick="EnableItem">Enable item</button>
     </div>
 
     <div class="padding">
         <div class="bold">Hide Item</div>
         <div class="italic">Void</div>
-        <button id="hideitem" class="e-btn e-info" @onclick="@HideItem">Hide item</button>
+        <button id="hideitem" class="e-btn e-info" @onclick="HideItem">Hide item</button>
     </div>
 
     <div class="padding">
         <div class="bold">Show Item</div>
         <div class="italic">Void</div>
-        <button id="showitem" class="e-btn e-info" @onclick="@ShowItem">Show item</button>
+        <button id="showitem" class="e-btn e-info" @onclick="ShowItem">Show item</button>
     </div>
 </div>
 

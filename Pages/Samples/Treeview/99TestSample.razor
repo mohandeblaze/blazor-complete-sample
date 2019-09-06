@@ -5,15 +5,15 @@
 
 <div class="control-section">
     <div class="control_wrapper">
-        <EjsTreeView id="treedata" HtmlAttributes="@HTMLProps" TValue="Parentitem" LoadOnDemand="true">
+        <EjsTreeView ID="treedata" HtmlAttributes="@HTMLProps" TValue="Parentitem" LoadOnDemand="false">
             <TreeViewFieldsSettings DataSource="@parentitem" Id="nodeId" ParentID="pid" Text="nodeText" HasChildren="hasChild" Expanded="expanded" Child="@child"></TreeViewFieldsSettings>
         </EjsTreeView>
     </div>
 </div>
 
 <div>
-    <button @onclick="@AddItem" class="e-btn e-info">Add item</button>
-    <button @onclick="@RemoveItem" class="e-btn e-info">Remove item</button>
+    <button @onclick="AddItem" class="e-btn e-info">Add item</button>
+    <button @onclick="RemoveItem" class="e-btn e-info">Remove item</button>
 </div>
 
 @code{
@@ -40,7 +40,7 @@
     {
         base.OnInitialized();
 
-        for (int i = 0; i < 500; i++)
+        for (int i = 0; i < 100; i++)
         {
             parentitem.Add(new Parentitem
             {

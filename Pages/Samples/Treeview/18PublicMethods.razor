@@ -6,13 +6,13 @@
 
 <div style="display: flex;">
     <div style="margin: 10px;">
-        <EjsTreeView @ref="@NormalTreeview" @ref:suppressField AllowEditing="true" TValue="Parentitem">
+        <EjsTreeView @ref="@NormalTreeview"  AllowEditing="true" TValue="Parentitem">
             <TreeViewFieldsSettings DataSource="@parentitem" Id="nodeId" ParentID="pid" Text="nodeText" HasChildren="hasChild" Expanded="expanded" Child="@child"></TreeViewFieldsSettings>
         </EjsTreeView>
     </div>
 
     <div style="margin: 10px;">
-        <EjsTreeView @ref="@CheckTreeview" @ref:suppressField AllowEditing="true" ShowCheckBox="true" TValue="Parentitem">
+        <EjsTreeView @ref="@CheckTreeview"  AllowEditing="true" ShowCheckBox="true" TValue="Parentitem">
             <TreeViewFieldsSettings DataSource="@parentitem" Id="nodeId" ParentID="pid" Text="nodeText" HasChildren="hasChild" Expanded="expanded" Child="@child"></TreeViewFieldsSettings>
         </EjsTreeView>
     </div>
@@ -22,61 +22,61 @@
     <div class="padding">
         <div class="bold">Add Nodes</div>
         <div class="italic">Void</div>
-        <button class="e-btn e-info" @onclick="@AddNodes">Add Nodes</button>
+        <button class="e-btn e-info" @onclick="AddNodes">Add Nodes</button>
     </div>
 
     <div class="padding">
         <div class="bold">RemoveNodes</div>
         <div class="italic">Void</div>
-        <button class="e-btn e-info" @onclick="@RemoveNodes">RemoveNodes</button>
+        <button class="e-btn e-info" @onclick="RemoveNodes">RemoveNodes</button>
     </div>
 
     <div class="padding">
         <div class="bold">UpdateNode</div>
         <div class="italic">Void</div>
-        <button class="e-btn e-info" @onclick="@UpdateNode">UpdateNode</button>
+        <button class="e-btn e-info" @onclick="UpdateNode">UpdateNode</button>
     </div>
 
     <div class="padding">
         <div class="bold">CheckAll</div>
         <div class="italic">Void</div>
-        <button class="e-btn e-info" @onclick="@CheckAll">CheckAll</button>
+        <button class="e-btn e-info" @onclick="CheckAll">CheckAll</button>
     </div>
 
     <div class="padding">
         <div class="bold">UncheckAll</div>
         <div class="italic">Void</div>
-        <button class="e-btn e-info" @onclick="@UncheckAll">UncheckAll</button>
+        <button class="e-btn e-info" @onclick="UncheckAll">UncheckAll</button>
     </div>
 
     <div class="padding">
         <div class="bold">ExpandAll</div>
         <div class="italic">Void</div>
-        <button class="e-btn e-info" @onclick="@ExpandAll">ExpandAll</button>
+        <button class="e-btn e-info" @onclick="ExpandAll">ExpandAll</button>
     </div>
 
     <div class="padding">
         <div class="bold">CollapseAll</div>
         <div class="italic">Void</div>
-        <button class="e-btn e-info" @onclick="@CollapseAll">CollapseAll</button>
+        <button class="e-btn e-info" @onclick="CollapseAll">CollapseAll</button>
     </div>
 
     <div class="padding">
         <div class="bold">DisableNodes</div>
         <div class="italic">Void</div>
-        <button class="e-btn e-info" @onclick="@DisableNodes">DisableNodes</button>
+        <button class="e-btn e-info" @onclick="DisableNodes">DisableNodes</button>
     </div>
 
     <div class="padding">
         <div class="bold">EnableNodes</div>
         <div class="italic">Void</div>
-        <button class="e-btn e-info" @onclick="@EnableNodes">EnableNodes</button>
+        <button class="e-btn e-info" @onclick="EnableNodes">EnableNodes</button>
     </div>
 
     <div class="padding">
         <div class="bold">Begin edit</div>
         <div class="italic">Void</div>
-        <button class="e-btn e-info" @onclick="@BeginEdit">Begin edit</button>
+        <button class="e-btn e-info" @onclick="BeginEdit">Begin edit</button>
     </div>
 
     <div class="padding">
@@ -87,7 +87,7 @@
                 <div>@item.nodeText</div>
             }
         </div>
-        <button class="e-btn e-info" @onclick="@GetTreeData">GetTreeData</button>
+        <button class="e-btn e-info" @onclick="GetTreeData">GetTreeData</button>
     </div>
 </div>
 

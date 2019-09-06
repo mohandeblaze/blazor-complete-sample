@@ -9,7 +9,7 @@
                 <tr>
                     <td>
                         <div class="sliderwrap">
-                            <EjsSlider Orientation="@SliderOrientation.Vertical" @bind-Value="@Default" TValue="int">
+                            <EjsSlider Orientation="@SliderOrientation.Vertical" @bind-Value="@Default" >
                                 <SliderTicksData Placement="@(EnableTicks ? Placement.Before : Placement.None)" LargeStep="20"></SliderTicksData>
                                 <SliderTooltipData IsVisible="@EnableTooltip"></SliderTooltipData>
                             </EjsSlider>
@@ -49,7 +49,7 @@
                         </td>
                         <td style="width: 50%;padding-right: 10px">
                             <div style="padding-left: 0;padding-top: 0">
-                                <input type="checkbox" @bind-value="@EnableTicks" />
+                                <input type="checkbox" @bind="@EnableTicks" />
                                 @*<EjsCheckBox @bind-Checked="@EnableTicks"></EjsCheckBox>*@
                             </div>
                         </td>
@@ -61,7 +61,7 @@
                         </td>
                         <td style="width: 50%;padding-right: 10px">
                             <div style="padding-left: 0;padding-top: 0">
-                                <input type="checkbox" @bind-value="@EnableTooltip" />
+                                <input type="checkbox" @bind="@EnableTooltip" />
                                 @*<EjsCheckBox @bind-Checked="@EnableTooltip"></EjsCheckBox>*@
                             </div>
                         </td>

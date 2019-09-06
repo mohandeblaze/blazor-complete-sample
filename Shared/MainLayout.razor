@@ -1,7 +1,7 @@
 ﻿@inherits LayoutComponentBase
 @using Data
 
-@inject Microsoft.AspNetCore.Components.IUriHelper UriHelper
+@inject Microsoft.AspNetCore.Components.NavigationManager UriHelper
 @inject SampleService SampleService
 @*<div class="sidebar">
         <NavMenu />
@@ -10,10 +10,10 @@
 <div class="main">
     <div class="top-row px-4">
 
-        <button class="e-btn e-info button" @onclick="@OnPrevClick">Prev</button>
-        <button class="e-btn e-primary button" @onclick="@OnHomeClick">Home</button>
+        <button class="e-btn e-info button" @onclick="OnPrevClick">Prev</button>
+        <button class="e-btn e-primary button" @onclick="OnHomeClick">Home</button>
         @*<button class="e-btn e-success button" @onclick="@OnStartClick">Start</button>*@
-        <button class="e-btn e-info button" @onclick="@OnNextClick">Next</button>
+        <button class="e-btn e-info button" @onclick="OnNextClick">Next</button>
     </div>
 
     <div class="content px-4">
@@ -32,27 +32,27 @@
 @code {
     void OnStartClick()
     {
-        UriHelper.NavigateTo(UriHelper.GetBaseUri() + SampleService.Samples[0].Substring(1));
+        UriHelper.NavigateTo(UriHelper.BaseUri + SampleService.Samples[0].Substring(1));
     }
 
     void OnHomeClick()
     {
-        UriHelper.NavigateTo(UriHelper.GetBaseUri());
+        UriHelper.NavigateTo(UriHelper.BaseUri);
     }
 
     void OnNextClick()
     {
-        UriHelper.NavigateTo(UriHelper.GetBaseUri() + GetPath(false));
+        UriHelper.NavigateTo(UriHelper.BaseUri + GetPath(false));
     }
 
     void OnPrevClick()
     {
-        UriHelper.NavigateTo(UriHelper.GetBaseUri() + GetPath(true));
+        UriHelper.NavigateTo(UriHelper.BaseUri + GetPath(true));
     }
 
     string GetPath(bool isPrev)
     {
-        string currentPath = UriHelper.ToBaseRelativePath(UriHelper.GetBaseUri(), UriHelper.GetAbsoluteUri());
+        string currentPath = UriHelper.ToBaseRelativePath(UriHelper.Uri);
         if (isPrev)
         {
             return SampleService.GetPrevSamplePath("/" + currentPath).Substring(1);

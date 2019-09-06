@@ -5,19 +5,19 @@
     <div class="padding">
         <div class="bold">Add Nodes</div>
         <div class="italic">Void</div>
-        <button class="e-btn e-info" @onclick="@AddNodes">Add Nodes</button>
+        <button class="e-btn e-info" @onclick="AddNodes">Add Nodes</button>
     </div>
 
     <div class="padding">
         <div class="bold">Remove Nodes</div>
         <div class="italic">Void</div>
-        <button class="e-btn e-info" @onclick="@RemoveNodes">Remove Nodes</button>
+        <button class="e-btn e-info" @onclick="RemoveNodes">Remove Nodes</button>
     </div>
 </div>
 <div class="flex-container">
     <div class="control_wrapper">
-        <h4>LoadOnDemand: True</h4>
-        <EjsTreeView ModelType="@modelType" LoadOnDemand="true" AllowEditing="true" AllowDragAndDrop="true" @ref="@NormalTreeview1" @ref:suppressField TValue="TreeData">
+        <h4>Flat LoadOnDemand: True</h4>
+        <EjsTreeView ModelType="@modelType" LoadOnDemand="true" AllowEditing="true" AllowDragAndDrop="true" @ref="@FlatTreeview2"  TValue="TreeData">
             <TreeViewFieldsSettings Id="Id" Text="Name" ParentID="Pid" HasChildren="HasChild" Selected="Selected" Expanded="Expanded" DataSource="@LocalData"></TreeViewFieldsSettings>
             <TreeViewTemplates>
                 <NodeTemplate>
@@ -33,13 +33,47 @@
     </div>
 
     <div class="control_wrapper">
-        <h4>LoadOnDemand: False</h4>
-        <EjsTreeView ModelType="@modelType" LoadOnDemand="false" AllowEditing="true" AllowDragAndDrop="true" @ref="@NormalTreeview" @ref:suppressField TValue="TreeData">
+        <h4>Flat LoadOnDemand: False</h4>
+        <EjsTreeView ModelType="@modelType" LoadOnDemand="false" AllowEditing="true" AllowDragAndDrop="true" @ref="@FlatTreeview2"  TValue="TreeData">
             <TreeViewFieldsSettings Id="Id" Text="Name" ParentID="Pid" HasChildren="HasChild" Selected="Selected" Expanded="Expanded" DataSource="@LocalData"></TreeViewFieldsSettings>
             <TreeViewTemplates>
                 <NodeTemplate>
                     @{
                         TreeData ContextData = context as TreeData;
+                        <div>
+                            <span class="treeName">@ContextData.Name</span>
+                        </div>
+                    }
+                </NodeTemplate>
+            </TreeViewTemplates>
+        </EjsTreeView>
+    </div>
+
+    <div class="control_wrapper">
+        <h4>Nested LoadOnDemand: True</h4>
+        <EjsTreeView ModelType="@TreeItemModelInstance" LoadOnDemand="true" AllowEditing="true" AllowDragAndDrop="true" @ref="@NestedTreeview2"  TValue="TreeItem">
+            <TreeViewFieldsSettings Id="Id" Text="Name" Child="@("Child")" Selected="Selected" Expanded="Expanded" DataSource="@TreeItems"></TreeViewFieldsSettings>
+            <TreeViewTemplates>
+                <NodeTemplate>
+                    @{
+                        TreeItem ContextData = context as TreeItem;
+                        <div>
+                            <span class="treeName">@ContextData.Name</span>
+                        </div>
+                    }
+                </NodeTemplate>
+            </TreeViewTemplates>
+        </EjsTreeView>
+    </div>
+
+    <div class="control_wrapper">
+        <h4>Nested LoadOnDemand: False</h4>
+        <EjsTreeView ModelType="@TreeItemModelInstance" LoadOnDemand="false" AllowEditing="true" AllowDragAndDrop="true" @ref="@NestedTreeview2"  TValue="TreeItem">
+            <TreeViewFieldsSettings Id="Id" Text="Name" Child="@("Child")" Selected="Selected" Expanded="Expanded" DataSource="@TreeItems"></TreeViewFieldsSettings>
+            <TreeViewTemplates>
+                <NodeTemplate>
+                    @{
+                        TreeItem ContextData = context as TreeItem;
                         <div>
                             <span class="treeName">@ContextData.Name</span>
                         </div>
@@ -51,10 +85,10 @@
 
     <div class="control_wrapper">
         <h4>DataManager</h4>
-        <EjsTreeView ModelType="@ModelType" AllowEditing="true" AllowDragAndDrop="true" @ref="@RemoteTreeview" @ref:suppressField  TValue="TreeData">
-            <TreeViewFieldsSettings Query="new ej.data.Query().from('Employees').select('EmployeeID,FirstName,Title').take(5)" Id="EmployeeID" Text="FirstName" HasChildren="EmployeeID"  TValue="TreeData">
+        <EjsTreeView ModelType="@ModelType" AllowEditing="true" AllowDragAndDrop="true" @ref="@RemoteTreeview"  TValue="TreeData">
+            <TreeViewFieldsSettings Query="new ej.data.Query().from('Employees').select('EmployeeID,FirstName,Title').take(5)" Id="EmployeeID" Text="FirstName" HasChildren="EmployeeID" TValue="TreeData">
                 <EjsDataManager url="https://services.odata.org/V4/Northwind/Northwind.svc" Adaptor="Syncfusion.EJ2.Blazor.Adaptors.ODataV4Adaptor" CrossDomain="true"></EjsDataManager>
-                <TreeViewFieldChild Query="new ej.data.Query().from('Orders').select('OrderID,EmployeeID,ShipName').take(5)" Id="OrderID" Text="ShipName" ParentID="EmployeeID"  TValue="TreeData">
+                <TreeViewFieldChild Query="new ej.data.Query().from('Orders').select('OrderID,EmployeeID,ShipName').take(5)" Id="OrderID" Text="ShipName" ParentID="EmployeeID" TValue="TreeData">
                     <EjsDataManager url="https://services.odata.org/V4/Northwind/Northwind.svc" Adaptor="Syncfusion.EJ2.Blazor.Adaptors.ODataV4Adaptor" CrossDomain="true"></EjsDataManager>
                 </TreeViewFieldChild>
             </TreeViewFieldsSettings>
@@ -85,26 +119,36 @@
 @functions{
 
     List<TreeData> LocalData = new List<TreeData>();
-    public TreeData modelType = new TreeData();
+    List<TreeItem> TreeItems = new List<TreeItem>();
+
+    TreeData modelType = new TreeData();
+    TreeItem TreeItemModelInstance = new TreeItem();
     DataModel ModelType = new DataModel();
-    EjsTreeView<TreeData> NormalTreeview;
+    EjsTreeView<TreeData> FlatTreeview1;
+    EjsTreeView<TreeData> FlatTreeview2;
     EjsTreeView<TreeData> RemoteTreeview;
-    EjsTreeView<TreeData> NormalTreeview1;
+    EjsTreeView<TreeItem> NestedTreeview1;
+    EjsTreeView<TreeItem> NestedTreeview2;
 
     void AddNodes()
     {
         TreeData[] parentitem = new TreeData[] { new TreeData { Id = 99, Name = "New item" } };
+        TreeItem[] treeitems = new TreeItem[] { new TreeItem { Id = 99, Name = "New item" } };
         Object[] items = new Object[] { new { EmployeeID = 99, Text = "New items" } };
-        NormalTreeview.AddNodes(parentitem, null, null, null);
-        NormalTreeview1.AddNodes(parentitem, null, null, null);
+        FlatTreeview1.AddNodes(parentitem, null, null, null);
+        FlatTreeview2.AddNodes(parentitem, null, null, null);
+        NestedTreeview1.AddNodes(treeitems, null, null, null);
+        NestedTreeview2.AddNodes(treeitems, null, null, null);
         RemoteTreeview.AddNodes(items, null, null, null);
     }
 
     void RemoveNodes()
     {
         string[] NodeId = { "99" };
-        NormalTreeview.RemoveNodes(NodeId);
-        NormalTreeview1.RemoveNodes(NodeId);
+        FlatTreeview1.RemoveNodes(NodeId);
+        FlatTreeview2.RemoveNodes(NodeId);
+        NestedTreeview1.RemoveNodes(NodeId);
+        NestedTreeview2.RemoveNodes(NodeId);
         RemoteTreeview.RemoveNodes(NodeId);
     }
 
@@ -193,6 +237,149 @@
             Name = "Outbox"
         });
 
+        TreeItems.Add(new TreeItem
+        {
+            Id = 1,
+            Name = "Australia",
+            Expanded = true,
+            Child = new List<TreeItem>()
+        {
+                new TreeItem
+                {
+                    Id = 2,
+                    Name = "New South Wales",
+
+                },
+                        new TreeItem
+                {
+                    Id = 3,
+                    Name = "Victoria"
+                },
+                        new TreeItem
+                {
+                    Id = 4,
+                    Name = "South Australia"
+                },
+                        new TreeItem
+                {
+                    Id = 6,
+                    Name = "Western Australia",
+
+                }
+            }
+        });
+
+        TreeItems.Add(new TreeItem
+        {
+            Id = 7,
+            Name = "Brazil",
+            Child = new List<TreeItem>()
+        {
+                new TreeItem
+                {
+                    Id = 8,
+                    Name = "Paran�"
+                },
+                new TreeItem
+                {
+                    Id = 9,
+                    Name = "Cear�"
+                },
+                new TreeItem
+                {
+                    Id = 10,
+                    Name = "Acre"
+                }
+            }
+        });
+        TreeItems.Add(new TreeItem
+        {
+            Id = 11,
+            Name = "China",
+            Child = new List<TreeItem>()
+        {
+                new TreeItem
+                {
+                    Id = 12,
+                    Name = "Guangzhou"
+                },
+                        new TreeItem
+                {
+                    Id = 13,
+                    Name = "Shanghai"
+                },
+                        new TreeItem
+                {
+                    Id = 14,
+                    Name = "Beijing"
+                },
+                        new TreeItem
+                {
+                    Id = 15,
+                    Name = "Shantou"
+
+                }
+            }
+        });
+        TreeItems.Add(new TreeItem
+        {
+            Id = 16,
+            Name = "France",
+            Child = new List<TreeItem>()
+        {
+                    new TreeItem
+                {
+                    Id = 17,
+                    Name = "Pays de la Loire"
+
+                },
+                        new TreeItem
+                {
+                    Id = 18,
+                    Name = "Aquitaine"
+
+                },
+                        new TreeItem
+                {
+                    Id = 19,
+                    Name = "Brittany"
+
+                },
+                        new TreeItem
+                {
+                    Id = 20,
+                    Name = "Lorraine"
+                }
+            }
+
+        });
+        TreeItems.Add(new TreeItem
+        {
+            Id = 21,
+            Name = "India",
+            Child = new List<TreeItem>()
+        {
+                new TreeItem
+                {
+                    Id = 22,
+                    Name = "Assam"
+
+                },
+                        new TreeItem
+                {
+                    Id = 23,
+                    Name = "Bihar"
+                },
+                        new TreeItem
+                {
+                    Id = 24,
+                    Name = "Tamil Nadu"
+
+                }
+            }
+
+        });
+
     }
 
     class DataModel
@@ -212,6 +399,15 @@
         public bool Selected { get; set; }
     }
 
+    class TreeItem
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public bool HasChild { get; set; }
+        public bool Expanded { get; set; }
+        public List<TreeItem> Child;
+
+    }
 
 }
 <style>
@@ -243,7 +439,6 @@
     }
 
     .flex-container {
-        display: flex;
         margin: 40px 0 0 0;
     }
 
