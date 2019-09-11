@@ -7,14 +7,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="cypress-e2e\**" />
     <Compile Remove="tests\**" />
+    <Content Remove="cypress-e2e\**" />
     <Content Remove="tests\**" />
+    <EmbeddedResource Remove="cypress-e2e\**" />
     <EmbeddedResource Remove="tests\**" />
+    <None Remove="cypress-e2e\**" />
     <None Remove="tests\**" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\ej2-blazor-source\Syncfusion.EJ2.Blazor\Syncfusion.EJ2.Blazor.csproj" />
-  </ItemGroup>
+</ItemGroup>
 
 </Project>

@@ -17,7 +17,11 @@
                             OnKeyPress="@((e) => { EventTriggeredList.Add("OnKeyPress"); this.StateHasChanged(); })"
                             NodeEdited="@((e) => { EventTriggeredList.Add("NodeEdited"); this.StateHasChanged(); })"
                             NodeEditing="@((e) => { EventTriggeredList.Add("NodeEditing"); this.StateHasChanged(); })"
-                            NodeSelected="@((e) => { EventTriggeredList.Add("NodeSelected"); this.StateHasChanged(); })"></TreeViewEvents>
+                            NodeSelected="@((e) => { EventTriggeredList.Add("NodeSelected"); this.StateHasChanged(); })"
+							OnNodeDragStart ="@((e) => { e.Cancel = true; EventTriggeredList.Add("OnNodeDragStart "); this.StateHasChanged(); })"
+							OnNodeDragged ="@((e) => { EventTriggeredList.Add("OnNodeDragged "); this.StateHasChanged(); })"
+							NodeDropped ="@((e) => { EventTriggeredList.Add("NodeDropped "); this.StateHasChanged(); })"
+							></TreeViewEvents>
         </EjsTreeView>
     </div>
 

@@ -9,7 +9,7 @@
             <EjsSlider ID="ticks_slider" @bind-Value="@Value" Step="5" Type="SliderType.Range" @ref="Slider" >
                 <SliderTicksData Placement="Placement.Before" LargeStep="20"></SliderTicksData>
                 <SliderTooltipData IsVisible="true" ShowOn="TooltipShowOn.Auto" Placement="TooltipPlacement.Before"></SliderTooltipData>
-                <SliderEvents TValue="int[]" TicksRendered="@TicksRendered" TicksRendering="@TicksRendering"></SliderEvents>
+                <SliderEvents TValue="int[]"></SliderEvents>
             </EjsSlider>
         </div>
         <div class="slider_container">

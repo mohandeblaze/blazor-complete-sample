@@ -13,7 +13,8 @@
                      HtmlAttributes="@HTMLProps"
                      DataSource="@DataSource"
                      ShowHeader="true"
-                     HeaderTitle="Normal List">
+                     HeaderTitle="Normal List"
+					 ModelType="@model">
             <ListViewFieldSettings Id="Id" Text="Text"></ListViewFieldSettings>
         </EjsListView>
     </div>
@@ -21,13 +22,19 @@
     <div style="margin: 10px;">
         <EjsListView ID="secondlist"
                      @ref="CheckList"
-
+						CssClass="e-list-template"
                      HtmlAttributes="@HTMLProps"
                      DataSource="@DataSource"
                      ShowHeader="true"
                      ShowCheckBox="true"
-                     HeaderTitle="CheckList">
+                     HeaderTitle="CheckList"
+					 ModelType="@model">
             <ListViewFieldSettings Id="Id" Text="Text"></ListViewFieldSettings>
+			<ListViewTemplates>
+                <Template>
+                    <div>Template item @((context as ListDataModel).Text)</div>
+                </Template>
+            </ListViewTemplates>
         </EjsListView>
     </div>
     <div style="margin: 10px;">
@@ -348,13 +355,17 @@
 
     void AddItem()
     {
-        ListDataModel[] data = new ListDataModel[] {
+		Random rnd = new Random();
+		int month  = rnd.Next(100, 1300);
+        List<ListDataModel> data = new List<ListDataModel>() {
             new ListDataModel {
-                Id = "5",
-                Text = "New Data 5"
+                Id = month.ToString(),
+                Text = "New Data "+ month.ToString()
             }
         };
         NormalList.AddItem(data, null);
+		CheckList.AddItem(data, NestedDataSource[0]);
+		NestedList.AddItem(data, NestedDataSource[0]);
     }
 
     void RemoveItem()

@@ -1,148 +1,26 @@
 @page "/listview/99TestSample"
+@*<h4 class="sample-title">Test sample</h4>*@
 
-<h4 class="sample-title">Test sample</h4>
+@using Syncfusion.EJ2.Blazor.Lists
+@using Syncfusion.EJ2.Blazor.Data
 
-@using System.Collections.ObjectModel
-@using Syncfusion.EJ2.Blazor.Popups
-@using ListviewSort = Syncfusion.EJ2.Blazor.Lists.SortOrder
+<EjsListView ShowHeader="true"
+             TValue="ListDataModel"
+             HeaderTitle="@HeaderTitle"
+             Query="new ej.data.Query().from('Products').select('ProductID,ProductName').take(10)">
+    <EjsDataManager Adaptor="Syncfusion.EJ2.Blazor.Adaptors.ODataAdaptor"
+                    CrossDomain="true"
+                    Url="//js.syncfusion.com/demos/ejServices/Wcf/Northwind.svc/"></EjsDataManager>
+    <ListViewFieldSettings Id="ProductID"
+                           Text="ProductName"></ListViewFieldSettings>
+</EjsListView>
 
-<div id="container">
-    <div class="sample flex">
-        <div class="flex">
-            <div class="padding">
-                <EjsListView DataSource="@DataSource" ModelType="@ModelInstance">
-                    <ListViewFieldSettings Id="Id" Text="Text"></ListViewFieldSettings>
-                    <ListViewTemplates>
-                        <Template>
-                            @{
-                                ListDataModel currentData = (ListDataModel)context;
-                                <div class="e-list-wrapper e-list-multi-line e-list-avatar">
-                                    <span class="pic01 e-avatar e-avatar-circle"></span>
-                                    <span class="e-list-item-header">@currentData.Name</span>
-                                    <span class="e-list-content">@currentData.Contact</span>
-                                </div>
-                            }
-                        </Template>
-                    </ListViewTemplates>
-                </EjsListView>
-            </div>
-        </div>
-    </div>
-</div>
-
-@code
-{
-    ListDataModel ModelInstance = new ListDataModel();
-
-    List<ListDataModel> DataSource = new List<ListDataModel> () {
-        new ListDataModel { Name = "Nancy", Contact = "(206) 555-985774", Id = "1", Image = "https://ej2.syncfusion.com/demos/src/grid/images/1.png", Category = "Experience" },
-        new ListDataModel { Name = "Janet", Contact = "(206) 555-3412", Id = "2", Image = "https://ej2.syncfusion.com/demos/src/grid/images/3.png", Category = "Fresher" },
-        new ListDataModel { Name = "Margaret", Contact = "(206) 555-8122", Id = "4", Image = "https://ej2.syncfusion.com/demos/src/grid/images/4.png", Category = "Experience" },
-        new ListDataModel { Name = "Andrew ", Contact = "(206) 555-9482", Id = "5", Image = "https://ej2.syncfusion.com/demos/src/grid/images/2.png", Category = "Experience" },
-        new ListDataModel { Name = "Steven", Contact = "(71) 555-4848", Id = "6", Image = "https://ej2.syncfusion.com/demos/src/grid/images/5.png", Category = "Fresher" },
-    };
-
+@code {
+    string HeaderTitle = "Listview header";
 
     class ListDataModel
     {
-        public string Id
-        {
-            get;
-            set;
-        }
-        public string Name
-        {
-            get;
-            set;
-        }
-        public string Image
-        {
-            get;
-            set;
-        }
-
-        public string Category
-        {
-            get;
-            set;
-        }
-
-        public string Contact
-        {
-            get;
-            set;
-        }
+        public string Id { get; set; }
+        public string Text { get; set; }
     }
 }
-<style>
-    #container .e-listview {
-        box-shadow: 0 1px 4px #ddd;
-        border-bottom: 1px solid #ddd;
-    }
-
-    #container .flex {
-        display: flex;
-        flex-direction: column;
-        width: 400px;
-        margin: auto;
-    }
-
-    #container .e-listview .e-list-item {
-        height: 100px;
-        width: 100px;
-        float: left;
-        padding: 0;
-    }
-
-        #container .e-listview .e-list-item .e-blazor-template {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            height: 100%;
-        }
-
-        #container .e-listview .e-list-item .delete-icon {
-            font-size: 9px;
-            font-family: 'e-icons';
-        }
-
-    #container .e-listview .e-badge {
-        z-index: 10;
-        display: none;
-    }
-
-    #container .e-listview .e-hover .e-badge {
-        display: unset;
-    }
-
-    #container .e-listview .e-active .e-badge {
-        display: unset;
-    }
-
-    #container .e-listview .e-list-item .delete-icon::before {
-        content: '\e7fc';
-        color: white;
-    }
-
-    .sample {
-        justify-content: center;
-        min-height: 280px;
-    }
-
-    .padding {
-        padding: 4px;
-    }
-
-    .flex {
-        display: flex;
-    }
-
-    .flex__center {
-        justify-content: center;
-    }
-
-    .margin {
-        margin: 10px;
-    }
-</style>
